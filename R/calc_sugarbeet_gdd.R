@@ -65,7 +65,7 @@ calc_sugarbeet_gdd <- function(max_tm, min_tm,
 
                    return(mean(c(minT,maxT)) - lower_th)
                  })
-    return(GDD)
+    return(sum(GDD))
     # function given from https://ndawn.ndsu.nodak.edu/help-sugarbeet-growing-degree-days.html
   }
 
