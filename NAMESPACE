@@ -2,7 +2,7 @@
 
 export(calc_pseudo_maturity)
 export(calc_sugarbeet_gdd)
+export(cercospora_dk)
 export(estimate_sb_drymatter)
-export(rain_threshold)
 import(data.table)
 importFrom(data.table,":=")
