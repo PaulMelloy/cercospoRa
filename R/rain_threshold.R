@@ -36,14 +36,19 @@
 #' weather_out <- rain_threshold(weather)
 #' weather_out
 rain_threshold <- function(w,
-                           days = 2,
+                           hours = 48,
                            rain_mm = 2) {
-  w[,rain_threshold := fifelse(frollsum(rain,
-                                        days,
-                                        align = "right",
-                                        na.rm = TRUE) ==
-                                 rain_mm,
-                               TRUE,FALSE)]
+  # initialise global def for data.table variables
+  rain <- NULL
 
+  data.table::setDT(w)
+
+  # for some reason it won't recognicse := as a function
+  # w[, rain_threshold := .(data.table::frollsum(rain,hours,
+  #                                              align = "right",
+  #                                              na.rm = TRUE) >= rain_mm)]
+  w$rain_threshold <- data.table::frollsum(w$rain,hours,
+                                           align = "right",
+                                           na.rm = TRUE) >= rain_mm
   return(w)
 }
