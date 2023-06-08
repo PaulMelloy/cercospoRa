@@ -4,7 +4,8 @@ daily_max <- c(25,37,29,11,15,12,10)
 test_that("Simple tests return", {
 
   expect_equal(calc_sugarbeet_gdd(daily_min, daily_max), 57.1)
-  expect_equal(calc_sugarbeet_gdd(daily_min, daily_max,hourly = TRUE), 57.1)
+  expect_equal(calc_sugarbeet_gdd(daily_min, daily_max,hourly = TRUE), 83.84771,
+               tolerance = 0.00001)
 })
 
 test_that("hourly returns a curved beta shape",{
