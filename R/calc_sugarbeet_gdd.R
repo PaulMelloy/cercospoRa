@@ -31,7 +31,7 @@ calc_sugarbeet_gdd <- function(max_tm, min_tm,
     HTT <- apply(dat,1,function(x){
       minT <- as.numeric(x["min_t"])
       maxT <- as.numeric(x["max_t"])
-      meanT <- mean(minT,maxT)
+      meanT <- mean(c(minT,maxT))
 
       if(minT < lower_th) return(0)
       if(maxT > upper_th) return(0)
@@ -40,12 +40,12 @@ calc_sugarbeet_gdd <- function(max_tm, min_tm,
         out <- (
           (meanT - lower_th)/
             (tm_optim - lower_th)
-        ) * ((
+        ) * (
           (upper_th - meanT)/
-            (upper_th - tm_optim)^((upper_th - tm_optim)/
-                                     tm_optim - lower_th))*
+            (upper_th - tm_optim))^((upper_th - tm_optim)/
+                                     (tm_optim - lower_th))*
             (tm_optim - lower_th)
-        )
+
         return(out)
         # beta formula from https://www.nature.com/articles/s41598-018-28392-z
       }
