@@ -18,3 +18,12 @@ first incidence in the field.
 Predicting the initial incidence of cercospora leaf spot in the field has been 
 the focus of plant disease models since 1972 (@rossi_cercopri_1991).  
 
+Appearance of the disease is seasonal between the middle of Jun to the middle of 
+August in southern Europe (@rossi_cercopri_1991) and is most likely to occur in 
+early July.
+This pattern might be explained by the temperature and moisture requirements for 
+production of conidiophores from pseudostromata surviving in the soil.
+This is similar to requirements for *Didimella pinoides* (@salam_g1_2011) or 
+*Leptosphaeria maculans* () pseudothecial maturity and ascospore production
+(@salam_blackleg_2003, @salam_g1_2011).
+
