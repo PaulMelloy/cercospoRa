@@ -1,0 +1,20 @@
+---
+title: A cercospora simulation model to aid disease detection in sugarbeet with remote
+  sensing
+author: 
+  - Facundo Izpizua, University of Gottingen
+  - Dr. Paul Melloy, The University of Queensland  
+  - Dr. Rene Heim, University of Gottingen
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: cercospora.bib
+---
+
+*Cercospora beticola* is a common limiting factor in the growth and production of
+sugarbeet (*Beta vulgaris*). 
+Limiting the impact of the pathogen on plant productivity, biomass accumulation 
+and subsequently sugar yields requires fungicide applications to be applied at 
+first incidence in the field.
+Predicting the initial incidence of cercospora leaf spot in the field has been 
+the focus of plant disease models since 1972 (@rossi_cercopri_1991).  
+
