@@ -1,7 +1,7 @@
 #' Evaluate rainfall threshold
 #'
 #' @param w data.table
-#' @param days integer, time period in days for which the rainfall threshold is
+#' @param hours integer, time period in days for which the rainfall threshold is
 #'   calculated
 #' @param rain_mm numeric, total rainfall needed in time period (`days`) for rainfall
 #'   threshold to be met.
@@ -10,7 +10,6 @@
 #'   an additional logical column `rain_threshold`.  Read more at `?(format_weather)`
 #'   The added `rain_threshold` indicates whether the rainfall threshold was met.
 #' @import data.table
-#' @export
 #' @examples
 #' scaddan <-
 #'    system.file("extdata", "scaddan_weather.csv",package = "epiphytoolR")
@@ -19,8 +18,9 @@
 #'    as.POSIXct(weather_dat$Local.Time, format = "%Y-%m-%d %H:%M:%S",
 #'               tz = "UTC")
 #'
-#' weather <- format_weather(
-#'    w = weather_station_data,
+#' weather <-
+#'  epiphytoolR::format_weather(
+#'    w = weather_dat,
 #'    POSIXct_time = "Local.Time",
 #'    ws = "meanWindSpeeds",
 #'    wd_sd = "stdDevWindDirections",
@@ -33,8 +33,8 @@
 #'    time_zone = "UTC"
 #' )
 #'
-#' weather_out <- rain_threshold(weather)
-#' weather_out
+#' #weather_out <- rain_threshold(weather)
+#' #weather_out
 rain_threshold <- function(w,
                            hours = 48,
                            rain_mm = 2) {
