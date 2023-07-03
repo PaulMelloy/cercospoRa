@@ -1,3 +1,17 @@
+#' Calculate infection rate
+#'
+#' Calculate the infection rate of Cercospora berticola in sugarbeet leaves
+#'
+#' @param Tm numeric, Temperature
+#' @param vpd numeric, Vapour pressure defecit
+#' @param RH numeric, (optional) Relative humditiy, when vpd is not available function
+#'  will calculate internally
+#'
+#' @return numeric probability of infection between 0 and 1
+#' @export
+#'
+#' @examples
+#' calc_inf_rate(25,0.2)
 calc_inf_rate <- function(Tm, vpd, RH = NA){
   if(is.na(RH) == FALSE){
     if(missing(vpd)) stop("No inputs detected for 'vpd' or 'RH' arguments. Please
@@ -14,7 +28,7 @@ calc_inf_rate <- function(Tm, vpd, RH = NA){
   # Tm <- seq(0,50,0.02)
 
   b3 <- vpd/0.5
-  b3 <- pbeta(b3,3,3)*220
+  b3 <- pbeta(b3,3,4)*220
 
   # set minimum and maximum infectious temperatures
   b1 <- (Tm - 5)/40
@@ -31,9 +45,9 @@ calc_inf_rate <- function(Tm, vpd, RH = NA){
 
 
   b2 <- abs(vpd - 0.5)/0.5
-  b2 <- pbeta(b2,6,3)
+  b2 <- pbeta(b2,6,1.8)
 
-  plot(vpd,b2)
+  #plot(vpd,b2)
 
   return(b1*b2)
 
