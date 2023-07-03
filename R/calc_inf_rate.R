@@ -12,6 +12,16 @@
 #'
 #' @examples
 #' calc_inf_rate(25,0.2)
+#'
+#' temp <- seq(5,45, by = 0.5)
+#' VPD <- seq(0,0.3, by = 0.02)
+#'
+#' i_rate <-
+#'   outer(temp,VPD,function(xi,ji){
+#'     calc_inf_rate(Tm = xi, vpd = ji)
+#'      })
+#' persp(temp,VPD,i_rate, theta = 160)
+#'
 calc_inf_rate <- function(Tm, vpd, RH = NA){
   if(is.na(RH) == FALSE){
     if(missing(vpd)) stop("No inputs detected for 'vpd' or 'RH' arguments. Please
@@ -28,14 +38,15 @@ calc_inf_rate <- function(Tm, vpd, RH = NA){
   # Tm <- seq(0,50,0.02)
 
   b3 <- vpd/0.5
-  b3 <- pbeta(b3,3,4)*220
+  b3 <- pbeta(b3,2,6) * 10
+  #plot(vpd,b3)
 
   # set minimum and maximum infectious temperatures
-  b1 <- (Tm - 5)/40
+  b1 <- (Tm - b3 - 5)/40
   # get beta-function for temperature
-  b1 <- dbeta(b1,5,5,ncp = b3)
+  b1 <- dbeta(b1,3+b3,3+b3)
   # find maximum value in sequence to normalise
-  b1_max <- max(dbeta(seq(0,50,0.01),5,5,b3))
+  b1_max <- max(dbeta(seq(0,50,0.01),3,3,b3))
   # normalise to 0 - 1
   b1 <- b1/b1_max
 
