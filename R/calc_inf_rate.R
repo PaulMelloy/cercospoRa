@@ -1,20 +1,25 @@
 #' Calculate infection rate
 #'
-#' Calculate the infection rate of Cercospora berticola in sugarbeet leaves
+#' @details
+#'  Calculate the infection rate of *Cercospora berticola* in sugar beet leaves.
+#'  This function is an attempt to copy the infection rate described by Racca and
+#'  Jorg (2007).
 #'
 #' @param Tm numeric, Temperature
-#' @param vpd numeric, Vapour pressure defecit
-#' @param RH numeric, (optional) Relative humditiy, when vpd is not available function
+#' @param vpd numeric, Vapour pressure deficit
+#' @param RH numeric, (optional) Relative humidity, when vpd is not available function
 #'  will calculate internally
 #'
 #' @return numeric probability of infection between 0 and 1
 #' @export
+#' @references
+#'     \insertRef{@racca_cercbet_2007}{cercosporaR}
 #'
 #' @examples
 #' calc_inf_rate(25,0.2)
 #'
-#' temp <- seq(5,45, by = 0.5)
-#' VPD <- seq(0,0.3, by = 0.02)
+#' temp <- seq(5,45, by = 1)
+#' VPD <- seq(0,0.3, by = 0.01)
 #'
 #' i_rate <-
 #'   outer(temp,VPD,function(xi,ji){
