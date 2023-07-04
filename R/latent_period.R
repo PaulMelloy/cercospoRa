@@ -1,0 +1,12 @@
+#' Calculate Cercospora latent period
+#'
+#' @param Tm numeric, Average temperature in degrees celcius for a hour of the day
+#'
+#' @return numeric, Latent period for a given hour
+#' @references \insertRef{@wolf_factors_2005}{cercosporaR} equation 4
+#'
+#' @examples
+latent_period <- function(Tm){
+  lp <-7 + 26 * exp(0.35*(Tm - 10))
+  return(lp)
+}
