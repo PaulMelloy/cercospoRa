@@ -51,7 +51,7 @@ calc_inf_rate <- function(Tm, vpd, RH = NA){
   # get beta-function for temperature
   b1 <- dbeta(b1,3+b3,3+b3)
   # find maximum value in sequence to normalise
-  b1_max <- max(dbeta(seq(0,50,0.01),3,3,b3))
+  b1_max <- max(dbeta(seq(0,50,0.01),3+b3,3+b3))
   # normalise to 0 - 1
   b1 <- b1/b1_max
 
