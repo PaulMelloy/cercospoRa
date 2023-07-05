@@ -2,6 +2,7 @@
 
 export(calc_inf_rate)
 export(calc_pseudo_maturity)
+export(calc_spore_rate)
 export(calc_sugarbeet_gdd)
 export(cercospora_dk)
 export(estimate_sb_drymatter)

@@ -15,7 +15,7 @@ calc_inf_rate(Tm, vpd, RH = NA)
 will calculate internally}
 }
 \value{
-numeric probability of infection between 0 and 1
+numeric, probability of infection between 0 and 1
 }
 \description{
 Calculate infection rate
@@ -35,7 +35,7 @@ i_rate <-
   outer(temp,VPD,function(xi,ji){
     calc_inf_rate(Tm = xi, vpd = ji)
      })
-persp(temp,VPD,i_rate, theta = 160)
+persp(temp,VPD,i_rate, theta = 160, ticktype = "detailed")
 
 }
 \references{

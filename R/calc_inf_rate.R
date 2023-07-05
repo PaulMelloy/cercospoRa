@@ -10,7 +10,7 @@
 #' @param RH numeric, (optional) Relative humidity, when vpd is not available function
 #'  will calculate internally
 #'
-#' @return numeric probability of infection between 0 and 1
+#' @return numeric, probability of infection between 0 and 1
 #' @export
 #' @references
 #'     \insertRef{@racca_cercbet_2007}{cercosporaR}
@@ -36,11 +36,11 @@ calc_inf_rate <- function(Tm, vpd, RH = NA){
   }
 
   # vpd <- seq(0,1.5,0.01)
-  # vpd <- 0.0
+  # vpd <- 0.2
 
   vpd[vpd > 0.5] <- 0.5
 
-  # Tm <- seq(0,50,0.02)
+  # Tm <- seq(0,50,0.1)
 
   b3 <- vpd/0.5
   b3 <- stats::pbeta(b3,2,6) * 10
