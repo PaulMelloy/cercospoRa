@@ -18,3 +18,4 @@ Imports:
     lubridate,
     Rdpack,
     stats
+RdMacros: Rdpack
