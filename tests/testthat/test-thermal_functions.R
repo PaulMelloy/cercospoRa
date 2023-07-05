@@ -1,0 +1,13 @@
+test_that("temperature_index() examples works", {
+  expect_equal(temperature_index(18),0.8477678, tolerance = 0.000001)
+  expect_equal(temperature_index(10),0.2204469, tolerance = 0.000001)
+  expect_equal(temperature_index(28),1, tolerance = 0.000001)
+  expect_equal(temperature_index(-28),0, tolerance = 0.000001)
+
+})
+
+test_that("latent_period() examples work", {
+  expect_equal(latent_period(25), 7.136435, tolerance = 0.000001)
+  expect_equal(latent_period(0), 868.002, tolerance = 0.000001)
+  expect_equal(latent_period(35), 7.00412, tolerance = 0.000001)
+  })
