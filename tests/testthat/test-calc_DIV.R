@@ -3,7 +3,7 @@ set.seed(69)
 # ten minute increments for
 date_t <- Sys.time() + seq(0, 179 * 60 * 10, (60 * 10))
 Tm <- rnorm(180,20,10)
-RH <- runif(180,min = 40,90)
+RH <- rep(rbeta(20,3,1)*100, each = 9)
 rain <- rbinom(180,1,0.1) * runif(180,0.1,20)
 
 test_that("calc_DIV works", {
@@ -14,7 +14,11 @@ test_that("calc_DIV works", {
     RH = RH,
     rain = rain
   )
-  expect_equal(DIV1,c(0.03598820,0.02570586), tolerance = 0.0000001)
+  expect_equal(DIV1$DIV,c(0.01945469 ,0.01822936 ), tolerance = 0.0000001)
+  expect_equal(DIV1$DIV_racca,c(0.024146823 ,0.001551948 ), tolerance = 0.0000001)
+  expect_type(DIV1,"list")
+  expect_equal(dim(DIV1), c(2,5))
+  expect_equal(colnames(DIV1), c("Year","Month","Day","DIV","DIV_racca"))
 
   in_dat <- data.frame(
     date_time = date_t,
