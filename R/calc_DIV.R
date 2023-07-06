@@ -58,8 +58,11 @@ calc_DIV <- function(date_time, Tm,RH, rain,dat){
              by = c("Year","Month","Day","Hour")
              ]
 
-  DIV <- dat[, list(DIV = 1/(sum(temperature_index(temp) * moisture_index(RH,rain)))),
+  DIV <- dat[, list(DIV = 1/(sum(temperature_index(temp) * moisture_index(RH,rain))),
+                    DIV_racca = mean(temperature_index(temp) *
+                                       calc_spore_rate(temp,RH) *
+                                       calc_inf_rate(temp, RH = RH))),
              by = c("Year","Month","Day")]
 
-  return(DIV[,DIV])
+  return(DIV)
 }
