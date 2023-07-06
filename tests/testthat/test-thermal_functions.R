@@ -11,3 +11,11 @@ test_that("latent_period() examples work", {
   expect_equal(latent_period(0), 868.002, tolerance = 0.000001)
   expect_equal(latent_period(35), 7.00412, tolerance = 0.000001)
   })
+
+test_that("moisture_index() examples work", {
+  expect_equal(moisture_index(25), 0)
+  expect_equal(moisture_index(90), 0)
+  expect_equal(moisture_index(95), 1)
+  expect_equal(moisture_index(25, rain = 0.1), 1)
+  expect_equal(moisture_index(55,rh_thresh = 50), 1)
+})
