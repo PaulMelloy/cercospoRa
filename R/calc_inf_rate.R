@@ -27,13 +27,45 @@
 #'      })
 #' persp(temp,VPD,i_rate, theta = 160, ticktype = "detailed")
 #'
-calc_inf_rate <- function(Tm, vpd, RH = NA){
-  if(is.na(RH) == FALSE){
-    if(missing(vpd)) stop("No inputs detected for 'vpd' or 'RH' arguments. Please
-                          Use one of these arguments for calculating the infection rate")
-    vpd <- epiphytoolR::calc_vpd(RH = RH,
-                                 Tm = Tm)
+calc_inf_rate <- function(Tm, vpd, RH = NA) {
+  if (missing(vpd)) {
+    if(length(RH > 1)){
+      if (all(is.na(RH))){
+        stop("No inputs, or NA inputs detected for 'vpd' or 'RH' arguments. Please
+      Use one of these arguments for calculating the infection rate")}
+    }else{
+      if (is.na(RH)){
+        stop("No inputs, or NA inputs detected for 'vpd' or 'RH' arguments. Please
+      Use one of these arguments for calculating the infection rate")}
+    }
+
+    vpd <- as.numeric(epiphytoolR::calc_vpd(RH = RH,
+                                            Tm = Tm))
   }
+
+  if(length(Tm) == length(vpd)){
+
+    # create data.frame with values
+    Dt <- data.frame(Tm = Tm,
+                     vpd = vpd)
+    # apply over each row
+    IR_out <- apply(Dt, 1, function(d) {
+      out <- calc_IR(Tm = as.numeric(d["Tm"]),
+                     vpd = as.numeric(d["vpd"]))
+      return(out)
+
+    })
+  } else{
+    # do single way
+    IR_out <- calc_IR(Tm = Tm, vpd = vpd)
+  }
+  return(IR_out)
+
+
+
+
+}
+calc_IR <- function(Tm, vpd){
 
   # vpd <- seq(0,1.5,0.01)
   # vpd <- 0.2
