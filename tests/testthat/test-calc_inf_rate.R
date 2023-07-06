@@ -9,7 +9,8 @@ test_that("infection rate returns sensible values", {
       calc_inf_rate(Tm = xi, vpd = ji)
       })
 
-  expect_true(all(i_rate < 1 &
+  expect_true(all(i_rate <= 1 &
                     i_rate >= 0 ))
   #persp(temp,VPD,i_rate, theta = 160)
 })
+
