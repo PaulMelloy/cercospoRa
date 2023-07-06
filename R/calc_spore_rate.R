@@ -2,8 +2,8 @@
 #'
 #' @details
 #'  Calculate the sporulation rate of *Cercospora berticola*.
-#'  This function is an attempt to copy the infection rate described by Racca and
-#'  Jorg (2007).
+#'  This function is an attempt to copy the infection rate described by
+#'  \insertCite{racca_cercbet_2007}{cercosporaR}.
 #'
 #' @param Tm numeric, Temperature
 #' @param RH numeric, Relative humidity, when vpd is not available function
@@ -12,7 +12,7 @@
 #' @return numeric probability of infection between 0 and 1
 #' @export
 #' @references
-#'     \insertRef{@racca_cercbet_2007}{cercosporaR}
+#'     \insertRef{racca_cercbet_2007}{cercosporaR}
 #'
 #' @examples
 #' calc_spore_rate(25,0.2)
@@ -26,8 +26,38 @@
 #'      })
 #' persp(temp,RH,s_rate, theta = 315, phi = 20, ticktype = "detailed")
 #'
-calc_spore_rate <- function(Tm, RH){
+calc_spore_rate <- function(Tm, RH) {
+  # if lengths are the same of Tm and RH apply over the vectors
+  if (length(Tm) == length(RH)) {
 
+    # create data.frame with values
+    Dt <- data.frame(Tm = Tm,
+                     RH = RH)
+    # apply over each row
+    SR_out <- apply(Dt, 1, function(d) {
+      out <- calc_SR(Tm = as.numeric(d["Tm"]),
+                     RH = as.numeric(d["RH"]))
+      return(out)
+
+    })
+  } else{
+    # do single way
+    SR_out <- calc_SR(Tm = Tm, RH = RH)
+  }
+  return(SR_out)
+}
+
+
+#' Internal: Calculate sporulation rate
+#'
+#' This function is wrapped by `calc_spore_rate``
+#'
+#' @param Tm See `calc_spore_rate()` documentation
+#' @param RH See `calc_spore_rate()` documentation
+#'
+#' @return See `calc_spore_rate()` documentation
+#' @noRd
+calc_SR <- function(Tm, RH){
   # RH <- seq(100,90,-0.2)
   # RH <- 100
 
