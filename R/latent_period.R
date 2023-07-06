@@ -6,8 +6,10 @@
 #' @references \insertRef{wolf_factors_2005}{cercosporaR}; equation 4
 #'
 latent_period <- function(Tm){
-  lp <- 7 + 26 * exp(-0.35*(Tm - 10))
-
+  lp <-
+    sapply(Tm, function(Tm) {
+      7 + 26 * exp(-0.35 * (Tm - 10))
+    })
   return(lp)
 }
 
@@ -33,11 +35,14 @@ latent_period <- function(Tm){
 #'    \insertAllCited{}
 temperature_index <- function(Tm, opt_Tm = 23){
 
-  tm_ind <- latent_period(opt_Tm)/latent_period(Tm)
-  if(tm_ind > 1) tm_ind <- 1
-  if(tm_ind < 0) tm_ind <- 0
+  out <- sapply(Tm,FUN = function(Tm1){
+    tm_ind <- latent_period(opt_Tm)/latent_period(Tm1)
+    if(tm_ind > 1) tm_ind <- 1
+    if(tm_ind < 0) tm_ind <- 0
 
-  return(tm_ind)
+    return(tm_ind)
+  })
+  return(out)
 }
 
 
@@ -54,8 +59,18 @@ temperature_index <- function(Tm, opt_Tm = 23){
 #' @references
 #'    \insertAllCited{}
 moisture_index <- function(RH, rain = 0, rh_thresh = 90){
-  rh_ind <- ifelse(RH > rh_thresh |
-                     rain >= 0.1 ,1,0)
+  dat2 <- data.table::data.table(RH = RH,
+                                 rain = rain)
+  rh_ind <- apply(dat2, 1, function(d2) {
+    rain <- d2["rain"]
+    RH <- d2["RH"]
+    if (is.na(rain))
+      rain <- 0
+    rh_ind <- ifelse(RH > rh_thresh |
+                       rain >= 0.1 , 1, 0)
 
+    return(rh_ind)
+  })
   return(rh_ind)
 }
+
