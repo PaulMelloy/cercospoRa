@@ -11,8 +11,11 @@
 #' @param dat data.frame, containing column names "times","temp","RH","rain" with
 #'  each of the respective arguments for input. provided as a convenience
 #'
-#' @return numeric vector of daily infection values, between 0 and 1
+#' @return data.table, with probability of infection between 0 and 1 undertaken with
+#'  two methods by Wolf \insertCite{wolf_factors_2005}{cercosporaR} under the `DIV`
+#'  column and method by Racca et. al \insertCite{racca_cercbet_2007}{cercosporaR}
 #' @export
+#' @references \insertAllCited{}
 #'
 #' @examples
 #' date_t <- Sys.time() + seq(0, 179 * 60 * 10, (60 * 10))
