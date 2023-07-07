@@ -16,6 +16,9 @@ mature}
 \item{rain_thresh}{numeric, minimum rainfall required to initiate pseudomata
 maturity}
 }
+\value{
+numeric, number of days which met the requirement for pseudomata maturity
+}
 \description{
 Calculate pseudomata maturity
 }

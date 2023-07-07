@@ -20,8 +20,8 @@ Calculate sporulation rate
 }
 \details{
 Calculate the sporulation rate of \emph{Cercospora berticola}.
-This function is an attempt to copy the infection rate described by Racca and
-Jorg (2007).
+This function is an attempt to copy the infection rate described by
+\insertCite{racca_cercbet_2007}{cercosporaR}.
 }
 \examples{
 calc_spore_rate(25,0.2)
@@ -37,6 +37,6 @@ persp(temp,RH,s_rate, theta = 315, phi = 20, ticktype = "detailed")
 
 }
 \references{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{\\insertRef\{@racca_cercbet_2007\}\{cercosporaR\}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{\\insertRef\{racca_cercbet_2007\}\{cercosporaR\}
 }\if{html}{\out{</div>}}
 }

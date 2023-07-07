@@ -7,7 +7,7 @@
 #' @param rain_thresh numeric, minimum rainfall required to initiate pseudomata
 #'  maturity
 #'
-#' @return
+#' @return numeric, number of days which met the requirement for pseudomata maturity
 #' @export
 #'
 #' @examples

@@ -11,9 +11,10 @@
 #' @param dat data.frame, containing column names "times","temp","RH","rain" with
 #'  each of the respective arguments for input. provided as a convenience
 #'
-#' @return data.table, with probability of infection between 0 and 1 undertaken with
-#'  two methods by Wolf \insertCite{wolf_factors_2005}{cercosporaR} under the `DIV`
-#'  column and method by Racca et. al \insertCite{racca_cercbet_2007}{cercosporaR}
+#' @return data.table, with probability of infection for each day, between 0 and 1
+#'  Undertaken with two methods by Wolf \insertCite{wolf_factors_2005}{cercosporaR}
+#'  under the `DIV` column and method by Racca et. al \insertCite{racca_cercbet_2007}{cercosporaR}
+#'  described in the `DIV_racca` column.
 #' @export
 #' @references \insertAllCited{}
 #'
@@ -29,8 +30,10 @@
 #' RH = RH,
 #' rain = rain
 #' )
-
 calc_DIV <- function(date_time, Tm,RH, rain,dat){
+  # declare non-globals
+  times <- temp <- NULL
+
   # check if dat is not supplied and create new data.table
   if(missing(dat)){
     if(missing(rain)) rain <- rep(0,length(RH))

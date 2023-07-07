@@ -46,7 +46,7 @@ temperature_index <- function(Tm, opt_Tm = 23){
 }
 
 
-#' Relitive humidity index
+#' Relative humidity index
 #'
 #' Confirms the humidity threshold has been met by returning a 1 or not met by
 #'  returning a 0. See \insertCite{wolf_factors_2005}{cercosporaR}
@@ -54,8 +54,10 @@ temperature_index <- function(Tm, opt_Tm = 23){
 #' @param RH numeric, relative humidity as a percentage
 #' @param rh_thresh numeric, humidity threshold where if humidity is below this
 #'  no progress towards the latent period is made.
+#' @param rain numeric, rainfall in millimetres
 #'
 #' @return numeric, either a 1 or 0
+#' @noRd
 #' @references
 #'    \insertAllCited{}
 moisture_index <- function(RH, rain = 0, rh_thresh = 90){
