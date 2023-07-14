@@ -60,16 +60,22 @@ temperature_index <- function(Tm, opt_Tm = 23){
 #' @noRd
 #' @references
 #'    \insertAllCited{}
-moisture_index <- function(RH, rain = 0, rh_thresh = 90){
+moisture_index <- function(RH, rain = 0, rh_thresh = 70){
   dat2 <- data.table::data.table(RH = RH,
                                  rain = rain)
   rh_ind <- apply(dat2, 1, function(d2) {
     rain <- d2["rain"]
     RH <- d2["RH"]
-    if (is.na(rain))
-      rain <- 0
-    rh_ind <- ifelse(RH > rh_thresh |
-                       rain >= 0.1 , 1, 0)
+
+    if (is.na(rain)){
+      rain <- 0}
+
+    # need to scale the threshold for more realistic values
+    scale_rh_thresh <- (exp((140-rh_thresh)/21.7))/25
+
+    rh_ind <- data.table::fcase(rain >= 0.1, 1/(1+exp((88-RH)/(2.5 * scale_rh_thresh))),
+                                RH > rh_thresh, 1/(1+exp((88-RH)/(2.5 * scale_rh_thresh))),
+                                default =  0)
 
     return(rh_ind)
   })
