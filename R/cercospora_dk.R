@@ -9,6 +9,7 @@
 #' @export
 #'
 #' @examples
+#' cercospora_dk(1,5,5,10)
 cercospora_dk <- function(x, y, sigma, lambda) {
   # x and y are the coordinates of the location to evaluate the dispersal kernel
   # sigma is the standard deviation of the Gaussian component
