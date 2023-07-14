@@ -32,6 +32,13 @@ Genotype specific effects of partitioning to above ground.
 
 Racca (@racca_cercbet_2007) CERCBET 3 reports excellent estimation for the onset 
 of Cercospora and action thresholds for a fungicidal intervention. Yet the report
-stops short of reporting the coefiencts or formulas for reproducing the work.  
+stops short of reporting the coefficients or formulas for reproducing the work.  
+
+The model described by Racca et. al (2007), uses daily infection values to determine
+when an epidemic has commenced. 
+An epidemic was described to commence when 50% of plants show disease symptoms.
+This metric translates to 0.01% of leaf area infected.  
+Canopy closure occurs when 90% of plants leaves in adjacent rows are touching.
+Canopy closure could be calculated by LAI and is the day when the model begins
 
 
