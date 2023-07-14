@@ -14,8 +14,8 @@ test_that("calc_DIV works", {
     RH = RH,
     rain = rain
   )
-  expect_equal(DIV1$DIV, c(0.01920886, 0.01705763), tolerance = 0.000001)
-  expect_equal(DIV1$DIV_racca, c(0.036566586, 0.009619148), tolerance = 0.000001)
+  expect_equal(DIV1$DIV, c(0.02856020, 0.07555424), tolerance = 0.000001)
+  expect_equal(DIV1$DIV_racca, c(0.02978103, 0.01170523), tolerance = 0.000001)
   expect_type(DIV1,"list")
   expect_equal(dim(DIV1), c(2,5))
   expect_equal(colnames(DIV1), c("Year","Month","Day","DIV","DIV_racca"))

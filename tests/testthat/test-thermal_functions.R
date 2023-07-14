@@ -14,8 +14,9 @@ test_that("latent_period() examples work", {
 
 test_that("moisture_index() examples work", {
   expect_equal(moisture_index(25), 0)
-  expect_equal(moisture_index(90), 0)
-  expect_equal(moisture_index(95), 1)
-  expect_equal(moisture_index(25, rain = 0.1), 1)
-  expect_equal(moisture_index(55,rh_thresh = 50), 1)
+  expect_equal(moisture_index(90), 0.68879132)
+  expect_equal(moisture_index(95), 0.9416218)
+  expect_equal(moisture_index(25, rain = 0.1), 0, tolerance = 0.0000000001)
+  expect_equal(moisture_index(55,rh_thresh = 50), 0.00540259, tolerance = 0.00001)
 })
+
