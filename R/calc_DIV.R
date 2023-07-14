@@ -8,7 +8,7 @@
 #' @param Tm numeric, temperature, in celcius' at time increment in `date_time`
 #' @param RH numeric, relative humidity (%) at time increment in `date_time`
 #' @param rain numeric, volume of rain in millimeters recorded between time recordings
-#' @param dat data.frame, containing column names "times","temp","RH","rain" with
+#' @param dat data.frame, containing column names "times","temp","rh","rain" with
 #'  each of the respective arguments for input. provided as a convenience
 #'
 #' @return data.table, with probability of infection for each day, between 0 and 1
@@ -39,11 +39,11 @@ calc_DIV <- function(date_time, Tm,RH, rain,dat){
     if(missing(rain)) rain <- rep(0,length(RH))
     dat <- data.table::data.table(times = date_time,
                                   temp = Tm,
-                                  RH = RH,
+                                  rh = RH,
                                   rain = rain)
   }
-  if(all(c("times","temp","RH","rain") %in% colnames(dat)) == FALSE){
-    stop("'dat' data.frame must have colnames 'times','temp','RH','rain'")
+  if(all(c("times","temp","rh","rain") %in% colnames(dat)) == FALSE){
+    stop("'dat' data.frame must have colnames 'times','temp','rh','rain'")
   }
 
   data.table::setDT(dat)
@@ -57,17 +57,17 @@ calc_DIV <- function(date_time, Tm,RH, rain,dat){
                          data.table::hour(times))]
   # Aggregate to hourly
   dat <- dat[, c("temp",
-                 "RH",
+                 "rh",
                  "rain") := list(mean(temp),
-                                 mean(RH),
+                                 mean(rh),
                                  sum(rain)),
              by = c("Year","Month","Day","Hour")
              ]
 
-  DIV <- dat[, list(DIV = 1/(sum(temperature_index(temp) * moisture_index(RH,rain))),
+  DIV <- dat[, list(DIV = 1/(sum(temperature_index(temp) * moisture_index(rh,rain))),
                     DIV_racca = mean(temperature_index(temp) *
-                                       calc_spore_rate(temp,RH) *
-                                       calc_inf_rate(temp, RH = RH))),
+                                       calc_spore_rate(temp,rh) *
+                                       calc_inf_rate(temp, RH = rh))),
              by = c("Year","Month","Day")]
 
   return(DIV)
