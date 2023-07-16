@@ -17,11 +17,11 @@ calc_epidemic_onset <- function(c_closure = as.POSIXct("2023-06-01"),
     stop("'weather' has not been formatted with 'epiphytoolR::format_weather().")
   }
 
-  w <- weather[times >= c_closure]
+  w <- copy(weather[times >= c_closure])
 
-  daily_inf_val <- calc_DIV(dat = weather)
+  daily_inf_val <- calc_DIV(dat = w)
 
-  sum(daily_inf_val$DIV_racca) / cultivar_sus
+  sum(daily_inf_val$DIV_racca, na.rm = TRUE) / cultivar_sus
 
 
 }
