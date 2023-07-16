@@ -15,7 +15,7 @@ calc_DIV(date_time, Tm, RH, rain, dat)
 
 \item{rain}{numeric, volume of rain in millimeters recorded between time recordings}
 
-\item{dat}{data.frame, containing column names "times","temp","RH","rain" with
+\item{dat}{data.frame, containing column names "times","temp","rh","rain" with
 each of the respective arguments for input. provided as a convenience}
 }
 \value{

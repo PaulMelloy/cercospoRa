@@ -21,3 +21,6 @@ numeric estimating the distance of the spore travel
 \description{
 Dispersal kernal for Cercospora berticola
 }
+\examples{
+cercospora_dk(1,5,5,10)
+}
