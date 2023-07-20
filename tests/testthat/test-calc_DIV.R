@@ -14,8 +14,8 @@ test_that("calc_DIV works", {
     RH = RH,
     rain = rain
   )
-  expect_equal(DIV1$DIV, c(0.02856020, 0.07555424), tolerance = 0.000001)
-  expect_equal(DIV1$DIV_racca, c(0.02978103, 0.01170523), tolerance = 0.000001)
+  expect_equal(DIV1$DIV, c(0.03264266, 0.05104200), tolerance = 0.000001)
+  expect_equal(DIV1$DIV_racca, c(0.036646453, 0.008868228), tolerance = 0.000001)
   expect_type(DIV1,"list")
   expect_equal(dim(DIV1), c(2,5))
   expect_equal(colnames(DIV1), c("Year","Month","Day","DIV","DIV_racca"))
@@ -28,12 +28,12 @@ test_that("calc_DIV works", {
   )
 
   expect_error(calc_DIV(dat = in_dat),
-               regexp = "'dat' data.frame must have colnames 'times','temp','RH','rain'")
+               regexp = "'dat' data.frame must have colnames 'times','temp','rh','rain'")
 
   in_dat <- data.frame(
     times = date_t,
     temp = Tm,
-    RH = RH,
+    rh = RH,
     rain = rain
   )
   calc_DIV(dat = in_dat)
