@@ -32,7 +32,7 @@
 #' )
 calc_DIV <- function(date_time, Tm,RH, rain,dat){
   # declare non-globals
-  times <- temp <- NULL
+  times <- temp <- rh <- NULL
 
   # check if dat is not supplied and create new data.table
   if(missing(dat)){
