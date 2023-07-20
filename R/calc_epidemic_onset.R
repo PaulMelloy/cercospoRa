@@ -13,6 +13,7 @@
 calc_epidemic_onset <- function(c_closure = as.POSIXct("2023-06-01"),
                                 weather,
                                 cultivar_sus = 5){
+  rh <- times <- NULL
   if(inherits(weather,"epiphy.weather") == FALSE){
     stop("'weather' has not been formatted with 'epiphytoolR::format_weather().")
   }
