@@ -1,0 +1,104 @@
+---
+title: "Getting-started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting-started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(cercosporaR)
+library(data.table)
+```
+
+The `cercosporaR` package estimates the proportional progress towards a 
+*Cercospora beticola* epidemic on sugarbeet.
+This requires formated hourly weather data that the model recognises.
+The R package `epiphytoolR` contains functions which automatically checks the weather
+data and returns it in the required hourly format.  
+
+We will need to install epiphytoolR  
+
+```{r}
+# install stationaRy package if it is not installed
+if("epiphytoolR" %in% installed.packages()[,1] == FALSE){
+  remotes::install_github("PaulMelloy/epiphytoolR",ref = "dev", dependencies = TRUE)
+}
+library(epiphytoolR)
+```
+
+
+Next lets download some weather data using the R package `nasapower`.
+```{r}
+# install stationaRy package if it is not installed
+if("nasapower" %in% installed.packages()[,1] == FALSE){
+  install.packages("nasapower")
+}
+library(nasapower)
+
+np <- get_power(
+  community = "ag",
+  pars = c(
+    "RH2M", # Relative humidity at 2 meters
+    "T2M", # Air temperature at 2 meters
+    "WS2M", # wind speed at 2 meters,
+    "WD2M",# wind direction at 2 meters,
+    "PRECTOTCORR",
+    "ALLSKY_SFC_SW_DWN", # short wave downward solar radiation at the earth surface
+    "ALLSKY_SFC_LW_DWN", # long wave downward solar radiation at the earth surface
+    "PS", # surface pressure
+    "ALLSKY_SRF_ALB" # Surface albedo
+  ),
+  temporal_api = "hourly",
+  lonlat = c(50.6, 4.7),
+  dates = c("2018-02-01", "2020-12-08"),
+  time_standard = "UTC"
+)
+
+# set as a data.table
+setDT(np)
+
+# give the weather data a station name
+np$station <- "Belgium"
+# provide a wind direction standard deviation
+np$WDSD <- 20
+
+# format weather
+w_beau <- 
+  format_weather(np,
+                 time_zone = "UTC",
+                 temp = "T2M",
+                 rain = "PRECTOTCORR",
+                 YYYY = "YEAR",
+                 MM = "MO",
+                 DD = "DY",
+                 hh = "HR",
+                 rh = "RH2M",
+                 ws = "WS2M",
+                 wd = "WD2M",
+                 wd_sd = "WDSD",
+                 station = "station",
+                 lon = "LON", 
+                 lat = "LAT"
+                 )
+```
+
+```{r}
+calc_epidemic_onset(start = as.POSIXct("2020-03-01",tz = "UTC"),
+                    end = as.POSIXct("2020-11-30",tz = "UTC"),
+                    c_closure = as.POSIXct("2020-06-01",tz = "UTC"),
+                    weather = w_beau)
+
+
+
+```
+
+
