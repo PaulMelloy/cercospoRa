@@ -2,8 +2,10 @@
 #'
 #' @details
 #'  Calculate the sporulation rate of *Cercospora berticola*.
-#'  This function is an attempt to copy the infection rate described by
+#'  This function is an attempt to copy the sporulation rate described by
 #'  \insertCite{racca_cercbet_2007}{cercosporaR}.
+#'  The optimum conditions for sporulation is relative humidity above 95% and
+#'  temperatures between 23$^o$C and 28$^o$C
 #'
 #' @param Tm numeric, Temperature
 #' @param RH numeric, Relative humidity, when vpd is not available function
@@ -68,7 +70,7 @@ calc_SR <- function(Tm, RH){
   # set minimum and maximum infectious temperatures
   b1 <- (Tm - 5)/30
   # get beta-function for temperature
-  b1 <- stats::dbeta(b1,1.8,2,7)
+  b1 <- stats::dbeta(b1,5,3,0.7)
   # find maximum value in sequence to normalise
   b1_max <- max(stats::dbeta(seq(0,50,0.01),1.8,2,7))
   # normalise to 0 - 1
