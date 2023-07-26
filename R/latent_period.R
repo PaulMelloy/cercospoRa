@@ -33,7 +33,7 @@ latent_period <- function(Tm){
 #' @importFrom Rdpack reprompt
 #' @references
 #'    \insertAllCited{}
-temperature_index <- function(Tm, opt_Tm = 23){
+temperature_index <- function(Tm, opt_Tm = 21){
 
   out <- sapply(Tm,FUN = function(Tm1){
     tm_ind <- latent_period(opt_Tm)/latent_period(Tm1)
