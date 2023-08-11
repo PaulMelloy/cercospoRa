@@ -28,6 +28,7 @@ remotes::install_github(repo = "PaulMelloy/cercosporaR")
 ### Format weather data  
 ```r
 library(epiphytoolR)
+library(cercosporaR)
 # import example weather data
 brisvegas <-
    system.file("extdata", "bris_weather_obs.csv", package = "epiphytoolR")
@@ -43,7 +44,7 @@ bris <- fill_time_gaps(bris,"aifstime_utc")
 bris[rain_trace == "-", rain_trace := "0"]
 bris[, rain_trace := as.numeric(rain_trace)]
 # convert cumulative rainfall to periodic rainfall
-bris[, rain := rain_trace - shift(rain_trace, type = "lead")][rain < 0, rain := rain_trace ]
+bris[, rain := rain_trace - data.table::shift(rain_trace, type = "lead")][rain < 0, rain := rain_trace ]
 
 # order the data by time
 bris <- bris[order(aifstime_utc)]
