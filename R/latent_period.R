@@ -1,15 +1,27 @@
 #' Calculate Cercospora latent period
 #'
 #' @param Tm numeric, Average temperature in degrees Celsius for a hour of the day
+#' @param ref character, method for calculating latent period. Default is `"wolf"`
+#' also available `"jarroudi"`. See references for where formulas were used
 #'
-#' @return numeric, Latent period for a given hour
+#' @return numeric, Latent period for a given hour. `ref = "jarroudi"` returns
+#'  latent period in days.
 #' @references \insertRef{wolf_factors_2005}{cercosporaR}; equation 4
+#'  \insertRef{el_jarroudi_weather-based_2021}{cercosporaR}; equation 1
 #'
-latent_period <- function(Tm){
+#'
+latent_period <- function(Tm, ref = "wolf"){
+  if(ref = "wolf"){
   lp <-
     sapply(Tm, function(Tm) {
       7 + 26 * exp(-0.35 * (Tm - 10))
     })
+  }
+  if(ref = "jarroudi"){
+    lp <-
+      1/(0.00442 * Tm - 0.0238)
+  }
+
   return(lp)
 }
 
