@@ -11,15 +11,20 @@
 #'
 #'
 latent_period <- function(Tm, ref = "wolf"){
-  if(ref = "wolf"){
+  if(ref == "wolf"){
   lp <-
     sapply(Tm, function(Tm) {
       7 + 26 * exp(-0.35 * (Tm - 10))
     })
   }
-  if(ref = "jarroudi"){
+  if(ref == "jarroudi"){
     lp <-
-      1/(0.00442 * Tm - 0.0238)
+      sapply(Tm,function(Tm){
+      lper <-
+        1/(0.00442 * Tm - 0.0238)
+      if(lper < 0) lper <- 0
+      return(lper)
+    })
   }
 
   return(lp)
