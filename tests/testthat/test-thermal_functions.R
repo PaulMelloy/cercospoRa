@@ -10,6 +10,28 @@ test_that("latent_period() examples work", {
   expect_equal(latent_period(25), 7.136435, tolerance = 0.000001)
   expect_equal(latent_period(0), 868.002, tolerance = 0.000001)
   expect_equal(latent_period(35), 7.00412, tolerance = 0.000001)
+  expect_equal(latent_period(20:25), c(7.78513196898028,
+                                       7.55327314739781,
+                                       7.38988499733242,
+                                       7.27474731398017,
+                                       7.19361115984403,
+                                       7.13643547837872), tolerance = 0.000001)
+
+  expect_equal(latent_period(25, ref = "jarroudi"), 11.53403, tolerance = 0.000001)
+  expect_equal(latent_period(0, ref = "jarroudi"), 0, tolerance = 0.000001)
+  expect_equal(latent_period(35, ref = "jarroudi"), 7.639419, tolerance = 0.000001)
+  expect_equal(latent_period(20:25,
+                             ref = "jarroudi"),
+               c(15.47988 ,
+                 14.48855 ,
+                 13.61656 ,
+                 12.84357 ,
+                 12.15362 ,
+                 11.53403), tolerance = 0.000001)
+  # Compare methods
+  # plot(10:40,latent_period(10:40), type = "l")
+  # lines(10:40,latent_period(10:40, ref = "jarroudi"), type = "l", col = "blue")
+
   })
 
 test_that("moisture_index() examples work", {
