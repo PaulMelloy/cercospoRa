@@ -37,6 +37,8 @@ calc_spore_rate <- function(Tm, RH) {
                      RH = RH)
     # apply over each row
     SR_out <- apply(Dt, 1, function(d) {
+      if(is.na(d["Tm"])) warning("Temperature values contain NA")
+      if(is.na(d["RH"])) warning("VPD/relative humidity values contain NA")
       out <- calc_SR(Tm = as.numeric(d["Tm"]),
                      RH = as.numeric(d["RH"]))
       return(out)
@@ -44,6 +46,8 @@ calc_spore_rate <- function(Tm, RH) {
     })
   } else{
     # do single way
+    if(is.na(Tm)) warning("Temperature values contain NA")
+    if(is.na(vpd)) warning("VPD/relative humidity values contain NA")
     SR_out <- calc_SR(Tm = Tm, RH = RH)
   }
   return(SR_out)
