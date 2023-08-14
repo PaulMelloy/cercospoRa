@@ -80,10 +80,12 @@ bris_formated <- format_weather(
 # susceptible cultivar
 calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01"),
                     weather = bris_formated,
-                    cultivar_sus = 5)
+                    cultivar_sus = 3)
 # resistant cultivar                    
 calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01"),
                     weather = bris_formated,
-                    cultivar_sus = 7)                    
+                    cultivar_sus = 5)                    
                     
 ```
+In the susceptible cultivar the Wolf method reaches an epidemic on the "2023-07-04 UTC".
+In the resistant cultivar progress to an epidemic is only 68.17%.
