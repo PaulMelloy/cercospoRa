@@ -10,7 +10,9 @@
 #' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
 #'  "S" susceptible, "MR" moderately resistant ect.
 #'
-#' @return numeric, proportion an epidemic indicating the progress to
+#' @return If the input weather is conducive for epidemic, the function returns a
+#'  POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
+#'  proportion indicating the progress an epidemic is returned
 #' @export
 #'
 #' @examples
