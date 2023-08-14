@@ -1,9 +1,13 @@
 #' Calculate epidemic onset
 #'
-#' @param c_closure POSIXct formated date to start the model running the model
+#' @param start posixct, start date in which to begin calculating the epidemic
+#'  onset, if not specified, the first date in the weather data will be used.
+#' @param end posixct, end date, last date to complete calculating the epidemic
+#'  onset, if not specified, the last date in the weather data will be used.
+#' @param c_closure POSIXct formatted date to start the model running the model
 #'  This is usually at canopy closure (racca)
-#' @param weather data.table, formated with `epiphytoolR::format_weather`
-#' @param cultivar_sus character, susceptibiliy of the cultivar in "R" resistant,
+#' @param weather data.table, formatted with `epiphytoolR::format_weather`
+#' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
 #'  "S" susceptible, "MR" moderately resistant ect.
 #'
 #' @return numeric, proportion an epidemic indicating the progress to
@@ -19,16 +23,18 @@ calc_epidemic_onset <- function(start,
   if(inherits(weather,"epiphy.weather") == FALSE){
     stop("'weather' has not been formatted with 'epiphytoolR::format_weather().")
   }
+  if(missing(start)) start <- as.Date(weather$times[1])
+  if(missing(end)) end <- as.Date(last(weather$times))
 
   w <- copy(weather[times > as.POSIXct(start) &
                 times < (as.POSIXct(end) + 3600),][times >= as.POSIXct(c_closure)])
 
   daily_inf_val <- calc_DIV(dat = w)
 
-  div_cs <- daily_inf_val[which(cumsum(DIV) >cultivar_sus),
+  div_cs <- daily_inf_val[first(which(cumsum(DIV) >cultivar_sus)),
                           as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
 
-  div_cs_r <- daily_inf_val[which(cumsum(DIV_racca) >cultivar_sus),
+  div_cs_r <- daily_inf_val[first(which(cumsum(DIV_racca) >cultivar_sus)),
                           as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
 
   return(list(wolf_date = div_cs[1],
