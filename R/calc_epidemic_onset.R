@@ -37,6 +37,9 @@ calc_epidemic_onset <- function(start,
   div_cs_r <- daily_inf_val[first(which(cumsum(DIV_racca) >cultivar_sus)),
                           as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
 
+  if(length(div_cs) == 0) div_cs <- div_cs / cultivar_sus
+  if(length(div_cs_r) == 0) div_cs_r <- div_cs_r / cultivar_sus
+
   return(list(wolf_date = div_cs[1],
               racca_date = div_cs_r[1]))
 
