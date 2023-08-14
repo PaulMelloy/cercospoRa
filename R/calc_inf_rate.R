@@ -50,6 +50,8 @@ calc_inf_rate <- function(Tm, vpd, RH = NA) {
                      vpd = vpd)
     # apply over each row
     IR_out <- apply(Dt, 1, function(d) {
+      if(is.na(d["Tm"])) warning("Temperature values contain NA")
+      if(is.na(d["vpd"])) warning("VPD/relative humidity values contain NA")
       out <- calc_IR(Tm = as.numeric(d["Tm"]),
                      vpd = as.numeric(d["vpd"]))
       return(out)
@@ -57,6 +59,8 @@ calc_inf_rate <- function(Tm, vpd, RH = NA) {
     })
   } else{
     # do single way
+    if(is.na(Tm)) warning("Temperature values contain NA")
+    if(is.na(vpd)) warning("VPD/relative humidity values contain NA")
     IR_out <- calc_IR(Tm = Tm, vpd = vpd)
   }
   return(IR_out)
