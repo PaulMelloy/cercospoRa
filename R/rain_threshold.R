@@ -41,14 +41,14 @@ rain_threshold <- function(w,
   # initialise global def for data.table variables
   rain <- NULL
 
-  data.table::setDT(w)
+  if("epiphy.weather" %in% class(w) == FALSE) {
+    stop("'w' must be an output of epiphytoolR::format_weather() and be class
+         \"epiphy.weather\" & \"data.table\"")
+    }
 
   # for some reason it won't recognicse := as a function
-  # w[, rain_threshold := .(data.table::frollsum(rain,hours,
-  #                                              align = "right",
-  #                                              na.rm = TRUE) >= rain_mm)]
-  w$rain_threshold <- data.table::frollsum(w$rain,hours,
-                                           align = "right",
-                                           na.rm = TRUE) >= rain_mm
+  w[, rain_threshold := data.table::frollsum(rain,hours,
+                                               align = "right",
+                                               na.rm = TRUE) >= rain_mm]
   return(w)
 }
