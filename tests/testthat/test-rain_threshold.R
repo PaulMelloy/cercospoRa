@@ -17,9 +17,14 @@ test_that("example works", {
     lon = "Station.Longitude",
     lat = "Station.Latitude",
     station = "StationID",
-    time_zone = "UTC")
+    time_zone = "UTC",data_check = FALSE)
 
   # test rain threshold
-   # weather_out <- rain_threshold(weather)
+    weather_out <- rain_threshold(weather)
+    expect_s3_class(weather_out,c("epiphy.weather", "data.table"))
+    expect_true("rain_threshold" %in% colnames(weather_out))
+    expect_equal(dim(weather_out), c(4393,17))
+    expect_equal(dim(weather_out[is.na(rain_threshold) == FALSE,
+                                 ][rain_threshold == TRUE,]), c(1750,17))
 
 })
