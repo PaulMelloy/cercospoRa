@@ -10,7 +10,10 @@
 #' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
 #'  "S" susceptible, "MR" moderately resistant ect.
 #'
-#' @return If the input weather is conducive for epidemic, the function returns a
+#' @return `$wolf_date:` If the input weather is conducive for epidemic, the function returns a
+#'  POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
+#'  proportion indicating the progress an epidemic is returned
+#'  `racca_percent:` If the input weather is conducive for epidemic, the function returns a
 #'  POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
 #'  proportion indicating the progress an epidemic is returned
 #' @export
@@ -36,11 +39,13 @@ calc_epidemic_onset <- function(start,
   div_cs <- daily_inf_val[first(which(cumsum(DIV) >cultivar_sus)),
                           as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
 
-  div_cs_r <- daily_inf_val[first(which(cumsum(DIV_racca) >cultivar_sus)),
+  # return date when 5% of canopy is infected
+  div_cs_r <- daily_inf_val[first(which(cumsum(DIV_racca) > 0.05)),
                           as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
 
   if(length(div_cs) == 0) div_cs <- sum(daily_inf_val$DIV, na.rm = TRUE) / cultivar_sus
-  if(length(div_cs_r) == 0) div_cs_r <- sum(daily_inf_val$DIV_racca,na.rm = TRUE) / cultivar_sus
+  # calculate percentage
+  if(length(div_cs_r) == 0) div_cs_r <- sum(daily_inf_val$DIV_racca,na.rm = TRUE) *100
 
   return(list(wolf_date = div_cs[1],
               racca_date = div_cs_r[1]))
