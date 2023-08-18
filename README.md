@@ -87,5 +87,31 @@ calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01"),
                     cultivar_sus = 5)                    
                     
 ```
+**wolf_date**
 In the susceptible cultivar the Wolf method reaches an epidemic on the "2023-07-04 UTC".
-In the resistant cultivar progress to an epidemic is only 68.17%.
+In the resistant cultivar progress to an epidemic is only 68.17%.  
+
+**racca_date**
+The Racca method ignores cultivar susceptibility and returns the incidence of leaves
+infected as a percentage. 
+When this percentage exceeds 5% the date for which 5% infection occurs is returned.  
+
+`calc_epidemic_onset()` is a wrapper for `calc_DIV()` which returns a data.table 
+detailing the daily contribution towards the "daily infection values" (Wolf and Verreet, 2005) or "daily leaf incidence" (Racca and Jörg, 2007).
+For more detailed outputs call `calc_DIV()`
+
+### Calculate daily infection values  
+```r
+calc_DIV(dat = bris_formated)
+```
+This produces a `data.table` detailing the daily infection value for each day using
+the method described in Wolf and Verreet (2005) \insertCite{wolf_factors_2005}{cercosporaR} 
+`DIV` and Racca and Jörg (2007) \insertCite{racca_cercbet_2007}{cercosporaR} (`DIV_racca`)
+
+
+The method for Racca and Jörg (2007) is optimised for in crop weather data and 
+Wolf and Verreet (2005) is optimised for weather data recorded at 2 meters proximal 
+to the crop.  
+
+## References  
+\insertAllCited{}
