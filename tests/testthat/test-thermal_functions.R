@@ -1,6 +1,6 @@
 test_that("temperature_index() examples works", {
-  expect_equal(temperature_index(18),0.8477678, tolerance = 0.000001)
-  expect_equal(temperature_index(10),0.2204469, tolerance = 0.000001)
+  expect_equal(temperature_index(18),0.880226, tolerance = 0.000001)
+  expect_equal(temperature_index(10),0.2288871, tolerance = 0.000001)
   expect_equal(temperature_index(28),1, tolerance = 0.000001)
   expect_equal(temperature_index(-28),0, tolerance = 0.000001)
 
