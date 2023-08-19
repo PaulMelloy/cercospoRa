@@ -20,8 +20,10 @@ Calculate sporulation rate
 }
 \details{
 Calculate the sporulation rate of \emph{Cercospora berticola}.
-This function is an attempt to copy the infection rate described by
+This function is an attempt to copy the sporulation rate described by
 \insertCite{racca_cercbet_2007}{cercosporaR}.
+The optimum conditions for sporulation is relative humidity above 95\% and
+temperatures between 23$^o$C and 28$^o$C
 }
 \examples{
 calc_spore_rate(25,0.2)

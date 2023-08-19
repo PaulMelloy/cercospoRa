@@ -4,7 +4,7 @@
 \alias{temperature_index}
 \title{Get temperature index}
 \usage{
-temperature_index(Tm, opt_Tm = 23)
+temperature_index(Tm, opt_Tm = 21)
 }
 \arguments{
 \item{Tm}{numeric, temperature for any given hour}

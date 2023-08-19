@@ -7,7 +7,7 @@
 estimate_sb_drymatter(RG, LAI, incid_rad = 0.48, k = 0.7, RUE = 3.36)
 }
 \arguments{
-\item{RG}{Global incident radiation (RG)}
+\item{RG}{Global incident radiation (RG) kilowatts hours per m2}
 
 \item{LAI}{leaf area index for the crop cycle \emph{n}. The ratio of total leaf area
 of plants divided by the land surface area. Typically between 0 and 9.}
@@ -21,11 +21,14 @@ to be 0.48 (default)}
 by Lemaire et. al (2009). Typical values for k are in the range of 0.5 to 0.9}
 }
 \value{
-numeric, an esimation of total dry matter produced durung a cycle per
+numeric, an estimation of total dry matter produced during a cycle per
 square meter
 }
 \description{
 Estimate sugar beat dry matter aculumation
+}
+\examples{
+estimate_sb_drymatter(RG = 5, LAI = 0.8)
 }
 \references{
 Crop Modeling and Decision Support - A Morphogenetic Crop Model for

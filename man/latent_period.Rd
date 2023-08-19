@@ -4,17 +4,22 @@
 \alias{latent_period}
 \title{Calculate Cercospora latent period}
 \usage{
-latent_period(Tm)
+latent_period(Tm, ref = "wolf")
 }
 \arguments{
 \item{Tm}{numeric, Average temperature in degrees Celsius for a hour of the day}
+
+\item{ref}{character, method for calculating latent period. Default is \code{"wolf"}
+also available \code{"jarroudi"}. See references for where formulas were used}
 }
 \value{
-numeric, Latent period for a given hour
+numeric, Latent period for a given hour. \code{ref = "jarroudi"} returns
+latent period in days.
 }
 \description{
 Calculate Cercospora latent period
 }
 \references{
 \insertRef{wolf_factors_2005}{cercosporaR}; equation 4
+\insertRef{el_jarroudi_weather-based_2021}{cercosporaR}; equation 1
 }

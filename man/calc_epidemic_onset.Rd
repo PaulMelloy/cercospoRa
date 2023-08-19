@@ -4,23 +4,30 @@
 \alias{calc_epidemic_onset}
 \title{Calculate epidemic onset}
 \usage{
-calc_epidemic_onset(
-  c_closure = as.POSIXct("2023-06-01"),
-  weather,
-  cultivar_sus = 5
-)
+calc_epidemic_onset(start, end, c_closure, weather, cultivar_sus = 5)
 }
 \arguments{
-\item{c_closure}{POSIXct formated date to start the model running the model
+\item{start}{posixct, start date in which to begin calculating the epidemic
+onset, if not specified, the first date in the weather data will be used.}
+
+\item{end}{posixct, end date, last date to complete calculating the epidemic
+onset, if not specified, the last date in the weather data will be used.}
+
+\item{c_closure}{POSIXct formatted date to start the model running the model
 This is usually at canopy closure (racca)}
 
-\item{weather}{data.table, formated with \code{epiphytoolR::format_weather}}
+\item{weather}{data.table, formatted with \code{epiphytoolR::format_weather}}
 
-\item{cultivar_sus}{character, susceptibiliy of the cultivar in "R" resistant,
+\item{cultivar_sus}{character, susceptibility of the cultivar in "R" resistant,
 "S" susceptible, "MR" moderately resistant ect.}
 }
 \value{
-numeric, proportion an epidemic indicating the progress to
+\verb{$wolf_date:} If the input weather is conducive for epidemic, the function returns a
+POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
+proportion indicating the progress an epidemic is returned
+\verb{racca_percent:} If the input weather is conducive for epidemic, the function returns a
+POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
+proportion indicating the progress an epidemic is returned
 }
 \description{
 Calculate epidemic onset
