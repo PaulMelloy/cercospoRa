@@ -36,7 +36,8 @@ library(epiphytoolR)
 ```
 
 
-Next lets download some weather data using the R package `nasapower`.
+Next lets download some weather data using the R package `nasapower`.  
+
 ```{r}
 # install stationaRy package if it is not installed
 if("nasapower" %in% installed.packages()[,1] == FALSE){
@@ -58,8 +59,8 @@ np <- get_power(
     "ALLSKY_SRF_ALB" # Surface albedo
   ),
   temporal_api = "hourly",
-  lonlat = c(50.6, 4.7),
-  dates = c("2018-02-01", "2020-12-08"),
+  lonlat = c(9.916,51.41866),
+  dates = c("2018-02-01", "2022-12-08"),
   time_standard = "UTC"
 )
 
@@ -92,13 +93,10 @@ w_beau <-
 ```
 
 ```{r}
-calc_epidemic_onset(start = as.POSIXct("2020-03-01",tz = "UTC"),
-                    end = as.POSIXct("2020-11-30",tz = "UTC"),
-                    c_closure = as.POSIXct("2020-06-01",tz = "UTC"),
+calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+                    end = as.POSIXct("2022-09-30",tz = "UTC"),
+                    c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
                     weather = w_beau)
-
-
-
 ```
 
 ### Real example of field trial data  
