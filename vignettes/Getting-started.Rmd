@@ -101,4 +101,82 @@ calc_epidemic_onset(start = as.POSIXct("2020-03-01",tz = "UTC"),
 
 ```
 
+### Real example of field trial data  
+
+This weather was contributed by Facundo and is from a field trial.  
+
+```{r}
+# read in excel formated file
+library(readxl)
+wethr <- read_xlsx(path = "../inst/Wetterdaten_Reinshof_2022.xlsx")
+
+# format to data.table
+setDT(wethr)
+
+# Add key data needed for format weather
+# format the time
+wethr[,Time := as.POSIXct(paste0(Datum, " ",Stunde,":00"),tz = "UTC")]
+
+# nominate gps location, 
+# while not needed in cercosporaR some plant disease models will use location to 
+# decide the closest weather station to pull weather from
+wethr[, c("lon","lat") := list(9.916,51.41866)]
+# weather is hourly we need to state a standard deviation of weather direction
+wethr[, wd_std := 20]
+
+# remove all data after September as it contains missing data
+wethr <- wethr[Datum < as.POSIXct("2022-10-01")]
+
+# set NA wind speed values to zero
+wethr[is.na(WG200),WG200 := 0]
+
+# set NA wind direction values to 20 degrees. Wind is not important for this model
+wethr[is.na(WR200),WR200 := 20]
+
+weathr <- format_weather(wethr,
+                         POSIXct_time = "Time",
+                         time_zone = "UTC",
+                         temp = "T200",
+                         rain = "N100",
+                         rh = "F200",
+                         wd = "WR200",
+                         ws = "WG200",
+                         station = "Station",
+                         lon = "lon",
+                         lat = "lat",
+                         wd_sd = "wd_std",
+                         data_check = FALSE # this stops the function from checking for faults
+                         )
+# As the data is formatted closely enough for what is expected for the model. 
+# We can elect to turn the data_check off so 
+```
+
+We can find the epidemic start date by calling the `calc_epidemic_onset()` function.
+This function is a wrapper for the `calc_DIV()` function which calculates the daily
+infection values for both, Wolf and Racca methods.
+
+This date is determined by the negative prognosis models to be the last day for 
+which a epidemic is likely not to start.  
+
+```{r}
+calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+                    end = as.POSIXct("2022-09-30",tz = "UTC"),
+                    c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
+                    weather = weathr)
+```
+
+  
+`calc_DIV()` will do this for all the days in the weather data frame provided, starting at 
+the first day, integrating over the hourly data.  
+
+```{r}
+divalues <- calc_DIV(dat = weathr[times > as.POSIXct("2022-07-01")])
+
+# we take the cumulative sum of the daily infection values to monitor the increasing
+# risk of infection from cercospora
+divalues[, DIV_sum := cumsum(DIV)]
+divalues[, DIV_sum_racca := cumsum(DIV_racca)]
+divalues
+```
+
 
