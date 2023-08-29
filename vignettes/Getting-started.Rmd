@@ -38,7 +38,7 @@ library(epiphytoolR)
 
 Next lets download some weather data using the R package `nasapower`.  
 
-```{r}
+```{r eval=FALSE, include=TRUE}
 # install stationaRy package if it is not installed
 if("nasapower" %in% installed.packages()[,1] == FALSE){
   install.packages("nasapower")
@@ -93,45 +93,49 @@ w_beau <-
 ```
 
 ```{r}
-calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
-                    end = as.POSIXct("2022-09-30",tz = "UTC"),
-                    c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
-                    weather = w_beau)
+# calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+#                     end = as.POSIXct("2022-09-30",tz = "UTC"),
+#                     c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
+#                     weather = w_beau)
 ```
 
-### Real example of field trial data  
+### Format weather station data  
 
-This weather was contributed by Facundo and is from a field trial.  
+This is data recorded by a weather station and contributed by Facundo and is from 
+a field trial.  
+
+We will format the data so the model functions can recognise the data and won't 
+return errors due to inconsistencies and NAs which are common in weather data. 
+This will require the user to think about how to replace the NAs or state default
+values to complete the dataset.  
 
 ```{r}
-# read in excel formated file
-library(readxl)
-wethr <- read_xlsx(path = "../inst/Wetterdaten_Reinshof_2022.xlsx")
-
 # format to data.table
-setDT(wethr)
+wthr <- data.table(cercosporaR::weathr)
 
-# Add key data needed for format weather
-# format the time
-wethr[,Time := as.POSIXct(paste0(Datum, " ",Stunde,":00"),tz = "UTC")]
+# Use POSIXct formatted time.
+wthr[,Time := as.POSIXct(paste0(Datum, " ",Stunde,":00"),tz = "UTC")]
 
-# nominate gps location, 
-# while not needed in cercosporaR some plant disease models will use location to 
-# decide the closest weather station to pull weather from
-wethr[, c("lon","lat") := list(9.916,51.41866)]
-# weather is hourly we need to state a standard deviation of weather direction
-wethr[, wd_std := 20]
+# Nominate Latitude and Longitude location of the weather station. 
+# While not needed in cercosporaR some plant disease models will use location to 
+#  decide the closest weather station to pull weather from
+wthr[, c("lon","lat") := list(9.916,51.41866)]
+
+# weather is hourly and will error if we don't specify a standard deviation of 
+#  weather direction. This is intentional to force the user to decide how variable
+#  the wind direction data could be.
+wthr[, wd_std := 20]
 
 # remove all data after September as it contains missing data
-wethr <- wethr[Datum < as.POSIXct("2022-10-01")]
+wthr <- wthr[Datum < as.POSIXct("2022-10-01")]
 
 # set NA wind speed values to zero
-wethr[is.na(WG200),WG200 := 0]
+wthr[is.na(WG200),WG200 := 0]
 
 # set NA wind direction values to 20 degrees. Wind is not important for this model
-wethr[is.na(WR200),WR200 := 20]
+wthr[is.na(WR200),WR200 := 20]
 
-weathr <- format_weather(wethr,
+wthr <- format_weather(wthr,
                          POSIXct_time = "Time",
                          time_zone = "UTC",
                          temp = "T200",
@@ -160,7 +164,7 @@ which a epidemic is likely not to start.
 calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
                     end = as.POSIXct("2022-09-30",tz = "UTC"),
                     c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
-                    weather = weathr)
+                    weather = wthr)
 ```
 
   
@@ -168,7 +172,7 @@ calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
 the first day, integrating over the hourly data.  
 
 ```{r}
-divalues <- calc_DIV(dat = weathr[times > as.POSIXct("2022-07-01")])
+divalues <- calc_DIV(dat = wthr[times > as.POSIXct("2022-07-01")])
 
 # we take the cumulative sum of the daily infection values to monitor the increasing
 # risk of infection from cercospora
