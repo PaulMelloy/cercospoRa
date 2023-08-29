@@ -42,3 +42,9 @@ Canopy closure occurs when 90% of plants leaves in adjacent rows are touching.
 Canopy closure could be calculated by LAI and is the day when the model begins
 
 
+## Canopy closure  
+
+Canopy closure is used as the start of models because cercospora spreads mostly by
+splash dispersal. 
+This means that infection mostly spreads between plants when the canopy is overlapping.
+Subsequently spread between rows is much more unlikely , compared to within rows.
