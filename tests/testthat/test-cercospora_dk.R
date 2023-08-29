@@ -28,5 +28,5 @@ test_that("dispersal kernal example works", {
 
 
 
-plot(cercospora_dk(1:200, 0,1,1))
-sum(cercospora_dk(1:20000, 0,1,1))
+# plot(cercospora_dk(1:200, 0,1,1))
+# sum(cercospora_dk(1:20000, 0,1,1))
