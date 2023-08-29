@@ -24,7 +24,7 @@ calc_epidemic_onset <- function(start,
                                 c_closure,
                                 weather,
                                 cultivar_sus = 5){
-  rh <- times <- NULL
+  rh <- times <- DIV <- Year <- Month <- Day <- DIV_racca <- NULL
   if(inherits(weather,"epiphy.weather") == FALSE){
     stop("'weather' has not been formatted with 'epiphytoolR::format_weather().")
   }

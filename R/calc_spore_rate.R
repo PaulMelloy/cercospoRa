@@ -29,6 +29,8 @@
 #' persp(temp,RH,s_rate, theta = 315, phi = 20, ticktype = "detailed")
 #'
 calc_spore_rate <- function(Tm, RH) {
+
+  vpd <- NULL
   # if lengths are the same of Tm and RH apply over the vectors
   if (length(Tm) == length(RH)) {
 
