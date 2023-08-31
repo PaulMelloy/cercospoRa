@@ -11,7 +11,7 @@ to mimic the ACTUAL spatial distribution?
 4) Can we improve on existing decision support models by Wolf **OR** Racca by using
 LAI to determine canopy closure.  
 
-## Aproach  
+## Approach  
 
  We will need to verify the models in the repository which were informed by publications
  by Wolf et. al () and Racca et. al (), have been coded correctly.  
