@@ -6,7 +6,7 @@
 *Cercospora beticola* (raster maps, descriptive metrics (which?))?  
 2) Does the cercosporaR model mimic the ACTUAL distribution?  
     - single vs multiple in-field environmental sensors  
-3) Who do different RS (satellite/UAV) influence cercosporaR in its capability 
+3) How do different RS (satellite/UAV) approches influence cercosporaR in its capability 
 to mimic the ACTUAL spatial distribution?  
 4) Can we improve on existing decision support models by Wolf **OR** Racca by using
 LAI to determine canopy closure.  
