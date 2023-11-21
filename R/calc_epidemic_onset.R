@@ -19,6 +19,9 @@
 #' @export
 #'
 #' @examples
+wethr <- read.csv(
+  system.file("extdata", "clean_weather.csv",
+              package = "cercosporaR"))
 calc_epidemic_onset <- function(start,
                                 end,
                                 c_closure,
