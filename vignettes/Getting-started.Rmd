@@ -161,7 +161,7 @@ This date is determined by the negative prognosis models to be the last day for
 which a epidemic is likely not to start.  
 
 ```{r}
-calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+cercosporaR::calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
                     end = as.POSIXct("2022-09-30",tz = "UTC"),
                     c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
                     weather = wthr)

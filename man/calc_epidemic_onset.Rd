@@ -32,3 +32,13 @@ proportion indicating the progress an epidemic is returned
 \description{
 Calculate epidemic onset
 }
+\examples{
+wethr <- read.csv(system.file("extdata", "clean_weather.csv",
+                  package = "cercosporaR"))
+wethr <- epiphytoolR::format_weather(wethr,time_zone = "UTC")
+
+calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+                    end = as.POSIXct("2022-09-30",tz = "UTC"),
+                    c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
+                    weather = wethr)
+}
