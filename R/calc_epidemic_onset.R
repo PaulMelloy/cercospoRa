@@ -19,9 +19,14 @@
 #' @export
 #'
 #' @examples
-wethr <- read.csv(
-  system.file("extdata", "clean_weather.csv",
-              package = "cercosporaR"))
+#' wethr <- read.csv(system.file("extdata", "clean_weather.csv",
+#'                   package = "cercosporaR"))
+#' wethr <- epiphytoolR::format_weather(wethr,time_zone = "UTC")
+#'
+#' calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+#'                     end = as.POSIXct("2022-09-30",tz = "UTC"),
+#'                     c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
+#'                     weather = wethr)
 calc_epidemic_onset <- function(start,
                                 end,
                                 c_closure,
