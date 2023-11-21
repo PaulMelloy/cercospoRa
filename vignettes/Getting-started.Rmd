@@ -111,7 +111,7 @@ values to complete the dataset.
 
 ```{r}
 # format to data.table
-wthr <- data.table(cercosporaR::weathr)
+wthr <- data.table(weathr)
 
 # Use POSIXct formatted time.
 wthr[,Time := as.POSIXct(paste0(Datum, " ",Stunde,":00"),tz = "UTC")]
