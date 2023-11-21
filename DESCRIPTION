@@ -17,9 +17,11 @@ Config/testthat/edition: 3
 Imports: 
     data.table,
     epiphytoolR,
-    lubridate,
     Rdpack,
     stats
+Suggests:
+    lubridate,
+    remotes
 RdMacros: Rdpack
 VignetteBuilder: knitr
 Depends: 
