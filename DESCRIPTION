@@ -13,15 +13,14 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
+    lubridate,
+    remotes
 Config/testthat/edition: 3
 Imports: 
     data.table,
     epiphytoolR,
     Rdpack,
     stats
-Suggests:
-    lubridate,
-    remotes
 RdMacros: Rdpack
 VignetteBuilder: knitr
 Depends: 
