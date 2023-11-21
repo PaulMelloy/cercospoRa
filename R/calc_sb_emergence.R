@@ -27,6 +27,7 @@
 #' @param soil_water_content numeric, usually between 0.55 (drier) and 0.7 (saturated)
 #' @param soil_particle_diameter numeric, diameter of soil particle size. This is
 #'  not described and guessed. No units were provided either.
+#' @param na.rm logical, remove any NA values when averaging days to emergence.
 #'
 #' @return numeric, the estimated days to emergence in days. always returns a single
 #'  number
