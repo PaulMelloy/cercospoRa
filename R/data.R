@@ -2,7 +2,10 @@
 #'
 #' A unformatted weather station dataset from Germany
 #'
-#' @format ## `weathr`
+#' @name weathr
+#' @docType data
+#' @author Facundo
+#' @source Facundo
 #' A data frame with 8,016 rows and 15 columns:
 #' \describe{
 #'   \item{Station}{Identifier}
@@ -15,5 +18,5 @@
 #'   \item{F-200}{Relative humidity at 200cm}
 #'   ...
 #' }
-#' @source Facundo
+NULL
 
