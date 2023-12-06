@@ -98,7 +98,7 @@ bris[is.na(air_temp), air_temp := impute_diurnal(aifstime_utc,
 # Assume NA rainfall entries = 0 rain
 bris[is.na(rain), rain := 0]
 
-# format weather so it is recognised by the model
+# format weather data so it is recognised by the model
 # specify column names in data for each of the variables 
 # see ?format_weather
 bris_formated <- format_weather(
@@ -116,6 +116,8 @@ bris_formated <- format_weather(
    data_check = c("temp","rain")
 )
 ```
+*Warnings are produced here due to missing wind direction data* 
+*This model does not need wind direction so this is not problematic for how it runs*  
 
 ### Calculate the proportional progress towards an epidemic  
 ```r
@@ -129,6 +131,8 @@ calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01"),
                     cultivar_sus = 5)                    
                     
 ```
+*There are some warnings here due to missing humidity data, see below for more explaination*
+
 **wolf_date**
 In the susceptible cultivar the Wolf method reaches an epidemic on the "2023-07-04 UTC".
 In the resistant cultivar progress to an epidemic is only 68.17%.  
@@ -150,6 +154,10 @@ This produces a `data.table` detailing the daily infection value for each day us
 the method described in Wolf and Verreet (2005) \insertCite{wolf_factors_2005}{cercosporaR} 
 `DIV` and Racca and Jörg (2007) \insertCite{racca_cercbet_2007}{cercosporaR} (`DIV_racca`)
 
+**Note:** Missing humidity values do not prevent the model from running and these
+days are assumed to not progress the model. The Racca and Jörg model returns `NA` values 
+and the Wolf model returns `0` as seen in the `calc_DIV(dat = bris_formated)` function 
+output.  
 
 The method for Racca and Jörg (2007) is optimised for in crop weather data and 
 Wolf and Verreet (2005) is optimised for weather data recorded at 2 meters proximal 
