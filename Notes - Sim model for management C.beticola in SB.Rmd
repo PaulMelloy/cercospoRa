@@ -1,10 +1,10 @@
 ---
-title: A cercospora simulation model to aid disease detection in sugarbeet with remote
-  sensing
+title: Enhancing weather-based disease forecast with remote sensing: An openenly available cercospora leaf spot simulation model to aid disease detection in sugarbeet
 author: 
-  - Facundo Izpizua, University of Gottingen
+  - Dr. Rene Heim, Universität Bonn and Institut für Zuckerrübenforschung
   - Dr. Paul Melloy, The University of Queensland  
-  - Dr. Rene Heim, University of Gottingen
+  - Nathan Okole, University of Gottingen  
+  - Facundo Ispizua, Institut für Zuckerrübenforschung
 date: "`r Sys.Date()`"
 output: html_document
 bibliography: inst/cercospora.bib
