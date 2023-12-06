@@ -1,5 +1,9 @@
 #' Calculate Cercospora latent period
 #'
+#' @details
+#'
+#'
+#'
 #' @param Tm numeric, Average temperature in degrees Celsius for a hour of the day
 #' @param ref character, method for calculating latent period. Default is `"wolf"`
 #' also available `"jarroudi"`. See references for where formulas were used
