@@ -5,7 +5,7 @@
 #' @param end posixct, end date, last date to complete calculating the epidemic
 #'  onset, if not specified, the last date in the weather data will be used.
 #' @param c_closure POSIXct formatted date to start the model running the model
-#'  This is usually at canopy closure (racca)
+#'  This is usually at canopy closure (Wolf)
 #' @param weather data.table, formatted with `epiphytoolR::format_weather`
 #' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
 #'  "S" susceptible, "MR" moderately resistant ect.
