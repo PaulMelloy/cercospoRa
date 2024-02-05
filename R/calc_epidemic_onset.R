@@ -38,6 +38,11 @@ calc_epidemic_onset <- function(start,
   }
   if(missing(start)) start <- as.Date(weather$times[1])
   if(missing(end)) end <- as.Date(last(weather$times))
+  if(missing(c_closure)){
+    warning("'c_closure' not supplied, setting 'start' as canopy closure date")
+    start <- c_closure
+  }
+  if(c_closure >= end) stop("'c_closure' is after last weather date")
 
   w <- copy(weather[times > as.POSIXct(start) &
                 times < (as.POSIXct(end) + 3600),][times >= as.POSIXct(c_closure)])
