@@ -93,3 +93,51 @@ test_that("epidemic onset produces expected outcome", {
   expect_equal(res_out$racca_date, as.POSIXct("2023-07-04",tz = "UTC"))
 
 })
+
+test_that("different start dates provide different epidemic dates",{
+  w_dat <- data.table(weathr)
+  # Use POSIXct formatted time.
+  w_dat[,Time := as.POSIXct(paste0(Datum, " ",Stunde,":00"),tz = "UTC")]
+  w_dat[, c("lon","lat") := list(9.916,51.41866)]
+  # weather is hourly and will error if we don't specify a wd standard deviation
+  w_dat[, wd_std := 20]
+  # set NA wind direction values to 20 degrees. Wind is not important for this model
+  w_dat[,WR200 := runif(.N,min = 0,359)]
+  # remove all data after September as it contains missing data
+  w_dat <- w_dat[Datum < as.POSIXct("2022-10-01")]
+  # set NA wind speed values to zero
+  w_dat[is.na(WG200),WG200 := 0]
+
+
+  w_dat <- format_weather(w_dat,
+                         POSIXct_time = "Time",
+                         time_zone = "UTC",
+                         temp = "T200",
+                         rain = "N100",
+                         rh = "F200",
+                         wd = "WR200",
+                         ws = "WG200",
+                         station = "Station",
+                         lon = "lon",
+                         lat = "lat",
+                         wd_sd = "wd_std",
+                         data_check = FALSE # this stops the function from checking for faults
+  )
+
+  for(i in 1:30){
+    if(i == 1){
+      wolf <- vector(mode = "character")
+      racca <- vector(mode = "character")
+    }
+    out <- calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+                               end = as.POSIXct("2022-09-30",tz = "UTC"),
+                               c_closure = as.POSIXct("2022-05-01")+(i*3*86400), # 86400 is the number of seconds in a day
+                               weather = w_dat,
+                               cultivar_sus = 3)
+
+    wolf <- c(wolf,as.character(out$wolf_date))
+    racca <- c(racca,as.character(out$racca_date))
+  }
+  wolf
+})
+
