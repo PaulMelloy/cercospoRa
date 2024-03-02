@@ -10,6 +10,8 @@
 #' @param Tm numeric, Temperature
 #' @param RH numeric, Relative humidity, when vpd is not available function
 #'  will calculate internally
+#' @param Cv numeric proportion, Influence of cultivar resistance on the sporulation
+#'  rate. 1 = susceptible, 0 = completely resistant. (default = 1)
 #'
 #' @return numeric probability of infection between 0 and 1
 #' @export
@@ -28,7 +30,7 @@
 #'      })
 #' persp(temp,RH,s_rate, theta = 315, phi = 20, ticktype = "detailed")
 #'
-calc_spore_rate <- function(Tm, RH) {
+calc_spore_rate <- function(Tm, RH, Cv= 1) {
 
   vpd <- NULL
   # if lengths are the same of Tm and RH apply over the vectors
@@ -43,7 +45,7 @@ calc_spore_rate <- function(Tm, RH) {
       if(is.na(d["RH"])) warning("VPD/relative humidity values contain NA")
       out <- calc_SR(Tm = as.numeric(d["Tm"]),
                      RH = as.numeric(d["RH"]))
-      return(out)
+      return(out*Cv)
 
     })
   } else{
@@ -52,7 +54,7 @@ calc_spore_rate <- function(Tm, RH) {
     if(is.na(vpd)) warning("VPD/relative humidity values contain NA")
     SR_out <- calc_SR(Tm = Tm, RH = RH)
   }
-  return(SR_out)
+  return(SR_out*Cv)
 }
 
 
