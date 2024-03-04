@@ -69,8 +69,9 @@ calc_inf_rate <- function(Tm, vpd, RH = NA) {
 
 
 }
-calc_IR <- function(Tm, vpd){
+calc_IR <- function(Tm, vpd, method = "estimated"){
 
+  if(method == "estimated"){
   # vpd <- seq(0,1.5,0.01)
   # vpd <- 0.2
 
@@ -101,6 +102,20 @@ calc_IR <- function(Tm, vpd){
 
   #plot(vpd,b2)
 
-  return(b1*b2)
+  return(b1*b2)}else{
+    if(Tm < 5 |
+       Tm >=45){
+      Tr <- 0
+      }else{
+         (0.179 - 0.098) * (Tm + 0.015) * (Tm^2 - 0.053) * 10^2 *
+          Tm ^3 +5.45 * 10^6 * Tm^4
+       }
+
+  }
 
 }
+
+# fun1 <- function(Tm){
+#   (0.179 - 0.098) * (Tm + 0.015) * (Tm^2 - 0.053) * 10^2 *
+#     Tm ^3 +5.45 * 10^6 * Tm^4
+# }
