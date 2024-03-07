@@ -13,7 +13,7 @@
 #' @return numeric, probability of infection between 0 and 1
 #' @export
 #' @references
-#'     \insertRef{racca_cercbet_2007}{cercosporaR}
+#'     \insertRef{racca_cercbet_2007}{cercospoRa}
 #'
 #' @examples
 #' calc_inf_rate(25,0.2)

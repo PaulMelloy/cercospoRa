@@ -1,17 +1,19 @@
 # cercospoRa  
 
+`cercospoRa` is a mechanistic epidemiological model for estimating epidemics of 
+_Cercospora beticola_ in sugar beat farms, available as an R package.  
+
 ## Installation  
 
 This package imports [`epiphytoolR`](https://github.com/PaulMelloy/epiphytoolR). 
-To install this package run the following code in `R`
+To install this package run the following code in `R`.  
 ```
-remotes::install_github(repo = "PaulMelloy/epiphytoolR", ref = "dev")
+remotes::install_github(repo = "PaulMelloy/epiphytoolR")
 ```
-We recommend the development branch
+Next install the package  
 
-Next install the package
 ```
-remotes::install_github(repo = "PaulMelloy/cercosporaR")
+remotes::install_github(repo = "PaulMelloy/cercospoRa")
 ```
 
 ## Getting started
@@ -19,11 +21,10 @@ remotes::install_github(repo = "PaulMelloy/cercosporaR")
 ### Format weather data  
 ```r
 library(epiphytoolR)
-library(cercosporaR)
-# import example weather data
-brisvegas <-
-   system.file("extdata", "bris_weather_obs.csv", package = "epiphytoolR")
-bris <- data.table::fread(brisvegas)
+library(cercospoRa)
+
+# Format weather data
+head(cercospoRa::weathr)
 
 # Format times to POSIXct time with UTC timezone
 bris[,aifstime_utc := as.POSIXct(aifstime_utc,tz = "UTC")]
@@ -100,8 +101,8 @@ For more detailed outputs call `calc_DIV()`
 calc_DIV(dat = bris_formated)
 ```
 This produces a `data.table` detailing the daily infection value for each day using
-the method described in Wolf and Verreet (2005) \insertCite{wolf_factors_2005}{cercosporaR} 
-`DIV` and Racca and Jörg (2007) \insertCite{racca_cercbet_2007}{cercosporaR} (`DIV_racca`)
+the method described in Wolf and Verreet (2005) \insertCite{wolf_factors_2005}{cercospoRa} 
+`DIV` and Racca and Jörg (2007) \insertCite{racca_cercbet_2007}{cercospoRa} (`DIV_racca`)
 
 **Note:** Missing humidity values do not prevent the model from running and these
 days are assumed to not progress the model. The Racca and Jörg model returns `NA` values 

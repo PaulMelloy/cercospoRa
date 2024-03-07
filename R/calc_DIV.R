@@ -1,8 +1,8 @@
 #' Calculate daily infection values
 #'
 #' This function calculates the daily infection values for *Cercospora berticola*
-#'  on sugar beet. Functions were adapted from \insertCite{wolf_factors_2005}{cercosporaR}
-#'  and \insertCite{wolf_zum_2001}{cercosporaR}
+#'  on sugar beet. Functions were adapted from \insertCite{wolf_factors_2005}{cercospoRa}
+#'  and \insertCite{wolf_zum_2001}{cercospoRa}
 #'
 #' @param date_time POSIX_ct, date time the weather recording was taken
 #' @param Tm numeric, temperature, in celcius' at time increment in `date_time`
@@ -12,8 +12,8 @@
 #'  each of the respective arguments for input. provided as a convenience
 #'
 #' @return data.table, with probability of infection for each day, between 0 and 1
-#'  Undertaken with two methods by Wolf \insertCite{wolf_factors_2005}{cercosporaR}
-#'  under the `DIV` column and method by Racca et. al \insertCite{racca_cercbet_2007}{cercosporaR}
+#'  Undertaken with two methods by Wolf \insertCite{wolf_factors_2005}{cercospoRa}
+#'  under the `DIV` column and method by Racca et. al \insertCite{racca_cercbet_2007}{cercospoRa}
 #'  described in the `DIV_racca` column.
 #' @export
 #' @references \insertAllCited{}
