@@ -115,7 +115,20 @@ calc_IR <- function(Tm, vpd, method = "estimated"){
 
 }
 
-# fun1 <- function(Tm){
-#   (0.179 - 0.098) * (Tm + 0.015) * (Tm^2 - 0.053) * 10^2 *
-#     Tm ^3 +5.45 * 10^6 * Tm^4
+# rossi94_Tm <- function(Tm){
+#   0.179 -
+#     (0.098 * Tm) +
+#     (0.015 * Tm^2) -
+#     0.053 * 10^-2 * Tm^3 +
+#     5.45 * 10^-6 * Tm^4
 # }
+# plot(fun1(6:44),x = 6:44, type = "l")
+
+# rossi94_rh <- function(rh){
+#   0.179 -
+#     (0.098 * Tm) +
+#     (0.015 * Tm^2) -
+#     0.053 * 10^-2 * Tm^3 +
+#     5.45 * 10^-6 * Tm^4
+# }
+# plot(fun1(6:44),x = 6:44, type = "l")
