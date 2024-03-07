@@ -52,7 +52,7 @@ np <- get_power(
     "T2M", # Air temperature at 2 meters
     "WS2M", # wind speed at 2 meters,
     "WD2M",# wind direction at 2 meters,
-    "PRECTOTCORR", # Precipitation
+    "PRECTOTCORR", # Precipitations
     "ALLSKY_SFC_SW_DWN", # short wave downward solar radiation at the earth surface
     "ALLSKY_SFC_LW_DWN", # long wave downward solar radiation at the earth surface
     "PS", # surface pressure
