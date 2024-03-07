@@ -28,7 +28,7 @@ data and returns it in the required hourly format.
 We will need to install epiphytoolR  
 
 ```{r}
-# install stationaRy package if it is not installed
+# install epiphytoolR package if it is not installed
 if("epiphytoolR" %in% installed.packages()[,1] == FALSE){
   remotes::install_github("PaulMelloy/epiphytoolR",ref = "dev", dependencies = TRUE)
 }
@@ -39,7 +39,7 @@ library(epiphytoolR)
 Next lets download some weather data using the R package `nasapower`.  
 
 ```{r eval=FALSE, include=TRUE}
-# install stationaRy package if it is not installed
+# install nasapower package if it is not installed
 if("nasapower" %in% installed.packages()[,1] == FALSE){
   install.packages("nasapower")
 }
@@ -52,7 +52,7 @@ np <- get_power(
     "T2M", # Air temperature at 2 meters
     "WS2M", # wind speed at 2 meters,
     "WD2M",# wind direction at 2 meters,
-    "PRECTOTCORR",
+    "PRECTOTCORR", # Precipitation
     "ALLSKY_SFC_SW_DWN", # short wave downward solar radiation at the earth surface
     "ALLSKY_SFC_LW_DWN", # long wave downward solar radiation at the earth surface
     "PS", # surface pressure
