@@ -39,6 +39,6 @@ persp(temp,VPD,i_rate, theta = 160, ticktype = "detailed")
 
 }
 \references{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{\\insertRef\{racca_cercbet_2007\}\{cercosporaR\}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{\\insertRef\{racca_cercbet_2007\}\{cercospoRa\}
 }\if{html}{\out{</div>}}
 }

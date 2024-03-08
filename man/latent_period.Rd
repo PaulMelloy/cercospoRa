@@ -19,7 +19,11 @@ latent period in days.
 \description{
 Calculate Cercospora latent period
 }
+\details{
+Calculates the latent period for \emph{Cercospora beticola} infections on
+sugar beet
+}
 \references{
-\insertRef{wolf_factors_2005}{cercosporaR}; equation 4
-\insertRef{el_jarroudi_weather-based_2021}{cercosporaR}; equation 1
+\insertRef{wolf_factors_2005}{cercospoRa}; equation 4
+\insertRef{el_jarroudi_weather-based_2021}{cercospoRa}; equation 1
 }

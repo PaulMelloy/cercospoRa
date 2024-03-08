@@ -39,7 +39,7 @@ not described and guessed. No units were provided either.}
 
 \item{mu1}{model parameter, This is defined by soil properties, such as, soil
 moisture, soil particle size and sowing depth. By default we use soil type 3
-described in the paper \insertCite{rimaz_predicting_2020}{cercosporaR},
+described in the paper \insertCite{rimaz_predicting_2020}{cercospoRa},
 Daneshkadeh soil Seri.}
 
 \item{mu2}{model parameter, See \code{mu1} description}
@@ -53,7 +53,7 @@ of the seedling and emergence. Default 6$^o$C}
 
 \item{Tm_crit}{numeric, critical (Highest) temperature which contributes to
 the development of the seedling and emergence. Ideal development temperature
-is described as between 24 and 28 degrees \insertCite{rimaz_predicting_2020}{cercosporaR}}
+is described as between 24 and 28 degrees \insertCite{rimaz_predicting_2020}{cercospoRa}}
 
 \item{na.rm}{logical, remove any NA values when averaging days to emergence.}
 }
@@ -63,7 +63,7 @@ number
 }
 \description{
 This function estimates the time required for sugarbeat emergence as described
-by \insertCite{rimaz_predicting_2020}{cercosporaR}
+by \insertCite{rimaz_predicting_2020}{cercospoRa}
 }
 \examples{
 calc_sb_emergence(27)
