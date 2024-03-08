@@ -68,9 +68,9 @@ calc_DIV <- function(date_time, Tm,RH, rain,dat){
           "moist_ind") := list(temperature_index(temp),
                               moisture_index(rh,rain))]
 
-  DIV <- dat[, DIV = mean(fifelse(Tm_index == 0 | moist_ind == 0,
-                                  0, (Tm_index * moist_ind))),
-             by = c("Year","Month","Day")]
+  DIV <- dat[, list(DIV = mean(fifelse(test = Tm_index == 0 | moist_ind == 0,
+                                  yes = 0, no = (Tm_index * moist_ind)))),
+             by = c("Year", "Month", "Day")]
 
   return(DIV)
 }
