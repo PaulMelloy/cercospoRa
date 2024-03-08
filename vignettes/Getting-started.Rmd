@@ -30,7 +30,7 @@ We will need to install epiphytoolR
 ```{r}
 # install stationaRy package if it is not installed
 if("epiphytoolR" %in% installed.packages()[,1] == FALSE){
-  remotes::install_github("PaulMelloy/epiphytoolR",ref = "main", dependencies = TRUE)
+  remotes::install_github("PaulMelloy/epiphytoolR", dependencies = TRUE)
 }
 library(epiphytoolR)
 ```
@@ -92,17 +92,17 @@ w_beau <-
                  )
 ```
 
-```{r}
-# calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
-#                     end = as.POSIXct("2022-09-30",tz = "UTC"),
-#                     c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
-#                     weather = w_beau)
+```{r eval=FALSE, include=TRUE}
+calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+                    end = as.POSIXct("2022-09-30",tz = "UTC"),
+                    c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
+                    weather = w_beau)
 ```
 
 ### Format weather station data  
 
-This is data recorded by a weather station and contributed by Facundo and is from 
-a field trial.  
+This is data recorded by a weather station and contributed by Facundo Ramón Ispizua Yamati
+and is from a sugarbeet field trial.  
 
 We will format the data so the model functions can recognise the data and won't 
 return errors due to inconsistencies and NAs which are common in weather data. 
