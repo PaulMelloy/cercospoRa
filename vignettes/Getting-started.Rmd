@@ -177,7 +177,6 @@ divalues <- calc_DIV(dat = wthr[times > as.POSIXct("2022-07-01")])
 # we take the cumulative sum of the daily infection values to monitor the increasing
 # risk of infection from cercospora
 divalues[, DIV_sum := cumsum(DIV)]
-divalues[, DIV_sum_racca := cumsum(DIV_racca)]
 divalues
 ```
 
