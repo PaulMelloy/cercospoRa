@@ -40,13 +40,13 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     lubridate,
-    remotes
+    remotes,
+    epiphytoolR,
+    stats
 Config/testthat/edition: 3
 Imports: 
     data.table,
-    epiphytoolR,
-    Rdpack,
-    stats
+    Rdpack
 RdMacros: Rdpack
 VignetteBuilder: knitr
 Depends: 
