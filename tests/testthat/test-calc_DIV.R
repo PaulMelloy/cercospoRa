@@ -14,11 +14,10 @@ test_that("calc_DIV works", {
     RH = RH,
     rain = rain
   )
-  #expect_equal(DIV1$DIV, c(0.769005, 0.177156,0.00002154), tolerance = 0.000001)
-  #expect_equal(DIV1$DIV_racca, c(0.08947015, 0.01142334, 0.00000000), tolerance = 0.000001)
+  expect_equal(DIV1$DIV, c(0.5098039  , 0.1760586), tolerance = 0.000001)
   expect_type(DIV1,"list")
-  expect_equal(dim(DIV1), c(2,5))
-  expect_equal(colnames(DIV1), c("Year","Month","Day","DIV","DIV_racca"))
+  expect_equal(dim(DIV1), c(2,4))
+  expect_equal(colnames(DIV1), c("Year","Month","Day","DIV"))
 
   in_dat <- data.frame(
     date_time = date_t,

@@ -77,19 +77,15 @@ test_that("epidemic onset produces expected outcome", {
   sus_out <- calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01"),
                       weather = bris_formated,
                       cultivar_sus = 3)
-  expect_type(sus_out,"list")
-  expect_named(sus_out, c("wolf_date", "racca_date"))
-  expect_equal(sus_out, lapply(c(wolf_date = "2023-07-04",
-                                 racca_date= "2023-07-04"),as.POSIXct,tz = "UTC"))
+  expect_type(sus_out,"double")
+  expect_equal(sus_out, as.POSIXct("2023-07-04",tz = "UTC"))
 
   # resistant cultivar
   res_out <- calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01"),
                       weather = bris_formated,
                       cultivar_sus = 5)
-  expect_type(res_out,"list")
-  expect_named(res_out, c("wolf_date", "racca_date"))
-  expect_equal(res_out$wolf_date, 0.7017544,tolerance = 0.0000001)
-  expect_equal(res_out$racca_date, as.POSIXct("2023-07-04",tz = "UTC"))
+  expect_type(res_out,"double")
+  expect_equal(res_out, 0.7017544,tolerance = 0.0000001)
 
 })
 
@@ -125,8 +121,7 @@ test_that("different start dates provide different epidemic dates",{
 
   for(i in 1:30){
     if(i == 1){
-      wolf <- vector(mode = "character")
-      racca <- vector(mode = "character")
+      out2 <- vector(mode = "character")
     }
     out <- calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
                                end = as.POSIXct("2022-09-30",tz = "UTC"),
@@ -134,9 +129,17 @@ test_that("different start dates provide different epidemic dates",{
                                weather = w_dat,
                                cultivar_sus = 3)
 
-    wolf <- c(wolf,as.character(out$wolf_date))
-    racca <- c(racca,as.character(out$racca_date))
+    out2 <- c(out2,as.character(out))
+
   }
-  wolf
+  # cat(out2,sep = "\", \"")
+  expect_equal(out2, c("2022-06-11", "2022-06-11", "2022-06-12", "2022-06-13",
+                       "2022-06-15", "2022-06-20", "2022-06-25", "2022-06-27",
+                       "2022-06-29", "2022-06-30", "2022-07-01", "2022-07-02",
+                       "2022-07-08", "2022-07-12", "2022-07-19", "2022-07-21",
+                       "2022-07-22", "2022-07-23", "2022-07-26", "2022-07-30",
+                       "2022-07-30", "2022-07-31", "2022-08-01", "2022-08-02",
+                       "2022-08-05", "2022-08-05", "2022-08-05", "2022-08-15",
+                       "2022-08-17", "2022-08-18"))
 })
 
