@@ -47,6 +47,6 @@ dat <- data.table(Tm = rep(0:49, times = 50),
 
 dat[, DIV := list(temperature_index(Tm)*
                     moisture_index(Rh))]
-library(ggplot2)
-ggplot(dat, aes(x = Tm, y = Rh, z = DIV))+
-  geom_contour_filled()
+# library(ggplot2)
+# ggplot(dat, aes(x = Tm, y = Rh, z = DIV))+
+#   geom_contour_filled()
