@@ -52,3 +52,4 @@ VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
 LazyData: true
+URL: https://paulmelloy.github.io/cercospoRa/
