@@ -2,9 +2,35 @@ Package: cercospoRa
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9001
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person(given = "Paul",
+           family = "Melloy",
+           role = c("aut", "cre", "trl"),
+           email = "P.Melloy@uq.edu.au",
+           comment = c(ORCID = "0000-0003-4253-7167",
+                       "Translated equations from literature and developed package.")),
+    person(given = "Rene",
+           family = "Heim",
+           role = c("aut"),
+           email = "heim@ifz-goettingen.de",
+           comment = c(ORCID = "0000-0002-0666-2588",
+                       "Code review and development of leaf area index model")),
+    person(given = "Nathan",
+           family = "Okole",
+           role = c("ctb"),
+           email = "okole@ifz-goettingen.de",
+           comment = c(ORCID = "0000-0002-5375-2420",
+                       "Code review and development of leaf area index model")),
+    person(given = "Facundo Ramón",
+           family = "Ispizua Yamati",
+           role = c("dtc", "ctb"),
+           email = "ispizua@ifz-goettingen.de",
+           comment = c(ORCID = "0000-0001-5775-3554",
+                       "Code review")),
+    person(given = "Anne-Katrin",
+           family = "Mahlein",
+           role = c("ctb"),
+           comment = c(ORCID = "0000-0003-1091-3690"))
+Description: Mechanistic epidemiological model for Cercospora leaf spot of sugar beet
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

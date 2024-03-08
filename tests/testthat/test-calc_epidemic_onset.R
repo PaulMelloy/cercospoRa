@@ -1,4 +1,3 @@
-library(data.table)
 # load the weather data to be formatted
 # import BOM data file
 brisvegas <-
