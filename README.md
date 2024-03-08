@@ -23,95 +23,91 @@ remotes::install_github(repo = "PaulMelloy/cercospoRa")
 library(epiphytoolR)
 library(cercospoRa)
 
-# Format weather data
+# Inspect raw weather station data
 head(cercospoRa::weathr)
+```
+
+`weathr` is a data.table containing weather data recorded at a sugarbeat field 
+trial observing the spread and severity of *C. beticola*.
+
+```r
+# make a copy of the data
+wthr <- data.table(weathr)
 
 # Format times to POSIXct time with UTC timezone
-bris[,aifstime_utc := as.POSIXct(aifstime_utc,tz = "UTC")]
+wthr[,Time := as.POSIXct(paste0(Datum, " ",Stunde,":00"),tz = "UTC")]
 
-# fill time gaps
-bris <- fill_time_gaps(bris,"aifstime_utc")
+# Nominate Latitude and Longitude location of the weather station. 
+# While not needed in cercospoRa some plant disease models will use location to 
+#  decide the closest weather station to pull weather from
+wthr[, c("lon","lat") := list(9.916,51.41866)]
 
-# replace dashes with zeros
-bris[rain_trace == "-", rain_trace := "0"]
-bris[, rain_trace := as.numeric(rain_trace)]
-# convert cumulative rainfall to periodic rainfall
-bris[, rain := rain_trace - data.table::shift(rain_trace, type = "lead")][rain < 0, rain := rain_trace ]
+# weather is hourly and will error if we don't specify a standard deviation of 
+#  weather direction. This is intentional to force the user to decide how variable
+#  the wind direction data could be.
+wthr[, wd_std := 20]
 
-# order the data by time
-bris <- bris[order(aifstime_utc)]
+# remove all data after September as it contains missing data
+wthr <- wthr[Datum < as.POSIXct("2022-10-01")]
 
-#impute temperature
-bris[is.na(air_temp), air_temp := impute_diurnal(aifstime_utc,
-                                                 min_obs = 10,max_obs = 28,
-                                                 max_hour = 14, min_hour = 5)]
-# Assume NA rainfall entries = 0 rain
-bris[is.na(rain), rain := 0]
+# set NA wind speed values to zero
+wthr[is.na(WG200),WG200 := 0]
 
-# format weather data so it is recognised by the model
-# specify column names in data for each of the variables 
-# see ?format_weather
-bris_formated <- format_weather(
-   w = bris,
-   POSIXct_time = "aifstime_utc",
-   time_zone = "UTC",
-   temp = "air_temp",
-   rh = "rel_hum",
-   rain = "rain_trace",
-   ws = "wind_spd_kmh",
-   wd = "wind_dir_deg",
-   station = "name",
-   lon = "lon",
-   lat = "lat",
-   data_check = c("temp","rain")
-)
+# set NA wind direction values to 20 degrees. Wind is not important for this model
+wthr[is.na(WR200),WR200 := 20]
+
+# format_weather() is a function from epiphytoolR that formats weather data to 
+#  hourly and checks for missing data or any issues that may cause downstream faults
+#  in the model.
+wthr <- 
+  epiphytoolR::format_weather(wthr,
+                              POSIXct_time = "Time",
+                              time_zone = "UTC",
+                              temp = "T200",
+                              rain = "N100",
+                              rh = "F200",
+                              wd = "WR200",
+                              ws = "WG200",
+                              station = "Station",
+                              lon = "lon",
+                              lat = "lat",
+                              wd_sd = "wd_std",
+                              data_check = FALSE # this stops the function from checking for faults
+                         )
 ```
-*Warnings are produced here due to missing wind direction data* 
-*This model does not need wind direction so this is not problematic for how it runs*  
 
 ### Calculate the proportional progress towards an epidemic  
 ```r
 # susceptible cultivar
-calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01"),
-                    weather = bris_formated,
+calc_epidemic_onset(c_closure = as.POSIXct("2022-07-01"),
+                    weather = wthr,
                     cultivar_sus = 3)
 # resistant cultivar                    
-calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01"),
-                    weather = bris_formated,
+calc_epidemic_onset(c_closure = as.POSIXct("2022-07-01"),
+                    weather = wthr,
                     cultivar_sus = 5)                    
                     
 ```
-*There are some warnings here due to missing humidity data, see below for more explaination*
-
-**wolf_date**
-In the susceptible cultivar the Wolf method reaches an epidemic on the "2023-07-04 UTC".
-In the resistant cultivar progress to an epidemic is only 68.17%.  
-
-**racca_date**
-The Racca method ignores cultivar susceptibility and returns the incidence of leaves
-infected as a percentage. 
-When this percentage exceeds 5% the date for which 5% infection occurs is returned.  
+This returns a POSIXct date for the onset of an epidemic for the susceptible and
+more resistant cultivar.
+If the input weather data does not provide a window where a epidemic onset date 
+is met, the proportional progress towards an epidemic is returned.
 
 `calc_epidemic_onset()` is a wrapper for `calc_DIV()` which returns a data.table 
-detailing the daily contribution towards the "daily infection values" (Wolf and Verreet, 2005) or "daily leaf incidence" (Racca and Jörg, 2007).
-For more detailed outputs call `calc_DIV()`
+detailing the daily contribution towards the "daily infection values" (Wolf and Verreet, 2005). 
+For more detailed output of daily infection values call `calc_DIV()`
 
 ### Calculate daily infection values  
 ```r
-calc_DIV(dat = bris_formated)
+calc_DIV(dat = wthr)
 ```
 This produces a `data.table` detailing the daily infection value for each day using
-the method described in Wolf and Verreet (2005) \insertCite{wolf_factors_2005}{cercospoRa} 
-`DIV` and Racca and Jörg (2007) \insertCite{racca_cercbet_2007}{cercospoRa} (`DIV_racca`)
+the method described in Wolf and Verreet (2005) 
 
 **Note:** Missing humidity values do not prevent the model from running and these
 days are assumed to not progress the model. The Racca and Jörg model returns `NA` values 
 and the Wolf model returns `0` as seen in the `calc_DIV(dat = bris_formated)` function 
 output.  
 
-The method for Racca and Jörg (2007) is optimised for in crop weather data and 
-Wolf and Verreet (2005) is optimised for weather data recorded at 2 meters proximal 
-to the crop.  
-
 ## References  
-\insertAllCited{}
+Wolf, P. F., & Verreet, J. A. (2005). A model for simulating the infection of sugar beet leaves by Cercospora beticola. Plant Pathology, 54(3), 333-343.
