@@ -102,12 +102,22 @@ For more detailed output of daily infection values call `calc_DIV()`
 calc_DIV(dat = wthr)
 ```
 This produces a `data.table` detailing the daily infection value for each day using
-the method described in Wolf and Verreet (2005) 
+the method described in Wolf and Verreet (2005). 
 
 **Note:** Missing humidity values do not prevent the model from running and these
 days are assumed to not progress the model. The Racca and Jörg model returns `NA` values 
 and the Wolf model returns `0` as seen in the `calc_DIV(dat = bris_formated)` function 
 output.  
 
+
+## Notes for contributors  
+The `main` branch is the production branch and only provides functions to recreate
+the model described in Wolf and Verreet (2005) as explained in the paper. 
+The `main` branch is locked, please contribute to the `dev` branch.
+The `dev` (development) branch also includes functions to recreate other *C. beticola*
+mechanistic models published by Racca and Jörg (2007) and auxilary functions which
+might be helpful for future versions.
+
 ## References  
-Wolf, P. F., & Verreet, J. A. (2005). A model for simulating the infection of sugar beet leaves by Cercospora beticola. Plant Pathology, 54(3), 333-343.
+Wolf, P. F., & Verreet, J. A. (2005). Factors Affecting the Onset of Cercospora Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring Thresholds. *Phytopathology*, 95(3), 269-274.  
+Racca, P., and Jörg, E. (2007). CERCBET 3 – a forecaster for epidemic development of *Cercospora beticola*. *EPPO Bulletin*, 37(2), 344-349.  
