@@ -109,7 +109,7 @@ test_that("different start dates provide different epidemic dates",{
   w_dat[is.na(WG200),WG200 := 0]
 
 
-  w_dat <- format_weather(w_dat,
+  w_dat <- epiphytoolR::format_weather(w_dat,
                          POSIXct_time = "Time",
                          time_zone = "UTC",
                          temp = "T200",
