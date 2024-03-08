@@ -52,15 +52,9 @@ calc_epidemic_onset <- function(start,
   div_cs <- daily_inf_val[first(which(cumsum(DIV) >cultivar_sus)),
                           as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
 
-  # return date when 5% of canopy is infected
-  div_cs_r <- daily_inf_val[first(which(cumsum(DIV_racca) > 0.05)),
-                          as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
-
   if(length(div_cs) == 0) div_cs <- sum(daily_inf_val$DIV, na.rm = TRUE) / cultivar_sus
   # calculate percentage
-  if(length(div_cs_r) == 0) div_cs_r <- sum(daily_inf_val$DIV_racca,na.rm = TRUE) *100
 
-  return(list(wolf_date = div_cs[1],
-              racca_date = div_cs_r[1]))
+  return(div_cs[1])
 
 }
