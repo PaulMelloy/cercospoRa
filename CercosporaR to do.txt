@@ -1,6 +1,0 @@
-CercosporaR
-Check on resistatnce and susceptibility and how it is input
-ordinal range vs documented MR VS 
-
-681955
-
