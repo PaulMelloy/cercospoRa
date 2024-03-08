@@ -1,6 +1,7 @@
 #' Calculate Cercospora latent period
 #'
-#' @details
+#' @details Calculates the latent period for *Cercospora beticola* infections on
+#' sugar beet
 #'
 #'
 #'
