@@ -22,8 +22,8 @@ Temperatures at or above the optimum temperature for the disease cycle will
 yield 1 and the lower the temperature the infinitely longer the latent period.
 }
 \details{
-For equations and original documentation, see \insertCite{wolf_factors_2005}{cercosporaR}
-and \insertCite{wolf_zum_2001}{cercosporaR}
+For equations and original documentation, see \insertCite{wolf_factors_2005}{cercospoRa}
+and \insertCite{wolf_zum_2001}{cercospoRa}
 }
 \references{
 \insertAllCited{}

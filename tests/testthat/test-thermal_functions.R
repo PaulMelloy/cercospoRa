@@ -3,8 +3,16 @@ test_that("temperature_index() examples works", {
   expect_equal(temperature_index(10),0.2288871, tolerance = 0.000001)
   expect_equal(temperature_index(28),1, tolerance = 0.000001)
   expect_equal(temperature_index(-28),0, tolerance = 0.000001)
-
 })
+
+# # plot temperature index function
+# plot(temperature_index(0:40),type = "l",
+#      xlab = "Temperature C")
+#
+# plot(latent_period(0:40),type = "l",
+#      xlab = "Temperature C")
+
+
 
 test_that("latent_period() examples work", {
   expect_equal(latent_period(25), 7.136435, tolerance = 0.000001)

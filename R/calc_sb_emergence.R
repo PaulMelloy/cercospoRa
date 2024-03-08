@@ -2,7 +2,7 @@
 #'
 #' @description
 #' This function estimates the time required for sugarbeat emergence as described
-#' by \insertCite{rimaz_predicting_2020}{cercosporaR}
+#' by \insertCite{rimaz_predicting_2020}{cercospoRa}
 #'
 #'
 #' @param Tm numeric, average hourly temperature between sowing and emergence in Celsius.
@@ -11,10 +11,10 @@
 #'  of the seedling and emergence. Default 6$^o$C
 #' @param Tm_crit numeric, critical (Highest) temperature which contributes to
 #'  the development of the seedling and emergence. Ideal development temperature
-#'  is described as between 24 and 28 degrees \insertCite{rimaz_predicting_2020}{cercosporaR}
+#'  is described as between 24 and 28 degrees \insertCite{rimaz_predicting_2020}{cercospoRa}
 #' @param mu1 model parameter, This is defined by soil properties, such as, soil
 #'  moisture, soil particle size and sowing depth. By default we use soil type 3
-#'  described in the paper \insertCite{rimaz_predicting_2020}{cercosporaR},
+#'  described in the paper \insertCite{rimaz_predicting_2020}{cercospoRa},
 #'  Daneshkadeh soil Seri.
 #' @param mu2 model parameter, See `mu1` description
 #' @param alfa model parameter, See `mu1` description

@@ -1,6 +1,7 @@
 #' Calculate Cercospora latent period
 #'
-#' @details
+#' @details Calculates the latent period for *Cercospora beticola* infections on
+#' sugar beet
 #'
 #'
 #'
@@ -10,8 +11,8 @@
 #'
 #' @return numeric, Latent period for a given hour. `ref = "jarroudi"` returns
 #'  latent period in days.
-#' @references \insertRef{wolf_factors_2005}{cercosporaR}; equation 4
-#'  \insertRef{el_jarroudi_weather-based_2021}{cercosporaR}; equation 1
+#' @references \insertRef{wolf_factors_2005}{cercospoRa}; equation 4
+#'  \insertRef{el_jarroudi_weather-based_2021}{cercospoRa}; equation 1
 #'
 #'
 latent_period <- function(Tm, ref = "wolf"){
@@ -42,8 +43,8 @@ latent_period <- function(Tm, ref = "wolf"){
 #' Temperatures at or above the optimum temperature for the disease cycle will
 #' yield 1 and the lower the temperature the infinitely longer the latent period.
 #'
-#' For equations and original documentation, see \insertCite{wolf_factors_2005}{cercosporaR}
-#'  and \insertCite{wolf_zum_2001}{cercosporaR}
+#' For equations and original documentation, see \insertCite{wolf_factors_2005}{cercospoRa}
+#'  and \insertCite{wolf_zum_2001}{cercospoRa}
 #'
 #' @param Tm numeric, temperature for any given hour
 #' @param opt_Tm numeric, the lowest temperature optimum at which all temperatures
@@ -70,7 +71,7 @@ temperature_index <- function(Tm, opt_Tm = 21){
 #' Relative humidity index
 #'
 #' Confirms the humidity threshold has been met by returning a 1 or not met by
-#'  returning a 0. See \insertCite{wolf_factors_2005}{cercosporaR}
+#'  returning a 0. See \insertCite{wolf_factors_2005}{cercospoRa}
 #'
 #' @param RH numeric, relative humidity as a percentage
 #' @param rh_thresh numeric, humidity threshold where if humidity is below this

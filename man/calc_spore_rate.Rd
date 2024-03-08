@@ -21,7 +21,7 @@ Calculate sporulation rate
 \details{
 Calculate the sporulation rate of \emph{Cercospora berticola}.
 This function is an attempt to copy the sporulation rate described by
-\insertCite{racca_cercbet_2007}{cercosporaR}.
+\insertCite{racca_cercbet_2007}{cercospoRa}.
 The optimum conditions for sporulation is relative humidity above 95\% and
 temperatures between 23$^o$C and 28$^o$C
 }
@@ -39,6 +39,6 @@ persp(temp,RH,s_rate, theta = 315, phi = 20, ticktype = "detailed")
 
 }
 \references{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{\\insertRef\{racca_cercbet_2007\}\{cercosporaR\}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{\\insertRef\{racca_cercbet_2007\}\{cercospoRa\}
 }\if{html}{\out{</div>}}
 }

@@ -20,14 +20,14 @@ each of the respective arguments for input. provided as a convenience}
 }
 \value{
 data.table, with probability of infection for each day, between 0 and 1
-Undertaken with two methods by Wolf \insertCite{wolf_factors_2005}{cercosporaR}
-under the \code{DIV} column and method by Racca et. al \insertCite{racca_cercbet_2007}{cercosporaR}
+Undertaken with two methods by Wolf \insertCite{wolf_factors_2005}{cercospoRa}
+under the \code{DIV} column and method by Racca et. al \insertCite{racca_cercbet_2007}{cercospoRa}
 described in the \code{DIV_racca} column.
 }
 \description{
 This function calculates the daily infection values for \emph{Cercospora berticola}
-on sugar beet. Functions were adapted from \insertCite{wolf_factors_2005}{cercosporaR}
-and \insertCite{wolf_zum_2001}{cercosporaR}
+on sugar beet. Functions were adapted from \insertCite{wolf_factors_2005}{cercospoRa}
+and \insertCite{wolf_zum_2001}{cercospoRa}
 }
 \examples{
 date_t <- Sys.time() + seq(0, 179 * 60 * 10, (60 * 10))

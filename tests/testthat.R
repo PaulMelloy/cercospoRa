@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(cercosporaR)
+library(cercospoRa)
 
-test_check("cercosporaR")
+test_check("cercospoRa")

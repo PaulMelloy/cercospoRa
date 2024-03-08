@@ -15,11 +15,11 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(cercosporaR)
+library(cercospoRa)
 library(data.table)
 ```
 
-The `cercosporaR` package estimates the proportional progress towards a 
+The `cercospoRa` package estimates the proportional progress towards a 
 *Cercospora beticola* epidemic on sugarbeet.
 This requires formated hourly weather data that the model recognises.
 The R package `epiphytoolR` contains functions which automatically checks the weather
@@ -30,7 +30,7 @@ We will need to install epiphytoolR
 ```{r}
 # install epiphytoolR package if it is not installed
 if("epiphytoolR" %in% installed.packages()[,1] == FALSE){
-  remotes::install_github("PaulMelloy/epiphytoolR",ref = "dev", dependencies = TRUE)
+  remotes::install_github("PaulMelloy/epiphytoolR", dependencies = TRUE)
 }
 library(epiphytoolR)
 ```
@@ -92,17 +92,17 @@ w_beau <-
                  )
 ```
 
-```{r}
-# calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
-#                     end = as.POSIXct("2022-09-30",tz = "UTC"),
-#                     c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
-#                     weather = w_beau)
+```{r eval=FALSE, include=TRUE}
+calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+                    end = as.POSIXct("2022-09-30",tz = "UTC"),
+                    c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
+                    weather = w_beau)
 ```
 
 ### Format weather station data  
 
-This is data recorded by a weather station and contributed by Facundo and is from 
-a field trial.  
+This is data recorded by a weather station and contributed by Facundo Ramón Ispizua Yamati
+and is from a sugarbeet field trial.  
 
 We will format the data so the model functions can recognise the data and won't 
 return errors due to inconsistencies and NAs which are common in weather data. 
@@ -117,7 +117,7 @@ wthr <- data.table(weathr)
 wthr[,Time := as.POSIXct(paste0(Datum, " ",Stunde,":00"),tz = "UTC")]
 
 # Nominate Latitude and Longitude location of the weather station. 
-# While not needed in cercosporaR some plant disease models will use location to 
+# While not needed in cercospoRa some plant disease models will use location to 
 #  decide the closest weather station to pull weather from
 wthr[, c("lon","lat") := list(9.916,51.41866)]
 
@@ -161,7 +161,7 @@ This date is determined by the negative prognosis models to be the last day for
 which a epidemic is likely not to start.  
 
 ```{r}
-cercosporaR::calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+cercospoRa::calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
                     end = as.POSIXct("2022-09-30",tz = "UTC"),
                     c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
                     weather = wthr)
