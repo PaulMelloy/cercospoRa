@@ -1,7 +1,7 @@
 # cercospoRa  
 
 `cercospoRa` is a mechanistic epidemiological model for estimating epidemics of 
-_Cercospora beticola_ in sugar beat farms, available as an R package.  
+_Cercospora beticola_ in sugar beet farms, available as an R package.  
 
 ## Installation  
 
