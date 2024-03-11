@@ -1,5 +1,7 @@
 # cercospoRa <a href="https://paulmelloy.github.io/cercospoRa/"><img src="man/figures/logo.png" align="right" height="138" alt="cercospoRa website" /></a>
 
+<br>
+
 `cercospoRa` is a mechanistic epidemiological model for estimating epidemics of 
 _Cercospora beticola_ in sugar beet farms, available as an R package.  
 
@@ -15,6 +17,8 @@ Next install the package
 ```
 remotes::install_github(repo = "PaulMelloy/cercospoRa")
 ```
+
+<br>  
 
 ## Getting started
 
@@ -75,6 +79,7 @@ wthr <-
                               data_check = FALSE # this stops the function from checking for faults
                          )
 ```
+<br>  
 
 ### Calculate the proportional progress towards an epidemic  
 ```r
@@ -116,7 +121,9 @@ the model described in Wolf and Verreet (2005) as explained in the paper.
 The `main` branch is locked, please contribute to the `dev` branch.
 The `dev` (development) branch also includes functions to recreate other *C. beticola*
 mechanistic models published by Racca and Jörg (2007) and auxilary functions which
-might be helpful for future versions.
+might be helpful for future versions.  
+
+<br>  
 
 ## References  
 Wolf, P. F., & Verreet, J. A. (2005). Factors Affecting the Onset of Cercospora Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring Thresholds. *Phytopathology*, 95(3), 269-274.  
