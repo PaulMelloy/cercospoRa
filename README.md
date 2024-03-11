@@ -1,4 +1,4 @@
-![cercospoRa](docs/logo.png)
+![cercospoRa](https://raw.githubusercontent.com/PaulMelloy/cercospoRa/main/docs/logo.png)
 # cercospoRa  
 
 `cercospoRa` is a mechanistic epidemiological model for estimating epidemics of 
