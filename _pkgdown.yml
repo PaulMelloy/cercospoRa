@@ -1,4 +1,5 @@
-url: https://paulmelloy.github.io/cercospoRa/
+url: ~
 template:
   bootstrap: 5
+  bootswatch: darkly
 

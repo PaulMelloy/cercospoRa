@@ -2,9 +2,9 @@ set.seed(69)
 
 # ten minute increments for
 date_t <- Sys.time() + seq(0, 179 * 60 * 10, (60 * 10))
-Tm <- rnorm(180,20,10)
+Tm <- round(rnorm(180,20,10),2)
 RH <- rep(rbeta(20,3,1)*100, each = 9)
-rain <- rbinom(180,1,0.1) * runif(180,0.1,20)
+rain <- round(rbinom(180,1,0.1) * runif(180,0.1,20),2)
 
 test_that("calc_DIV works", {
   # individual vectors
