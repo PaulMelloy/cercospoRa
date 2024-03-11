@@ -80,7 +80,9 @@
 <a class="anchor" aria-label="anchor" href="#cercospora-"></a>
 </h1>
 </div>
+<p><br></p>
 <p><code>cercospoRa</code> is a mechanistic epidemiological model for estimating epidemics of <em>Cercospora beticola</em> in sugar beet farms, available as an R package.</p>
+<p><br></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -88,6 +90,7 @@
 <pre><code><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"PaulMelloy/epiphytoolR"</span><span class="op">)</span></span></code></pre>
 <p>Next install the package</p>
 <pre><code><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"PaulMelloy/cercospoRa"</span><span class="op">)</span></span></code></pre>
+<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
@@ -101,7 +104,7 @@
 <span></span>
 <span><span class="co"># Inspect raw weather station data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">cercospoRa</span><span class="fu">::</span><span class="va"><a href="reference/weathr.html">weathr</a></span><span class="op">)</span></span></code></pre></div>
-<p><code>weathr</code> is a data.table containing weather data recorded at a sugarbeat field trial observing the spread and severity of <em>C. beticola</em>.</p>
+<p><code>weathr</code> is a data.table containing weather data recorded at a sugar beet field trial observing the spread and severity of <em>C. beticola</em>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make a copy of the data</span></span>
 <span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="op">(</span><span class="va">weathr</span><span class="op">)</span></span>
@@ -146,6 +149,7 @@
 <span>                              wd_sd <span class="op">=</span> <span class="st">"wd_std"</span>,</span>
 <span>                              data_check <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># this stops the function from checking for faults</span></span>
 <span>                         <span class="op">)</span></span></code></pre></div>
+<p><br></p>
 </div>
 <div class="section level3">
 <h3 id="calculate-the-proportional-progress-towards-an-epidemic">Calculate the proportional progress towards an epidemic<a class="anchor" aria-label="anchor" href="#calculate-the-proportional-progress-towards-an-epidemic"></a>
@@ -160,8 +164,9 @@
 <span>                    weather <span class="op">=</span> <span class="va">wthr</span>,</span>
 <span>                    cultivar_sus <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>                    </span>
 <span>                    </span></code></pre></div>
-<p>This returns a POSIXct date for the onset of an epidemic for the susceptible and more resistant cultivar. If the input weather data does not provide a window where a epidemic onset date is met, the proportional progress towards an epidemic is returned.</p>
+<p>This returns a <code>POSIXct</code> date for the onset of an epidemic for the susceptible and more resistant cultivar. If the input weather data does not provide a window where a epidemic onset date is met, the proportional progress towards an epidemic is returned.</p>
 <p><code><a href="reference/calc_epidemic_onset.html">calc_epidemic_onset()</a></code> is a wrapper for <code><a href="reference/calc_DIV.html">calc_DIV()</a></code> which returns a data.table detailing the daily contribution towards the “daily infection values” (Wolf and Verreet, 2005). For more detailed output of daily infection values call <code><a href="reference/calc_DIV.html">calc_DIV()</a></code></p>
+<p><br></p>
 </div>
 <div class="section level3">
 <h3 id="calculate-daily-infection-values">Calculate daily infection values<a class="anchor" aria-label="anchor" href="#calculate-daily-infection-values"></a>
@@ -170,12 +175,14 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/calc_DIV.html">calc_DIV</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">wthr</span><span class="op">)</span></span></code></pre></div>
 <p>This produces a <code>data.table</code> detailing the daily infection value for each day using the method described in Wolf and Verreet (2005).</p>
 <p><strong>Note:</strong> Missing humidity values do not prevent the model from running and these days are assumed to not progress the model. The Racca and Jörg model returns <code>NA</code> values and the Wolf model returns <code>0</code> as seen in the <code>calc_DIV(dat = bris_formated)</code> function output.</p>
+<p><br></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="notes-for-contributors">Notes for contributors<a class="anchor" aria-label="anchor" href="#notes-for-contributors"></a>
 </h2>
-<p>The <code>main</code> branch is the production branch and only provides functions to recreate the model described in Wolf and Verreet (2005) as explained in the paper. The <code>main</code> branch is locked, please contribute to the <code>dev</code> branch. The <code>dev</code> (development) branch also includes functions to recreate other <em>C. beticola</em> mechanistic models published by Racca and Jörg (2007) and auxilary functions which might be helpful for future versions.</p>
+<p>The <code>main</code> branch is the production branch and only provides functions to recreate the model described in Wolf and Verreet (2005) as explained in the paper. The <code>main</code> branch is locked, please contribute to the <code>dev</code> branch. The <code>dev</code> (development) branch also includes functions to recreate other <em>C. beticola</em> mechanistic models published by Racca and Jörg (2007) and auxiliary functions which might be helpful for future versions.</p>
+<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
