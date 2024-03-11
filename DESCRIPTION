@@ -30,7 +30,7 @@ Authors@R: c(
            family = "Mahlein",
            role = c("ctb"),
            comment = c(ORCID = "0000-0003-1091-3690")))
-Description: This package provides functions to recreate the null prognosis 
+Description: This package provides functions to recreate the negative prognosis 
     epidemiological model for describing when the model can't be certain a 
     chance Cercospora leaf spot (_Cercospora beticola_) epidemic has not 
     commenced. The model is based on the work of Wolf and Verreet 

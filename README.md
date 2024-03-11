@@ -1,3 +1,4 @@
+# {cercospoRa}: Cercospora beticola negative prognosis model <img src="docs/logo.png" style="float:right;" alt="logo" width="120" />
 # cercospoRa  
 
 `cercospoRa` is a mechanistic epidemiological model for estimating epidemics of 
