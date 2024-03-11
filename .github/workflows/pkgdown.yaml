@@ -31,8 +31,7 @@ jobs:
           use-public-rspm: true
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-repositories: "https://github.com/PaulMelloy/cercospoRa/main"
-          extra-packages: any::pkgdown, local::.
+          extra-packages: any::pkgdown, local::. "https://github.com/PaulMelloy/cercospoRa/main"
           needs: website
 
       - name: Build site

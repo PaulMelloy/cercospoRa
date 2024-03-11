@@ -53,6 +53,8 @@ Imports:
     Rdpack
 RdMacros: Rdpack
 VignetteBuilder: knitr
+Remotes: 
+    PaulMelloy/epiphytoolR
 Depends: 
     R (>= 2.10)
 LazyData: true
