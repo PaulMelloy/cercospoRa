@@ -95,7 +95,7 @@ hourly format.</p>
 <span><span class="kw">if</span><span class="op">(</span><span class="st">"epiphytoolR"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">installed.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"PaulMelloy/epiphytoolR"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">epiphytoolR</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulmelloy.github.io/epiphytoolR/" class="external-link">epiphytoolR</a></span><span class="op">)</span></span></code></pre></div>
 <p>Next lets download some weather data using the R package
 <code>nasapower</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -134,7 +134,7 @@ hourly format.</p>
 <span></span>
 <span><span class="co"># format weather</span></span>
 <span><span class="va">w_beau</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/epiphytoolR/man/format_weather.html" class="external-link">format_weather</a></span><span class="op">(</span><span class="va">np</span>,</span>
+<span>  <span class="fu"><a href="https://paulmelloy.github.io/epiphytoolR/reference/format_weather.html" class="external-link">format_weather</a></span><span class="op">(</span><span class="va">np</span>,</span>
 <span>                 time_zone <span class="op">=</span> <span class="st">"UTC"</span>,</span>
 <span>                 temp <span class="op">=</span> <span class="st">"T2M"</span>,</span>
 <span>                 rain <span class="op">=</span> <span class="st">"PRECTOTCORR"</span>,</span>
@@ -193,7 +193,7 @@ replace the NAs or state default values to complete the dataset.</p>
 <span><span class="co">#&gt; 'double') at RHS position 1 taken as TRUE when assigning to type 'logical'</span></span>
 <span><span class="co">#&gt; (column 10 named 'WR200')</span></span>
 <span></span>
-<span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/epiphytoolR/man/format_weather.html" class="external-link">format_weather</a></span><span class="op">(</span><span class="va">wthr</span>,</span>
+<span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulmelloy.github.io/epiphytoolR/reference/format_weather.html" class="external-link">format_weather</a></span><span class="op">(</span><span class="va">wthr</span>,</span>
 <span>                         POSIXct_time <span class="op">=</span> <span class="st">"Time"</span>,</span>
 <span>                         time_zone <span class="op">=</span> <span class="st">"UTC"</span>,</span>
 <span>                         temp <span class="op">=</span> <span class="st">"T200"</span>,</span>
