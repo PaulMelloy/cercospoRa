@@ -56,5 +56,5 @@ epidemic_onset_map <- calc_epidemic_onset_from_image(start = as.POSIXct("2022-04
                                                      c_closure = c_closure,
                                                      weather = wethr)
 
-raster::plot(epidemic_onset_map)
+plot(epidemic_onset_map)
 }

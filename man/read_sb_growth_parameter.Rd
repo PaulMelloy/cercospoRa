@@ -7,22 +7,25 @@
 read_sb_growth_parameter(im_folder, target_res)
 }
 \arguments{
-\item{im_folder}{folder containing two georeferenced image of the location of interest collected at two time points.
-The two images should be named after the date of collection (eg. 2022-05-01.tif)}
+\item{im_folder}{folder containing two georeferenced image of the location of
+interest collected at two time points. The two images should be named after
+the date of collection (eg. 2022-05-01.tif)}
 
-\item{resolution}{desired spatial resolution. \code{resolution} should be equal to or larger than the actual resolution
-of the images expressed in meters}
+\item{target_res}{desired spatial resolution. \code{target_res} should be equal to
+or larger than the actual resolution of the images expressed in meters.}
 }
 \value{
-\verb{param_list:} list containing parameters that are necessary to calculate \code{r}, the growth rate
+\verb{param_list:} list containing parameters that are necessary to calculate
+\code{r}, the growth rate.
 }
 \description{
 Read LAI images at several time points
 }
 \examples{
-epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img",
-                                                              package = "cercospoRa"),
-                                                 10)
-t <- epidemic_onset_param$t
-imgs <- epidemic_onset_param$imgs
+epidemic_onset_param <-
+  read_sb_growth_parameter(im_folder = system.file("extdata", "uav_img",
+                                                   package = "cercospoRa"),
+                           target_res = 10)
+epidemic_onset_param$t
+epidemic_onset_param$imgs
 }

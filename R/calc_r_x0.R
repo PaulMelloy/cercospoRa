@@ -14,11 +14,6 @@
 #'
 #' @export
 #'
-#' @import raster
-#' @import sf
-#' @import epiphytoolR
-#' @import minpack.lm
-#'
 #' @examples
 #' epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img",
 #'                                                              package = "cercospoRa"),
@@ -27,8 +22,6 @@
 #'                        min_r = 0.02,
 #'                        max_r = 0.05,
 #'                        k = 6)
-
-
 calc_r_x0 <- function(param_list,
                       min_r = 0.02,
                       max_r = 0.05,
@@ -45,17 +38,18 @@ calc_r_x0 <- function(param_list,
     for(j in 1:dim(imgs)[2]){
       N <- as.vector(imgs[i,j,])
       dataij <- data.frame(t, N)
-      dataij <- na.omit(dataij)
+      dataij <- stats::na.omit(dataij)
 
       if(!is.na(N[1])){
         if( dim(dataij)[1] == 1){
           r[i,j] <- min_r
         }else if (dim(dataij)[1] > 1){
-          fit_rx <- nlsLM(N ~ k/(1 + ((k-x_ij)/x_ij)*exp(-r_ij*(t-t0))),
-                          start = list(x_ij = 1,
-                                       r_ij = 0.025),
-                          algorithm = "port",
-                          data = dataij)
+          fit_rx <-
+            minpack.lm::nlsLM(N ~ k/(1 + ((k-x_ij)/x_ij)*exp(-r_ij*(t-t0))),
+                              start = list(x_ij = 1,
+                                           r_ij = 0.025),
+                              algorithm = "port",
+                              data = dataij)
           x_ij <- fit_rx$m$getAllPars()[1]
           r_ij <- fit_rx$m$getAllPars()[2]
 

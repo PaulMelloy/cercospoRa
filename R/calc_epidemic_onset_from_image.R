@@ -37,9 +37,7 @@
 #'                                                      c_closure = c_closure,
 #'                                                      weather = wethr)
 #'
-#' raster::plot(epidemic_onset_map)
-
-
+#' plot(epidemic_onset_map)
 calc_epidemic_onset_from_image <- function(start,
                                            end,
                                            c_closure,
@@ -65,5 +63,5 @@ calc_epidemic_onset_from_image <- function(start,
       }
     }
   }
-  return(Ep_onset)
+  return(terra::rast(Ep_onset))
 }
