@@ -2,6 +2,9 @@
 
 export(calc_DIV)
 export(calc_epidemic_onset)
+export(read_sb_growth_parameter)
 import(data.table)
+import(epiphytoolR)
+import(raster)
 importFrom(Rdpack,reprompt)
 importFrom(data.table,":=")
