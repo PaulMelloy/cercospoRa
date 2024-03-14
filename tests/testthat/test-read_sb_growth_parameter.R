@@ -11,6 +11,4 @@ test_that("example returns expected outputs", {
   expect_equal(epidemic_onset_param[[1]],
                as.POSIXct(c("2022-06-14", "2022-06-28")))
 
-
-  )
 })
