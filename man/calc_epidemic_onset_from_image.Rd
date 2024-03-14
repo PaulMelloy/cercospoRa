@@ -40,8 +40,8 @@ wethr <- read.csv(system.file("extdata", "clean_weather.csv",
                   package = "cercospoRa"))
 wethr <- epiphytoolR::format_weather(wethr,time_zone = "UTC")
 
-#' epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img",
-                                                                package = "your_package_name"),
+epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img",
+                                                                package = "cercospoRa"),
                                                    10)
 param_rxt <- calc_r_x0(epidemic_onset_param,
                        min_r = 0.02,

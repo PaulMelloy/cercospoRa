@@ -22,7 +22,7 @@
 #' wethr <- epiphytoolR::format_weather(wethr,time_zone = "UTC")
 #'
 #' epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img",
-#'                                                                 package = "your_package_name"),
+#'                                                                 package = "cercospoRa"),
 #'                                                    10)
 #' param_rxt <- calc_r_x0(epidemic_onset_param,
 #'                        min_r = 0.02,
@@ -37,7 +37,7 @@
 #'                                                      c_closure = c_closure,
 #'                                                      weather = wethr)
 #'
-#' plot(epidemic_onset_map)
+#' raster::plot(epidemic_onset_map)
 
 
 calc_epidemic_onset_from_image <- function(start,
@@ -46,9 +46,9 @@ calc_epidemic_onset_from_image <- function(start,
                                            weather,
                                            cultivar_sus = 5){
   Ep_onset <- c_closure
-  for(i in 1:dim(t)[1]){
-    for(j in 1:dim(t)[2]){
-      this_canopy_closure <- t[i,j]
+  for(i in 1:dim(c_closure)[1]){
+    for(j in 1:dim(c_closure)[2]){
+      this_canopy_closure <- c_closure[i,j]
       this_canopy_closure <- as.Date.numeric(round(this_canopy_closure),
                                              origin = '1970-01-01')
       if(is.na(this_canopy_closure)){
@@ -61,7 +61,7 @@ calc_epidemic_onset_from_image <- function(start,
                                                                           tz = "UTC"),
                                                    weather = weather,
                                                    cultivar_sus = cultivar_sus)
-        Ep_onset[i,j] <- as.numeric(This_epidemic_onset$wolf_date)/(24*60*60)
+        Ep_onset[i,j] <- as.numeric(This_epidemic_onset)/(24*60*60)
       }
     }
   }

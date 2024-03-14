@@ -24,7 +24,7 @@ Calculate growth rate(r) and LAI0 at time t0
 }
 \examples{
 epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img",
-                                                              package = "your_package_name"),
+                                                              package = "cercospoRa"),
                                                  10)
 param_rxt <- calc_r_x0(epidemic_onset_param,
                        min_r = 0.02,
