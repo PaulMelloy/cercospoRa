@@ -14,7 +14,9 @@
 #' @import epiphytoolR
 #'
 #' @examples
-#' epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img", package = "cercospoRa"), 10)
+#' epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img",
+#'                                                               package = "cercospoRa"),
+#'                                                  10)
 #' t <- epidemic_onset_param$t
 #' imgs <- epidemic_onset_param$imgs
 
