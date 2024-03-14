@@ -46,7 +46,7 @@ calc_epidemic_onset_from_image <- function(start,
   Ep_onset <- c_closure
   for(i in 1:dim(c_closure)[1]){
     for(j in 1:dim(c_closure)[2]){
-      this_canopy_closure <- c_closure[i,j]
+      this_canopy_closure <- as.numeric(c_closure[i,j])
       this_canopy_closure <- as.Date.numeric(round(this_canopy_closure),
                                              origin = '1970-01-01')
       if(is.na(this_canopy_closure)){
