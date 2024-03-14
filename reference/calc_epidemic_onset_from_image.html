@@ -116,11 +116,9 @@ proportion indicating the progress an epidemic is returned</p>
 <span class="r-in"><span>                                                     end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-09-30"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                                     c_closure <span class="op">=</span> <span class="va">c_closure</span>,</span></span>
 <span class="r-in"><span>                                                     weather <span class="op">=</span> <span class="va">wethr</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Incompatible methods ("+.Date", "Ops.data.frame") for "+"</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in as.Date(origin, ...) + x:</span> non-numeric argument to binary operator</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">epidemic_onset_map</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'epidemic_onset_map' not found</span>
+<span class="r-in"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">epidemic_onset_map</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="calc_epidemic_onset_from_image-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
