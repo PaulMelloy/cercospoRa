@@ -63,5 +63,5 @@ calc_epidemic_onset_from_image <- function(start,
       }
     }
   }
-  return(terra::rast(Ep_onset))
+  return(Ep_onset)
 }
