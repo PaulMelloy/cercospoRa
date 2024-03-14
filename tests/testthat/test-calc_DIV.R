@@ -1,29 +1,21 @@
-set.seed(69)
-
-# ten minute increments for
-date_t <- Sys.time() + seq(0, 179 * 60 * 10, (60 * 10))
-Tm <- round(rnorm(180,20,10),2)
-RH <- rep(rbeta(20,3,1)*100, each = 9)
-rain <- round(rbinom(180,1,0.1) * runif(180,0.1,20),2)
-
 test_that("calc_DIV works", {
   # individual vectors
   DIV1 <- calc_DIV(
     date_time = date_t,
-    Tm = Tm,
-    RH = RH,
-    rain = rain
+    Tm = Tm1,
+    RH = RH1,
+    rain = rain1
   )
-  expect_equal(DIV1$DIV, c(0.5331683   , 0.1973574), tolerance = 0.000001)
+  expect_equal(DIV1$DIV, c(0.8277005844, 0.2345840374 ,0.0009688822), tolerance = 0.000001)
   expect_type(DIV1,"list")
-  expect_equal(dim(DIV1), c(2,4))
+  expect_equal(dim(DIV1), c(3,4))
   expect_equal(colnames(DIV1), c("Year","Month","Day","DIV"))
 
   in_dat <- data.frame(
     date_time = date_t,
-    temp = Tm,
-    RH = RH,
-    rain = rain
+    temp = Tm1,
+    RH = RH1,
+    rain = rain1
   )
 
   expect_error(calc_DIV(dat = in_dat),
@@ -31,9 +23,9 @@ test_that("calc_DIV works", {
 
   in_dat <- data.frame(
     times = date_t,
-    temp = Tm,
-    rh = RH,
-    rain = rain
+    temp = Tm1,
+    rh = RH1,
+    rain = rain1
   )
   calc_DIV(dat = in_dat)
 
