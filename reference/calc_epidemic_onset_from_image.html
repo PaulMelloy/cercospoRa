@@ -108,17 +108,16 @@ proportion indicating the progress an epidemic is returned</p>
 <span class="r-in"><span>                       min_r <span class="op">=</span> <span class="fl">0.02</span>,</span></span>
 <span class="r-in"><span>                       max_r <span class="op">=</span> <span class="fl">0.05</span>,</span></span>
 <span class="r-in"><span>                       k <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in model.frame.default(formula = ~N + t, data = dataij):</span> invalid type (list) for variable 'N'</span>
 <span class="r-in"><span><span class="va">c_closure</span> <span class="op">&lt;-</span> <span class="fu"><a href="calc_c_closure.html">calc_c_closure</a></span><span class="op">(</span><span class="va">param_rxt</span>,</span></span>
 <span class="r-in"><span>                            x1 <span class="op">=</span> <span class="fl">1.3</span>,</span></span>
 <span class="r-in"><span>                            k<span class="op">=</span><span class="fl">6</span> <span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'param_rxt' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">epidemic_onset_map</span> <span class="op">&lt;-</span> <span class="fu">calc_epidemic_onset_from_image</span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-04-25"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                                     end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-09-30"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                                     c_closure <span class="op">=</span> <span class="va">c_closure</span>,</span></span>
 <span class="r-in"><span>                                                     weather <span class="op">=</span> <span class="va">wethr</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'c_closure' not found</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Incompatible methods ("+.Date", "Ops.data.frame") for "+"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in as.Date(origin, ...) + x:</span> non-numeric argument to binary operator</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">epidemic_onset_map</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'epidemic_onset_map' not found</span>
