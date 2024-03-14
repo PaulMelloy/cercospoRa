@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cercospoRa</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,11 +46,24 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="cercospora-development-version">cercospoRa (development version)<a class="anchor" aria-label="anchor" href="#cercospora-development-version"></a></h2>
-</div>
+<ul><li>Four functions have been added to deal with spatial heterogeneity:
+<ul><li>
+<code>read_sb_growth_parameter</code>: read in and format raster images to allow further computation.</li>
+<li>
+<code>calc_r_x0</code>: fit logistic growth curve to the date.</li>
+<li>
+<code>calc_c_closure</code>: to deduct canopy closure dates from the fitted curves.</li>
+<li>
+<code>calc_epidemic_onset_from_image</code>: builds on the existing <code>calc_epidemic_onset</code> function to compute a value for each pixel.</li>
+</ul></li>
+<li>Example datasets have been provided to check the functions. It consists of a folder containing two LAI maps computed from UAV images.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9001" id="cercospora-0009001">cercospoRa 0.0.0.9001<a class="anchor" aria-label="anchor" href="#cercospora-0009001"></a></h2>
-<p>Change package name Add pkgdown site Reduce functions to only those described by Wolf and Verreet (2005)</p>
-</div>
+<ul><li>Change package name<br></li>
+<li>Add pkgdown site<br></li>
+<li>Reduce functions to only those described by Wolf and Verreet (2005)</li>
+</ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
