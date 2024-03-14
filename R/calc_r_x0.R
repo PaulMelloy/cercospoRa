@@ -36,7 +36,7 @@ calc_r_x0 <- function(param_list,
 
   for(i in 1:dim(imgs)[1]){
     for(j in 1:dim(imgs)[2]){
-      N <- as.vector(imgs[i,j,])
+      N <- as.numeric(imgs[i,j,])
       dataij <- data.frame(t, N)
       dataij <- stats::na.omit(dataij)
 
