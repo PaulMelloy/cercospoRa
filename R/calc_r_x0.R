@@ -26,8 +26,8 @@ calc_r_x0 <- function(param_list,
                       min_r = 0.02,
                       max_r = 0.05,
                       k = 6){
-  t <- as.numeric(param_list$t)/(24*60*60)
-  t0 <- t[1]
+  tm <- as.numeric(param_list$tm)/(24*60*60)
+  t0 <- tm[1]
   imgs <- param_list$imgs
 
   r <- imgs[[1]]
@@ -37,7 +37,7 @@ calc_r_x0 <- function(param_list,
   for(i in 1:dim(imgs)[1]){
     for(j in 1:dim(imgs)[2]){
       N <- as.numeric(imgs[i,j,])
-      dataij <- data.frame(t, N)
+      dataij <- data.frame(tm, N)
       dataij <- stats::na.omit(dataij)
 
       if(!is.na(N[1])){
@@ -45,7 +45,7 @@ calc_r_x0 <- function(param_list,
           r[i,j] <- min_r
         }else if (dim(dataij)[1] > 1){
           fit_rx <-
-            minpack.lm::nlsLM(N ~ k/(1 + ((k-x_ij)/x_ij)*exp(-r_ij*(t-t0))),
+            minpack.lm::nlsLM(N ~ k/(1 + ((k-x_ij)/x_ij)*exp(-r_ij*(tm-t0))),
                               start = list(x_ij = 1,
                                            r_ij = 0.025),
                               algorithm = "port",
@@ -65,6 +65,6 @@ calc_r_x0 <- function(param_list,
 
   param_rxt <- list(r=r,
                     x0=x0,
-                    t0=param_list$t[1])
+                    t0=param_list$tm[1])
   return(param_rxt)
 }

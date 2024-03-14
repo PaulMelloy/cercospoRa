@@ -16,7 +16,7 @@
 #'   read_sb_growth_parameter(im_folder = system.file("extdata", "uav_img",
 #'                                                    package = "cercospoRa"),
 #'                            target_res = 10)
-#' epidemic_onset_param$t
+#' epidemic_onset_param$tm
 #' epidemic_onset_param$imgs
 read_sb_growth_parameter <- function(im_folder, target_res){
 
@@ -25,10 +25,10 @@ read_sb_growth_parameter <- function(im_folder, target_res){
 
   Im_list <- unlist(strsplit(Im_list, '.tif'))
 
-  t <- Im_list[order(as.POSIXct(Im_list,
+  tm <- Im_list[order(as.POSIXct(Im_list,
                                 tryFormats = c("%Y-%m-%d",
                                                "%Y_%m_%d")))]
-  t0 <- t[1]
+  t0 <- tm[1]
   img0 <- terra::rast(file.path(im_folder, paste(t0, '.tif', sep = '')))
   resolut <- mean(terra::res(img0))
 
@@ -46,7 +46,7 @@ read_sb_growth_parameter <- function(im_folder, target_res){
 
 
   imgs <- img0
-  for(ti in t[-1]){
+  for(ti in tm[-1]){
     imgi <- terra::rast(file.path(im_folder, paste(ti, '.tif', sep = '')))
     resolut <- mean(terra::res(imgi))
 
@@ -82,7 +82,7 @@ read_sb_growth_parameter <- function(im_folder, target_res){
   }
 
 
-  param_list <- list(t = as.POSIXct(t,
+  param_list <- list(tm = as.POSIXct(tm,
                                     tryFormats = c("%Y-%m-%d",
                                                    "%Y_%m_%d")),
                      imgs = imgs)
