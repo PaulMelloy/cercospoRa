@@ -9,7 +9,7 @@
 #' @param weather data.table, formatted with `epiphytoolR::format_weather`
 #' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
 #'  "S" susceptible, "MR" moderately resistant ect.
-#'
+#' @importFrom terra plot
 #' @return `$wolf_date:` If the input weather is conducive for epidemic, the function returns a
 #'  POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
 #'  proportion indicating the progress an epidemic is returned
@@ -37,7 +37,7 @@
 #'                                                      c_closure = c_closure,
 #'                                                      weather = wethr)
 #'
-#' plot(epidemic_onset_map)
+#' terra::plot(epidemic_onset_map)
 calc_epidemic_onset_from_image <- function(start,
                                            end,
                                            c_closure,

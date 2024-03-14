@@ -26,6 +26,6 @@ epidemic_onset_param <-
   read_sb_growth_parameter(im_folder = system.file("extdata", "uav_img",
                                                    package = "cercospoRa"),
                            target_res = 10)
-epidemic_onset_param$t
+epidemic_onset_param$tm
 epidemic_onset_param$imgs
 }
