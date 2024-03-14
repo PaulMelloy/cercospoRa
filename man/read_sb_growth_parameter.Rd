@@ -2,24 +2,27 @@
 % Please edit documentation in R/read_sb_growth_parameter.R
 \name{read_sb_growth_parameter}
 \alias{read_sb_growth_parameter}
-\title{Read LAI images at two time points}
+\title{Read LAI images at several time points}
 \usage{
-read_sb_growth_parameter(im_folder, resolution)
+read_sb_growth_parameter(im_folder, target_res)
 }
 \arguments{
 \item{im_folder}{folder containing two georeferenced image of the location of interest collected at two time points.
 The two images should be named after the date of collection (eg. 2022-05-01.tif)}
 
-\item{resolution}{desired spatiaal resolution. \code{resolution} should be equal to or larger than the actual resolution
+\item{resolution}{desired spatial resolution. \code{resolution} should be equal to or larger than the actual resolution
 of the images expressed in meters}
 }
 \value{
 \verb{param_list:} list containing parameters that are necessary to calculate \code{r}, the growth rate
 }
 \description{
-Read LAI images at two time points
+Read LAI images at several time points
 }
 \examples{
-epidemic_onset_param <- read_sb_growth_parameter(base_dir, scale)
-t1 <- epidemic_onset_param$t1; t0 <- epidemic_onset_param$t0
+epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img",
+                                                              package = "cercospoRa"),
+                                                 10)
+t <- epidemic_onset_param$t
+imgs <- epidemic_onset_param$imgs
 }
