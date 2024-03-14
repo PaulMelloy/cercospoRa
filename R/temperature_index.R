@@ -18,8 +18,8 @@
 #'    \insertAllCited{}
 temperature_index <- function(Tm, opt_Tm = 21){
 
-  out <- sapply(Tm,FUN = function(Tm1){
-    tm_ind <- latent_period(opt_Tm)/latent_period(Tm1)
+  out <- sapply(Tm,FUN = function(Tm_1){
+    tm_ind <- latent_period(opt_Tm)/latent_period(Tm_1)
     if(tm_ind > 1) tm_ind <- 1
     if(tm_ind < 0) tm_ind <- 0
 
