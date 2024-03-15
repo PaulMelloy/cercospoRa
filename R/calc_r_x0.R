@@ -48,6 +48,8 @@ calc_r_x0 <- function(param_list,
             minpack.lm::nlsLM(N ~ k/(1 + ((k-x_ij)/x_ij)*exp(-r_ij*(tm-t0))),
                               start = list(x_ij = 1,
                                            r_ij = 0.025),
+                              lower = c(1e-6,
+                                        1e-6),
                               algorithm = "port",
                               data = dataij)
           x_ij <- fit_rx$m$getAllPars()[1]
