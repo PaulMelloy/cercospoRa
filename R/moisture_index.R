@@ -12,7 +12,10 @@
 #' @noRd
 #' @references
 #'    \insertAllCited{}
-moisture_index <- function(RH, rain = 0, rh_thresh = 70){
+moisture_index <- function(RH,
+                           rain = 0,
+                           rh_thresh = 70,
+                           method = 1){
   dat2 <- data.table::data.table(RH = RH,
                                  rain = rain)
   rh_ind <- apply(dat2, 1, function(d2) {
@@ -25,9 +28,18 @@ moisture_index <- function(RH, rain = 0, rh_thresh = 70){
     # need to scale the threshold for more realistic values
     scale_rh_thresh <- (exp((140-rh_thresh)/21.7))/25
 
-    rh_ind <- data.table::fcase(rain >= 0.1, 1/(1+exp((88-RH)/(2.5 * scale_rh_thresh))),
-                                RH > rh_thresh, 1/(1+exp((88-RH)/(2.5 * scale_rh_thresh))),
-                                default =  0)
+    if(method == 1){
+    rh_ind <- data.table::fcase(rain >= 0.1, 1,
+                                RH >= 90, 1,
+                                default =  0)}
+    if(method == 2){
+      rh_ind <- data.table::fcase(rain >= 0.1, 1/(1+exp((88-RH)/(2.5 * scale_rh_thresh))),
+                                  RH > rh_thresh, 1/(1+exp((88-RH)/(2.5 * scale_rh_thresh))),
+                                  default =  0)}
+
+    if(method != 1 &
+       method != 2){ stop("argument 'method' needs to be '1' or '2' in reference to the
+                         two methods used by wolf and verreet to calculate Mij")}
 
     return(rh_ind)
   })
