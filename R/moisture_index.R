@@ -30,7 +30,7 @@ moisture_index <- function(RH,
 
     if(method == 1){
     rh_ind <- data.table::fcase(rain >= 0.1, 1,
-                                RH >= 90, 1,
+                                RH >= rh_thresh, 1,
                                 default =  0)}
     if(method == 2){
       rh_ind <- data.table::fcase(rain >= 0.1, 1/(1+exp((88-RH)/(2.5 * scale_rh_thresh))),
