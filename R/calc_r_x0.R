@@ -67,6 +67,6 @@ calc_r_x0 <- function(param_r,
 
   param_rxt <- list(r=r,
                     x0=x0,
-                    t0=param_list$tm[1])
+                    t0=names(param_r)[1])
   return(param_rxt)
 }
