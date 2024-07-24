@@ -92,7 +92,7 @@ read_sb_growth_parameter <- function(img_files,
     imgs <- c(imgs, imgi)
   }
 
-  terra::names(imgs) <- img_dates
+  names(imgs) <- img_dates
 
   return(imgs)
 }
