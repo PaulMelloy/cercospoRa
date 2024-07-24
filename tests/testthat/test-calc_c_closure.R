@@ -1,21 +1,10 @@
+img_dir <- system.file("extdata", "uav_img",package = "cercospoRa")
 epidemic_onset_param <-
-  read_sb_growth_parameter(system.file("extdata", "uav_img",
-                                       package = "cercospoRa"),
-                           10)
-
-
-test_that("SpatData is read as expected", {
-
-  expect_no_condition(read_sb_growth_parameter(system.file("extdata", "uav_img",
-                                       package = "cercospoRa"),
-                           10))
-
-  # output a named list with expected dates and dimensions
-  expect_type(epidemic_onset_param,"list")
-  expect_named(epidemic_onset_param,c("tm","imgs"))
-  expect_equal(epidemic_onset_param$tm, as.POSIXct(c("2022-06-14", "2022-06-28")))
-  expect_s4_class(epidemic_onset_param$imgs,"SpatRaster")
-})
+  read_sb_growth_parameter(img_files = list.files(img_dir,pattern = "tif",
+                                                  full.names = TRUE),
+                           img_dates = as.POSIXct(
+                             c("2022-06-14","2022-06-28"),tz = "UTC"),
+                           target_res = 10)
 
 
 param_rxt <- calc_r_x0(epidemic_onset_param,

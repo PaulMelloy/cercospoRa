@@ -7,11 +7,9 @@ test_that("example returns expected outputs", {
                              img_dates = as.POSIXct(
                                c("2022-06-14","2022-06-28"),tz = "UTC"),
                              target_res = 10)
-  expect_type(epidemic_onset_param,"list")
-  expect_s3_class(epidemic_onset_param[[1]],"POSIXct")
-  expect_s4_class(epidemic_onset_param[[2]],"SpatRaster")
-  expect_length(epidemic_onset_param,2)
-  expect_equal(epidemic_onset_param[[1]],
-               as.POSIXct(c("2022-06-14", "2022-06-28"), tz = "UTC"))
+  expect_s4_class(epidemic_onset_param,"SpatRaster")
+  expect_equal(terra::nlyr(epidemic_onset_param),2)
+  expect_equal(names(epidemic_onset_param),
+               c("2022-06-14", "2022-06-28"))
 
 })
