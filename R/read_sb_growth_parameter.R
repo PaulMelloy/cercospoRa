@@ -21,7 +21,8 @@
 read_sb_growth_parameter <- function(im_folder, target_res){
 
   Im_list <- list.files(file.path(im_folder),
-                        recursive = FALSE)
+                        recursive = FALSE,
+                        pattern = ".tif")
 
   Im_list <- unlist(strsplit(Im_list, '.tif'))
 
