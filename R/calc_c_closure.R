@@ -1,11 +1,13 @@
 #' Calculate growth rate(r) and LAI0 at time t0
 #'
-#' @param param_rxt Output of the function \\link{calc_r_x0}, which produces a list containing parameters that are necessary to
-#' calculate `c_closure`. These parameters are `r`, the growth rate, `x0`, the initial LAI value, and `t0`, the initial date.
-#' and the associated dates
-#' @param x1 LAI value at which 90% canopy closure is reached. It is fixed to 1.3 for sugar beet
-#' @param k carrying capaciy, which is the maximum LAI that can be attained. This value can be cultivar-dependent. The default
-#' is fixed to 6
+#' @param param_rxt Output of the function \link{calc_r_x0}, which produces a
+#'  list containing parameters that are necessary to calculate `c_closure`.
+#'  These parameters are `r`, the growth rate, `x0`, the initial LAI value, and
+#'  `t0`, the initial date and the associated dates
+#' @param x1 LAI value at which 90% canopy closure is reached. It is fixed to
+#'  1.3 for sugar beet.
+#' @param k carrying capacity, which is the maximum LAI that can be attained.
+#'  This value can be cultivar-dependent. The default is fixed to 6
 #'
 #' @return `c_closure` date at which 90% canopy closure is reached at each location.
 #'
