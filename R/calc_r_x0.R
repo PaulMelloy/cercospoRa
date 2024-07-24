@@ -1,7 +1,7 @@
 #' Calculate growth rate(r) and LAI0 at time t0
 #'
-#' @param param_list Output of the function \\link{read_sb_growth_parameter}, which produces a list containing the LAI images
-#' and the associated dates
+#' @param param_r Output of the function \\link{read_sb_growth_parameter}, which
+#'  produces a list containing the LAI images and the associated dates
 #' @param min_r minimum growth rate for sugar beet. Default `min_r` is fixed to 0.02 to ensure that the growth rate at the
 #' inflexion point of the sigmoid is at least 1 unit of LAI per month
 #' @param max_r manimum growth rate for sugar beet. Default `max_r` is fixed to 0.05 to ensure that the growth rate at the
@@ -22,28 +22,28 @@
 #'                        min_r = 0.02,
 #'                        max_r = 0.05,
 #'                        k = 6)
-calc_r_x0 <- function(param_list,
+calc_r_x0 <- function(param_r,
                       min_r = 0.02,
                       max_r = 0.05,
                       k = 6){
-  tm <- as.numeric(param_list$tm)/(24*60*60)
+  tm <- as.POSIXct(names(param_r), tz = "UTC")
+  tm <- as.numeric(tm)/(24*60*60)
   t0 <- tm[1]
-  imgs <- param_list$imgs
 
-  r <- imgs[[1]]
-  x0 <- imgs[[1]]
+  r <- param_r[[1]]
+  x0 <- param_r[[1]]
 
 
-  for(i in 1:dim(imgs)[1]){
-    for(j in 1:dim(imgs)[2]){
-      N <- as.numeric(imgs[i,j,])
+  for(i in 1:dim(param_r)[1]){
+    for(j in 1:dim(param_r)[2]){
+      N <- as.numeric(param_r[i,j,])
       dataij <- data.frame(tm, N)
       dataij <- stats::na.omit(dataij)
 
       if(!is.na(N[1])){
-        if( dim(dataij)[1] == 1){
+        if(nrow(dataij) == 1){
           r[i,j] <- min_r
-        }else if (dim(dataij)[1] > 1){
+        }else if (nrow(dataij) > 1){
           fit_rx <-
             minpack.lm::nlsLM(N ~ k/(1 + ((k-x_ij)/x_ij)*exp(-r_ij*(tm-t0))),
                               start = list(x_ij = 1,
