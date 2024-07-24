@@ -15,9 +15,13 @@
 #'
 #'
 #' @examples
-#' epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img",
-#'                                                               package = "cercospoRa"),
-#'                                                  10)
+#' img_dir <- system.file("extdata", "uav_img",package = "cercospoRa")
+#' epidemic_onset_param <-
+#'   read_sb_growth_parameter(img_files = list.files(img_dir,pattern = "tif",
+#'                                                   full.names = TRUE),
+#'                            img_dates = as.POSIXct(
+#'                              c("2022-06-14","2022-06-28"),tz = "UTC"),
+#'                            target_res = 10)
 #' param_rxt <- calc_r_x0(epidemic_onset_param,
 #'                        min_r = 0.02,
 #'                        max_r = 0.05,
