@@ -1,6 +1,6 @@
 #' Calculate growth rate(r) and LAI0 at time t0
 #'
-#' @param param_r Output of the function \\link{read_sb_growth_parameter}, which
+#' @param param_r Output of the function \link[cercospoRa]{read_sb_growth_parameter}, which
 #'  produces a list containing the LAI images and the associated dates
 #' @param min_r minimum growth rate for sugar beet. Default `min_r` is fixed to
 #'  0.02 to ensure that the growth rate at the inflexion point of the sigmiod is
@@ -39,12 +39,15 @@ calc_r_x0 <- function(param_r,
   x0 <- terra::app(param_r, fit_rx, k = k, tm = tm, t0 = t0, rtn = "x0")
   r <- terra::app(param_r, fit_rx, k = k, tm = tm, t0 = t0, rtn = "r")
 
+  names(x0) <- names(param_r)[1]
+
   try(r[r<min_r] <- min_r)
   try(r[r>=max_r] <- max_r)
 
   param_rxt <- list(r=r,
                     x0=x0,
-                    t0=names(param_r)[1])
+                    t0=as.POSIXct(names(param_r)[1],
+                                  tz = "UTC"))
   return(param_rxt)
 }
 
@@ -74,7 +77,7 @@ fit_rx <- function(xyi, k, tm,t0,rtn){
                       data = dataij)
   if(rtn == "x0") return(fitted_rx$m$getAllPars()[1])
   if(rtn == "r") return(fitted_rx$m$getAllPars()[2])else(
-    stop("rtn must be 'x0' or 'r'")
-  )
+     stop("rtn must be 'x0' or 'r'")
+   )
 
 }
