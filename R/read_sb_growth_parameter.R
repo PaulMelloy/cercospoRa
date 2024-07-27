@@ -18,13 +18,12 @@
 #' epidemic_onset_param <-
 #'   read_sb_growth_parameter(img_files = list.files(system.file("extdata", "uav_img",
 #'                                                               package = "cercospoRa"),
-#'                                                  pattern = ".tif"),
+#'                                                  pattern = ".tif",
+#'                                                  full.names = TRUE),
 #'                            img_dates = as.POSIXct(c("2022-06-14",
 #'                                                     "2022-06-28"),
 #'                                                   tz = "UTC"),
 #'                            target_res = 10)
-#' epidemic_onset_param$tm
-#' epidemic_onset_param$imgs
 read_sb_growth_parameter <- function(img_files,
                                      img_dates,
                                      target_res){
