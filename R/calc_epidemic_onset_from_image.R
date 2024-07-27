@@ -21,9 +21,15 @@
 #'                   package = "cercospoRa"))
 #' wethr <- epiphytoolR::format_weather(wethr,time_zone = "UTC")
 #'
-#' epidemic_onset_param <- read_sb_growth_parameter(system.file("extdata", "uav_img",
-#'                                                                 package = "cercospoRa"),
-#'                                                    10)
+#' img_dir <- system.file("extdata", "uav_img",package = "cercospoRa")
+#'
+#' epidemic_onset_param <-
+#'    read_sb_growth_parameter(
+#'       list.files(img_dir,pattern = "tif",
+#'                  full.names = TRUE),
+#'       img_dates = as.POSIXct(c("2022-06-14","2022-06-28"),
+#'                              tz = "UTC"),
+#'       10)
 #' param_rxt <- calc_r_x0(epidemic_onset_param,
 #'                        min_r = 0.02,
 #'                        max_r = 0.05,
@@ -43,25 +49,54 @@ calc_epidemic_onset_from_image <- function(start,
                                            c_closure,
                                            weather,
                                            cultivar_sus = 5){
-  Ep_onset <- c_closure
-  for(i in 1:dim(c_closure)[1]){
-    for(j in 1:dim(c_closure)[2]){
-      this_canopy_closure <- as.numeric(c_closure[i,j])
-      this_canopy_closure <- as.Date.numeric(round(this_canopy_closure),
-                                             origin = '1970-01-01')
-      if(is.na(this_canopy_closure)){
-      }else{
-        This_epidemic_onset <- calc_epidemic_onset(start = as.POSIXct("2022-06-01",
-                                                                      tz = "UTC"),
-                                                   end = as.POSIXct("2022-09-30",
-                                                                    tz = "UTC"),
-                                                   c_closure = as.POSIXct(this_canopy_closure,
-                                                                          tz = "UTC"),
-                                                   weather = weather,
-                                                   cultivar_sus = cultivar_sus)
-        Ep_onset[i,j] <- as.numeric(This_epidemic_onset)/(24*60*60)
-      }
-    }
-  }
+  # initialise onset raster
+
+  Ep_onset <- terra::app(x = c_closure,
+                        calc_r_onset,
+                        start = start,
+                        end = end,
+                        weather = weather,
+                        cultivar_sus = cultivar_sus)
+
+
+
+  # for(i in 1:dim(c_closure)[1]){
+  #   for(j in 1:dim(c_closure)[2]){
+  #     this_canopy_closure <- as.numeric(c_closure[i,j])
+  #     this_canopy_closure <- as.Date.numeric(round(this_canopy_closure),
+  #                                            origin = '1970-01-01')
+  #     if(is.na(this_canopy_closure)){
+  #     }else{
+  #       This_epidemic_onset <- calc_epidemic_onset(start = start,
+  #                                                  end = end,
+  #                                                  c_closure = as.POSIXct(this_canopy_closure,
+  #                                                                         tz = "UTC"),
+  #                                                  weather = weather,
+  #                                                  cultivar_sus = cultivar_sus)
+  #       Ep_onset[i,j] <- as.numeric(This_epidemic_onset)/(24*60*60)
+  #     }
+  #   }
+  # }
   return(Ep_onset)
 }
+
+#' Calculate epidemic onset from raster
+#'
+#' @details
+#'  Wrapper function to help internally calculate the earliest CLS onset date
+#'  from canopy closure dates supplied as integers with an origin date of 1970-01-01
+#'
+#' @param r SpatRaster with integer onset dates as values. This is usually the
+#'  output of `calc_c_closure`
+#' @param ... additional arguments to be supplied to `calc_epidemic_onset()`
+#'
+#' @return SpatRaster with integer values representing days since origin "1970-01-01"
+#' @noRd
+calc_r_onset <- function(r, ...){
+  #cat(r," | ")
+  c_closure_date <- as.Date.numeric(round(r),
+                                    origin = '1970-01-01')
+  onset_epidemic_date <- calc_epidemic_onset(c_closure = c_closure_date, ...)
+  return(as.integer(onset_epidemic_date))
+}
+
