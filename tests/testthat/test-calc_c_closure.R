@@ -26,14 +26,14 @@ test_that("growth rate is calculated correctly",{
   expect_s4_class(param_rxt$r,"SpatRaster")
   expect_equal(dim(param_rxt$r), c(17,29,1))
   expect_equal(terra::minmax(param_rxt$r),
-               matrix(c(0.02, 0.05),dimnames = list(c("min", "max"), "2022_06_14")))
+               matrix(c(0.02, 0.05),dimnames = list(c("min", "max"), "lyr.1")))
 
   expect_s4_class(param_rxt$x0,"SpatRaster")
   expect_equal(dim(param_rxt$x0), c(17,29,1))
   expect_equal(terra::minmax(param_rxt$x0),
-               matrix(c(0.5216454, 2.9568495),dimnames = list(c("min", "max"), "2022_06_14")))
+               matrix(c(0.5216454, 2.9568495),dimnames = list(c("min", "max"), "2022-06-14")))
 
-  expect_equal(param_rxt$t0, as.POSIXct(c("2022-06-14")))
+  expect_equal(param_rxt$t0, as.POSIXct("2022-06-14",tz = "UTC"))
 
 })
 
@@ -46,7 +46,7 @@ test_that("canopy closure is calculated correctly",{
   expect_s4_class(c_closure,"SpatRaster")
   expect_equal(dim(c_closure), c(17,29,1))
   expect_equal(terra::minmax(c_closure),
-               matrix(c(19093.5833, 19192.5833),dimnames = list(c("min", "max"), "2022_06_14")))
+               matrix(round(c(19093.5833, 19192.5833)),dimnames = list(c("min", "max"), "2022-06-14")))
 
 
 })
