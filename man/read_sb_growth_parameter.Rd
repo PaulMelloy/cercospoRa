@@ -4,12 +4,16 @@
 \alias{read_sb_growth_parameter}
 \title{Read LAI images at several time points}
 \usage{
-read_sb_growth_parameter(im_folder, target_res)
+read_sb_growth_parameter(img_files, img_dates, target_res)
 }
 \arguments{
-\item{im_folder}{folder containing two georeferenced image of the location of
-interest collected at two time points. The two images should be named after
-the date of collection (eg. 2022-05-01.tif)}
+\item{img_files}{character vector providing the file paths of at least two
+georeferenced images for the study location. Dates of image capture need to
+be defined in \code{img_dates} respectively.}
+
+\item{img_dates}{POSIXct vector of dates corresponding to the images supplied in
+\code{img_files} respectively.
+To prevent timezone issues use UTC timezone (tz = "UTC").}
 
 \item{target_res}{desired spatial resolution. \code{target_res} should be equal to
 or larger than the actual resolution of the images expressed in meters.}
@@ -23,9 +27,12 @@ Read LAI images at several time points
 }
 \examples{
 epidemic_onset_param <-
-  read_sb_growth_parameter(im_folder = system.file("extdata", "uav_img",
-                                                   package = "cercospoRa"),
+  read_sb_growth_parameter(img_files = list.files(system.file("extdata", "uav_img",
+                                                              package = "cercospoRa"),
+                                                 pattern = ".tif",
+                                                 full.names = TRUE),
+                           img_dates = as.POSIXct(c("2022-06-14",
+                                                    "2022-06-28"),
+                                                  tz = "UTC"),
                            target_res = 10)
-epidemic_onset_param$tm
-epidemic_onset_param$imgs
 }
