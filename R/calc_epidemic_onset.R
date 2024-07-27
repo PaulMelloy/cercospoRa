@@ -42,19 +42,22 @@ calc_epidemic_onset <- function(start,
     warning("'c_closure' not supplied, setting 'start' as canopy closure date")
     start <- c_closure
   }
-  if(c_closure >= end) stop("'c_closure' is after last weather date")
 
-  w <- copy(weather[times > as.POSIXct(start) &
-                times < (as.POSIXct(end) + 3600),][times >= as.POSIXct(c_closure)])
+  sapply(c_closure,function(cc){
+    if(c_closure >= end) stop("'c_closure' is after last weather date")
 
-  daily_inf_val <- calc_DIV(dat = w)
+    w <- copy(weather[times > as.POSIXct(start) &
+                        times < (as.POSIXct(end) + 3600),][times >= as.POSIXct(c_closure)])
 
-  div_cs <- daily_inf_val[first(which(cumsum(DIV) >cultivar_sus)),
-                          as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
+    daily_inf_val <- calc_DIV(dat = w)
 
-  if(length(div_cs) == 0) div_cs <- sum(daily_inf_val$DIV, na.rm = TRUE) / cultivar_sus
-  # calculate percentage
+    div_cs <- daily_inf_val[first(which(cumsum(DIV) >cultivar_sus)),
+                            as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
 
-  return(div_cs[1])
+    if(length(div_cs) == 0) div_cs <- sum(daily_inf_val$DIV, na.rm = TRUE) / cultivar_sus
+    # calculate percentage
+
+    return(div_cs[1])
+  })
 
 }
