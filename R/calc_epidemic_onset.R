@@ -43,11 +43,14 @@ calc_epidemic_onset <- function(start,
     start <- c_closure
   }
 
-  sapply(c_closure,function(cc){
-    if(c_closure >= end) stop("'c_closure' is after last weather date")
+  c_closure <- as.POSIXct(c_closure,tz = "UTC")
+
+  out <- sapply(c_closure,function(cc){
+    if(is.na(cc)) return(NA)
+    if(cc >= end) stop("'c_closure' is after last weather date")
 
     w <- copy(weather[times > as.POSIXct(start) &
-                        times < (as.POSIXct(end) + 3600),][times >= as.POSIXct(c_closure)])
+                        times < (as.POSIXct(end) + 3600),][times >= as.POSIXct(cc)])
 
     daily_inf_val <- calc_DIV(dat = w)
 
@@ -60,4 +63,5 @@ calc_epidemic_onset <- function(start,
     return(div_cs[1])
   })
 
+  return(as.POSIXct(out,tz = "UTC"))
 }
