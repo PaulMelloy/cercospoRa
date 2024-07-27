@@ -9,8 +9,9 @@
 #' @param target_res desired spatial resolution. `target_res` should be equal to
 #'  or larger than the actual resolution of the images expressed in meters.
 #'
-#' @return `param_list:` list containing parameters that are necessary to calculate
-#'  `r`, the growth rate.
+#' @return `SpatRast` with a layer for each input layer. Each layer contains is
+#'  named according to the `img_dates`. The output `SpatRast` is suitable for
+#'  input in `calc_r_x0()`
 #'
 #' @export
 #'

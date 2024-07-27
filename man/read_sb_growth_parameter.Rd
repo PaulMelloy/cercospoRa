@@ -19,8 +19,9 @@ To prevent timezone issues use UTC timezone (tz = "UTC").}
 or larger than the actual resolution of the images expressed in meters.}
 }
 \value{
-\verb{param_list:} list containing parameters that are necessary to calculate
-\code{r}, the growth rate.
+\code{SpatRast} with a layer for each input layer. Each layer contains is
+named according to the \code{img_dates}. The output \code{SpatRast} is suitable for
+input in \code{calc_r_x0()}
 }
 \description{
 Read LAI images at several time points
