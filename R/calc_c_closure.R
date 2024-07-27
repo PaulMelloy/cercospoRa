@@ -29,8 +29,6 @@
 #' c_closure <- calc_c_closure(param_rxt,
 #'                             x1 = 1.3,
 #'                             k=6 )
-
-
 calc_c_closure <- function(param_rxt,
                            x1 = 1.3,
                            k=6 ){
