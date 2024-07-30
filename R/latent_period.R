@@ -1,7 +1,9 @@
 #' Calculate Cercospora latent period
 #'
 #' @details Calculates the latent period for *Cercospora beticola* infections on
-#' sugar beet
+#' sugar beet. Note the published formula in \insertCite{wolf_factors_2005}
+#' contains an error in the exponent. e(0.35 x (Tm - 10)) should be
+#' e(-0.35 x (Tm - 10)). See issue #22 on github for additional information.
 #'
 #' @param Tm numeric, Average temperature in degrees Celsius for a hour of the day
 #' @param ref character, method for calculating latent period. Default is `"wolf"`

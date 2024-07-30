@@ -58,3 +58,8 @@ test_that("moisture_index(method =2) examples work", {
   expect_equal(moisture_index(55,rh_thresh = 50, method = 2), 0.00540259, tolerance = 0.00001)
 })
 
+# see issue #22
+plot(latent_period(9:35), x = 9:35,
+     xlab = "Temperature C",
+     ylab = "days",
+     pch = 16)
