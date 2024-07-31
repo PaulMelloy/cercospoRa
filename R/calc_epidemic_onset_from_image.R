@@ -58,25 +58,6 @@ calc_epidemic_onset_from_image <- function(start,
                         weather = weather,
                         cultivar_sus = cultivar_sus)
 
-
-
-  # for(i in 1:dim(c_closure)[1]){
-  #   for(j in 1:dim(c_closure)[2]){
-  #     this_canopy_closure <- as.numeric(c_closure[i,j])
-  #     this_canopy_closure <- as.Date.numeric(round(this_canopy_closure),
-  #                                            origin = '1970-01-01')
-  #     if(is.na(this_canopy_closure)){
-  #     }else{
-  #       This_epidemic_onset <- calc_epidemic_onset(start = start,
-  #                                                  end = end,
-  #                                                  c_closure = as.POSIXct(this_canopy_closure,
-  #                                                                         tz = "UTC"),
-  #                                                  weather = weather,
-  #                                                  cultivar_sus = cultivar_sus)
-  #       Ep_onset[i,j] <- as.numeric(This_epidemic_onset)/(24*60*60)
-  #     }
-  #   }
-  # }
   return(Ep_onset)
 }
 
