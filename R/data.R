@@ -4,9 +4,11 @@
 #'
 #' @name weathr
 #' @docType data
-#' @author Facundo
-#' @source Facundo
+#' @author Facundo Ispizua
+#' @source Facundo Ispizua
 #' A data frame with 8,016 rows and 15 columns:
+#' Weather station that accompanied field trial described in cercospora
+#' manuscript
 #' \describe{
 #'   \item{Station}{Identifier}
 #'   \item{Datum}{Date}
