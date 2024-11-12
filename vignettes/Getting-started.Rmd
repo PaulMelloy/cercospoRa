@@ -21,9 +21,10 @@ library(cercospoRa)
 library(data.table)
 ```
 
-The `cercospoRa` package estimates the proportional progress towards a 
-*Cercospora beticola* epidemic on sugarbeet.
-This requires formated hourly weather data in a format which the model recognises.
+The `cercospoRa` package estimates the daily infection values which tracks the 
+progress towards a *Cercospora beticola* epidemic on sugar beet.
+The package requires formatted hourly weather data in a format which the model 
+recognises.
 The R package `epiphytoolR` contains functions which automatically checks the weather
 data and returns it in the required hourly format.  
 
@@ -41,16 +42,16 @@ library(epiphytoolR)
 
 ### Format weather station data  
 
-This is data recorded by a weather station and contributed by Facundo Ramón Ispizua Yamati
-and is from a sugar beet field trial.  
+Included in the package is a weather dataset from a station adjacent to a sugar 
+beet field trial.  
 
-We will format the data so the model functions can recognise the data and won't 
-return errors due to inconsistencies and NAs which are common in weather data. 
+The weather data is first cleaned into to a format that the model can use without 
+returning errors due to inconsistencies and NAs, which are common in weather data. 
 This will require the user to think about how to replace the NAs or state default
 values to complete the dataset.  
 
-```{r}
-# format to data.table
+```{r prep_wdata}
+# clasify to data.table
 wthr <- data.table(weathr)
 
 # Use POSIXct formatted time.
@@ -70,11 +71,16 @@ wthr[, wd_std := 20]
 wthr <- wthr[Datum < as.POSIXct("2022-10-01")]
 
 # set NA wind speed values to zero
-wthr[is.na(WG200),WG200 := 0]
+wthr[is.na(WG200), WG200 := 0]
 
-# set NA wind direction values to 20 degrees. Wind is not important for this model
+# set NA wind direction values to 20 degrees. 
+#  Wind is not important for this model
 wthr[is.na(WR200),WR200 := 20]
+```
 
+Now we can use the `epiphytoolR::format_weather()` function.  
+
+```{r format_wdata}
 wthr <- format_weather(wthr,
                          POSIXct_time = "Time",
                          time_zone = "UTC",
@@ -101,7 +107,7 @@ spot epidemic could commence.
 `start` and `end` provide the time window for which the model should run.
 Canopy closure (`c_closure`) indicates when the model should start point for the 
 model.
-
+This is due to an observation by Wolf canopy closure pr
 
 This date is determined by the negative prognosis models to be the last day for 
 which a epidemic is likely not to start.  
@@ -116,10 +122,10 @@ cercospoRa::calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
 
 ## Estimate canopy closure  
 
-Canopy closure is tradionally observed manually. 
-The following methods permits canopy closure date estimation from remotley sensed
+Canopy closure is traditionally observed manually. 
+The following methods permits canopy closure date estimation from remotely sensed
 data.
-UAV or satelite data can be used to produce georeferenced leaf area index (LAI)
+UAV or satellite data can be used to produce georeferenced leaf area index (LAI)
 rasters. 
 
 ```{r}
