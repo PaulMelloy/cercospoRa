@@ -1,5 +1,6 @@
 # load the weather data to be formatted
 # import BOM data file
+set.seed(321)
 brisvegas <-
   system.file("extdata", "bris_weather_obs.csv", package = "epiphytoolR")
 bris <- data.table::fread(brisvegas)
@@ -74,14 +75,14 @@ test_that("epidemic onset produces expected outcome", {
                                rh)]
 
   # susceptible cultivar
-  sus_out <- calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01"),
+  sus_out <- calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01", tz = "UTC"),
                       weather = bris_formated,
                       cultivar_sus = 3)
   expect_type(sus_out,"double")
   expect_equal(sus_out, as.POSIXct("2023-06-07",tz = "UTC"))
 
   # resistant cultivar
-  res_out <- calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01"),
+  res_out <- calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01", tz = "UTC"),
                       weather = bris_formated,
                       cultivar_sus = 5)
   expect_type(res_out,"double")
@@ -99,7 +100,7 @@ test_that("different start dates provide different epidemic dates",{
   # set NA wind direction values to 20 degrees. Wind is not important for this model
   w_dat[,WR200 := runif(.N,min = 0,359)]
   # remove all data after September as it contains missing data
-  w_dat <- w_dat[Datum < as.POSIXct("2022-10-01")]
+  w_dat <- w_dat[Datum < as.POSIXct("2022-10-01",tz = "UTC")]
   # set NA wind speed values to zero
   w_dat[is.na(WG200),WG200 := 0]
 
@@ -125,21 +126,21 @@ test_that("different start dates provide different epidemic dates",{
     }
     out <- calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
                                end = as.POSIXct("2022-09-30",tz = "UTC"),
-                               c_closure = as.POSIXct("2022-05-01")+(i*3*86400), # 86400 is the number of seconds in a day
+                               c_closure = as.POSIXct("2022-05-01",tz = "UTC")+(i*3*86400), # 86400 is the number of seconds in a day
                                weather = w_dat,
                                cultivar_sus = 3)
 
     out2 <- c(out2,as.character(out))
 
   }
-  # cat(out2,sep = "\", \"")
-  expect_equal(out2, c("2022-05-20", "2022-05-20", "2022-05-21", "2022-05-24",
-                       "2022-05-24", "2022-05-29", "2022-06-05", "2022-06-08",
-                       "2022-06-09", "2022-06-11", "2022-06-12", "2022-06-13",
-                       "2022-06-20", "2022-06-24", "2022-06-26", "2022-06-27",
-                       "2022-06-30", "2022-07-01", "2022-07-04", "2022-07-08",
-                       "2022-07-11", "2022-07-13", "2022-07-17", "2022-07-22",
-                       "2022-07-25", "2022-07-26", "2022-07-29", "2022-08-01",
-                       "2022-08-01", "2022-08-04"))
+
+  expect_equal(out2, c("2022-05-20", "2022-05-21", "2022-05-22", "2022-05-24",
+                       "2022-05-25", "2022-05-31", "2022-06-06", "2022-06-08",
+                       "2022-06-09", "2022-06-11", "2022-06-12", "2022-06-17",
+                       "2022-06-22", "2022-06-25", "2022-06-26", "2022-06-27",
+                       "2022-06-30", "2022-07-01", "2022-07-07", "2022-07-09",
+                       "2022-07-11", "2022-07-13", "2022-07-20", "2022-07-23",
+                       "2022-07-26", "2022-07-26", "2022-07-29", "2022-08-01",
+                       "2022-08-03", "2022-08-05"))
 })
 
