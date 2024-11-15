@@ -1,5 +1,7 @@
+<!-- badges: start -->
 # cercospoRa <a href="https://paulmelloy.github.io/cercospoRa/"><img src="man/figures/logo.png" align="right" height="138" alt="cercospoRa website" /></a>
-
+[![repo status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+<!-- badges: end -->
 <br>
 
 `cercospoRa` is a mechanistic epidemiological model for estimating epidemics of 
