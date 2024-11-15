@@ -1,7 +1,11 @@
-# cercospoRa  
+# cercospoRa <a href="https://paulmelloy.github.io/cercospoRa/"><img src="man/figures/logo.png" align="right" height="138" alt="cercospoRa website" /></a>
+
+<br>
 
 `cercospoRa` is a mechanistic epidemiological model for estimating epidemics of 
-_Cercospora beticola_ in sugar beat farms, available as an R package.  
+_Cercospora beticola_ in sugar beet farms, available as an R package.  
+
+<br>  
 
 ## Installation  
 
@@ -16,8 +20,9 @@ Next install the package
 remotes::install_github(repo = "PaulMelloy/cercospoRa")
 ```
 
-## Getting started
+<br>  
 
+## Getting started  
 ### Format weather data  
 ```r
 library(epiphytoolR)
@@ -27,7 +32,7 @@ library(cercospoRa)
 head(cercospoRa::weathr)
 ```
 
-`weathr` is a data.table containing weather data recorded at a sugarbeat field 
+`weathr` is a data.table containing weather data recorded at a sugar beet field 
 trial observing the spread and severity of *C. beticola*.
 
 ```r
@@ -75,6 +80,7 @@ wthr <-
                               data_check = FALSE # this stops the function from checking for faults
                          )
 ```
+<br>  
 
 ### Calculate the proportional progress towards an epidemic  
 ```r
@@ -88,7 +94,7 @@ calc_epidemic_onset(c_closure = as.POSIXct("2022-07-01"),
                     cultivar_sus = 5)                    
                     
 ```
-This returns a POSIXct date for the onset of an epidemic for the susceptible and
+This returns a `POSIXct` date for the onset of an epidemic for the susceptible and
 more resistant cultivar.
 If the input weather data does not provide a window where a epidemic onset date 
 is met, the proportional progress towards an epidemic is returned.
@@ -96,6 +102,8 @@ is met, the proportional progress towards an epidemic is returned.
 `calc_epidemic_onset()` is a wrapper for `calc_DIV()` which returns a data.table 
 detailing the daily contribution towards the "daily infection values" (Wolf and Verreet, 2005). 
 For more detailed output of daily infection values call `calc_DIV()`
+
+<br>  
 
 ### Calculate daily infection values  
 ```r
@@ -109,14 +117,17 @@ days are assumed to not progress the model. The Racca and Jörg model returns `N
 and the Wolf model returns `0` as seen in the `calc_DIV(dat = bris_formated)` function 
 output.  
 
+<br>  
 
 ## Notes for contributors  
 The `main` branch is the production branch and only provides functions to recreate
 the model described in Wolf and Verreet (2005) as explained in the paper. 
 The `main` branch is locked, please contribute to the `dev` branch.
 The `dev` (development) branch also includes functions to recreate other *C. beticola*
-mechanistic models published by Racca and Jörg (2007) and auxilary functions which
-might be helpful for future versions.
+mechanistic models published by Racca and Jörg (2007) and auxiliary functions which
+might be helpful for future versions.  
+
+<br>  
 
 ## References  
 Wolf, P. F., & Verreet, J. A. (2005). Factors Affecting the Onset of Cercospora Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring Thresholds. *Phytopathology*, 95(3), 269-274.  

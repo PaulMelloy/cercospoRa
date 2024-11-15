@@ -42,25 +42,26 @@ calc_epidemic_onset <- function(start,
     warning("'c_closure' not supplied, setting 'start' as canopy closure date")
     start <- c_closure
   }
-  if(c_closure >= end) stop("'c_closure' is after last weather date")
 
-  w <- copy(weather[times > as.POSIXct(start) &
-                times < (as.POSIXct(end) + 3600),][times >= as.POSIXct(c_closure)])
+  c_closure <- as.POSIXct(c_closure,tz = "UTC")
 
-  daily_inf_val <- calc_DIV(dat = w)
+  out <- sapply(c_closure,function(cc){
+    if(is.na(cc)) return(NA)
+    if(cc >= end) stop("'c_closure' is after last weather date")
 
-  div_cs <- daily_inf_val[first(which(cumsum(DIV) >cultivar_sus)),
-                          as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
+    w <- copy(weather[times > as.POSIXct(start) &
+                        times < (as.POSIXct(end) + 3600),][times >= as.POSIXct(cc)])
 
-  # return date when 5% of canopy is infected
-  div_cs_r <- daily_inf_val[first(which(cumsum(DIV_racca) > 0.05)),
-                          as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
+    daily_inf_val <- calc_DIV(dat = w)
 
-  if(length(div_cs) == 0) div_cs <- sum(daily_inf_val$DIV, na.rm = TRUE) / cultivar_sus
-  # calculate percentage
-  if(length(div_cs_r) == 0) div_cs_r <- sum(daily_inf_val$DIV_racca,na.rm = TRUE) *100
+    div_cs <- daily_inf_val[first(which(cumsum(DIV) >cultivar_sus)),
+                            as.POSIXct(paste(Year,Month,Day,sep = "-"), tz = "UTC")]
 
-  return(list(wolf_date = div_cs[1],
-              racca_date = div_cs_r[1]))
+    if(length(div_cs) == 0) div_cs <- sum(daily_inf_val$DIV, na.rm = TRUE) / cultivar_sus
+    # calculate percentage
 
+    return(div_cs[1])
+  })
+
+  return(as.POSIXct(out,tz = "UTC"))
 }

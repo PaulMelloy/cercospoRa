@@ -5,8 +5,10 @@
 \alias{weathr}
 \title{Weather station data}
 \source{
-Facundo
+Facundo Ispizua
 A data frame with 8,016 rows and 15 columns:
+Weather station that accompanied field trial described in cercospora
+manuscript
 \describe{
 \item{Station}{Identifier}
 \item{Datum}{Date}
@@ -23,5 +25,5 @@ A data frame with 8,016 rows and 15 columns:
 A unformatted weather station dataset from Germany
 }
 \author{
-Facundo
+Facundo Ispizua
 }

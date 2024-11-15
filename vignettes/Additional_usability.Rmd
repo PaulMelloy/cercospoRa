@@ -1,0 +1,121 @@
+---
+title: "Additional_usability"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Additional_usability}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(cercospoRa)
+```
+
+
+```{r}
+# install epiphytoolR package if it is not installed
+if("epiphytoolR" %in% installed.packages()[,1] == FALSE){
+  remotes::install_github("PaulMelloy/epiphytoolR", dependencies = TRUE)
+}
+library(epiphytoolR)
+```
+
+Weather station data can be used for the model, however the example uses weather 
+data downloaded using the R package `nasapower`.  
+
+```{r eval=FALSE, include=TRUE}
+# install stationaRy package if it is not installed
+if("nasapower" %in% installed.packages()[,1] == FALSE){
+  install.packages("nasapower")
+}
+library(nasapower)
+
+np <- get_power(
+  community = "ag",
+  pars = c(
+    "RH2M", # Relative humidity at 2 meters
+    "T2M", # Air temperature at 2 meters
+    "WS2M", # wind speed at 2 meters,
+    "WD2M",# wind direction at 2 meters,
+    "PRECTOTCORR",
+    "ALLSKY_SFC_SW_DWN", # short wave downward solar radiation at the earth surface
+    "ALLSKY_SFC_LW_DWN", # long wave downward solar radiation at the earth surface
+    "PS", # surface pressure
+    "ALLSKY_SRF_ALB" # Surface albedo
+  ),
+  temporal_api = "hourly",
+  lonlat = c(9.916,51.41866),
+  dates = c("2018-02-01", "2022-12-08"),
+  time_standard = "UTC"
+)
+
+# set as a data.table
+setDT(np)
+
+# give the weather data a station name
+np$station <- "Belgium"
+# provide a wind direction standard deviation
+np$WDSD <- 20
+
+# format weather
+w_beau <- 
+  format_weather(np,
+                 time_zone = "UTC",
+                 temp = "T2M",
+                 rain = "PRECTOTCORR",
+                 YYYY = "YEAR",
+                 MM = "MO",
+                 DD = "DY",
+                 hh = "HR",
+                 rh = "RH2M",
+                 ws = "WS2M",
+                 wd = "WD2M",
+                 wd_sd = "WDSD",
+                 station = "station",
+                 lon = "LON", 
+                 lat = "LAT"
+                 )
+```
+
+## Calculate epidemic onset  
+
+The following function calculates the earliest date from which a cercospora leaf
+spot epidemic could commence. 
+`start` and `end` provide the time window for which the model should run.
+Canopy closure (`c_closure`) indicates when the model should start point for the 
+model.
+
+
+```{r eval=FALSE, include=TRUE}
+calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
+                    end = as.POSIXct("2022-09-30",tz = "UTC"),
+                    c_closure = as.POSIXct("2022-07-01",tz = "UTC"),
+                    weather = w_beau)
+```
+
+We can find the epidemic start date by calling the `calc_epidemic_onset()` function.
+This function is a wrapper for the `calc_DIV()` function which calculates the daily
+infection values.
+
+##  Calculate daily infection values  
+`calc_DIV()` will do this for all the days in the weather data frame provided, starting at 
+the first day, integrating over the hourly data.  
+
+```{r eval=FALSE, include=TRUE}
+divalues <- calc_DIV(dat = w_beau[times > as.POSIXct("2022-07-01")])
+
+# we take the cumulative sum of the daily infection values to monitor the increasing
+# risk of infection from cercospora
+divalues[, DIV_sum := cumsum(DIV)]
+divalues
+```
+
+
+

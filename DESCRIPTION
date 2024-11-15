@@ -1,6 +1,6 @@
 Package: cercospoRa
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9001
+Title: Mechanistic Epidemiological Model for Cercospora Leaf Spot of Sugar Beet
+Version: 0.0.0.9002
 Authors@R: c(
     person(given = "Paul",
            family = "Melloy",
@@ -30,25 +30,35 @@ Authors@R: c(
            family = "Mahlein",
            role = c("ctb"),
            comment = c(ORCID = "0000-0003-1091-3690")))
-Description: Mechanistic epidemiological model for Cercospora leaf spot of sugar beet
+Description: This package provides functions to recreate the negative prognosis 
+    epidemiological model for describing when the model can't be certain a 
+    chance Cercospora leaf spot (_Cercospora beticola_) epidemic has not 
+    commenced. The model is based on the work of Wolf and Verreet 
+    (2005 <https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269>).
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Suggests: 
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
     lubridate,
-    remotes
+    remotes,
+    epiphytoolR,
+    stats
 Config/testthat/edition: 3
 Imports: 
     data.table,
-    epiphytoolR,
     Rdpack,
-    stats
+    sf,
+    terra,
+    minpack.lm
 RdMacros: Rdpack
 VignetteBuilder: knitr
+Remotes: 
+    PaulMelloy/epiphytoolR
 Depends: 
     R (>= 2.10)
 LazyData: true
+URL: https://paulmelloy.github.io/cercospoRa/
