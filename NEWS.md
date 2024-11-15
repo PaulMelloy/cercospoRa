@@ -1,4 +1,5 @@
 # cercospoRa (development version)
+## New Features and minor improvements
   - Four functions have been added to deal with spatial heterogeneity:
     - `read_sb_growth_parameter`: read in and format raster images to allow 
      further computation.
@@ -9,6 +10,12 @@
   - Example datasets have been provided to check the functions. 
   It consists of a folder containing two LAI maps computed from UAV images.  
 
+## Documentation fixes  
+  - add metadata  
+  - Further simplification of `main` and `dev` branches to only the Wolf and 
+  Verreet functions.  
+  - add badge
+  
 
 # cercospoRa 0.0.0.9001
  - Change package name  
