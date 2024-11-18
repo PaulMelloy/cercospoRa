@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_c_closure.R
 \name{calc_c_closure}
 \alias{calc_c_closure}
-\title{Calculate growth rate(r) and LAI0 at time t0}
+\title{Calculate canopy closure date}
 \usage{
 calc_c_closure(param_rxt, x1 = 1.3, k = 6)
 }
@@ -22,7 +22,10 @@ This value can be cultivar-dependent. The default is fixed to 6}
 \code{c_closure} date at which 90\% canopy closure is reached at each location.
 }
 \description{
-Calculate growth rate(r) and LAI0 at time t0
+Calculate canopy closure date
+}
+\details{
+Calculates canopy closure dates from LAI and growth rate parameters
 }
 \examples{
 img_dir <- system.file("extdata", "uav_img",package = "cercospoRa")

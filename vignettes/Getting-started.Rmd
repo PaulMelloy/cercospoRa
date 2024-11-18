@@ -42,16 +42,16 @@ library(epiphytoolR)
 
 ### Format weather station data  
 
-Included in the package is a weather dataset from a station adjacent to a sugar 
+Included in the package is a weather data set from a station adjacent to a sugar 
 beet field trial.  
 
 The weather data is first cleaned into to a format that the model can use without 
-returning errors due to inconsistencies and NAs, which are common in weather data. 
-This will require the user to think about how to replace the NAs or state default
-values to complete the dataset.  
+returning errors due to inconsistencies and `NAs`, which are common in weather data. 
+This will require the user to think about how to replace the `NAs` or state default
+values to complete the data set.  
 
 ```{r prep_wdata}
-# clasify to data.table
+# classify to data.table
 wthr <- data.table(weathr)
 
 # Use POSIXct formatted time.
@@ -134,7 +134,7 @@ image_files <- list.files(system.file("extdata", "uav_img",package = "cercospoRa
                           pattern = "tif",
                           full.names = TRUE)
 
-# Read in data and check for consistancy  
+# Read in data and check for consistency  
 epidemic_onset_param <-
   read_sb_growth_parameter(img_files = image_files,
                            img_dates = as.POSIXct(c("2022-06-14","2022-06-28"),

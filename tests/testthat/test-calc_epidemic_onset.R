@@ -14,7 +14,9 @@ bris <- epiphytoolR::fill_time_gaps(bris,"aifstime_utc")
 bris[rain_trace == "-", rain_trace := "0"]
 bris[, rain_trace := as.numeric(rain_trace)]
 # get rainfall for each time
-bris[, rain := rain_trace - data.table::shift(rain_trace, type = "lead")][rain < 0, rain := rain_trace ]
+bris[, rain := rain_trace - data.table::shift(rain_trace,
+                                              type = "lead")][
+                                                rain < 0, rain := rain_trace ]
 
 # order the data by time
 bris <- bris[order(aifstime_utc)]
@@ -126,7 +128,8 @@ test_that("different start dates provide different epidemic dates",{
     }
     out <- calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
                                end = as.POSIXct("2022-09-30",tz = "UTC"),
-                               c_closure = as.POSIXct("2022-05-01",tz = "UTC")+(i*3*86400), # 86400 is the number of seconds in a day
+                               c_closure = as.POSIXct("2022-05-01",tz = "UTC")+
+                                 (i*3*86400), # 86400 is the number of seconds in a day
                                weather = w_dat,
                                cultivar_sus = 3)
 

@@ -1,18 +1,24 @@
-#' Calculate growth rate(r) and LAI0 at time t0
+#' Calculate growth rate and LAI at t0
 #'
-#' @param param_r Output of the function \link[cercospoRa]{read_sb_growth_parameter}, which
-#'  produces a list containing the LAI images and the associated dates
+#' @details
+#' Fits a non-linear model to remotely sensed LAI values and estimates the leaf
+#' area index (LAI) and growth rate _r_ at the start of the time window _t0_.
+#'
+#'
+#' @param param_r Output of the function \link[cercospoRa]{read_sb_growth_parameter},
+#'  which produces a list containing the LAI images and the associated dates
 #' @param min_r minimum growth rate for sugar beet. Default `min_r` is fixed to
-#'  0.02 to ensure that the growth rate at the inflexion point of the sigmiod is
+#'  0.02 to ensure that the growth rate at the inflexion point of the sigmoid is
 #'  at least 1 unit of LAI per month.
-#' @param max_r manimum growth rate for sugar beet. Default `max_r` is fixed to
+#' @param max_r maximum growth rate for sugar beet. Default `max_r` is fixed to
 #'  0.05 to ensure that the growth rate at the inflexion point of the sigmoid is
 #'  at most 2.5 units of LAI per month.
-#' @param k carrying capaciy, which is the maximum LAI that can be attained.
+#' @param k carrying capacity, which is the maximum LAI that can be attained.
 #'  This value can be cultivar-dependent. The default is fixed to 6
 #'
-#' @return `param_rxt:` list containing parameters that are necessary to calculate `c_closure`. These parameters are `r`, the
-#' growth rate, `x0`, the initial LAI value, and `t0`, the initial date.
+#' @return `param_rxt:` list containing parameters that are necessary to calculate
+#' `c_closure`. These parameters are `r`, the growth rate, `x0`, the initial LAI
+#'  value, and `t0`, the initial date.
 #'
 #' @export
 #'
@@ -55,7 +61,7 @@ calc_r_x0 <- function(param_r,
 #' Fit non-linear model to raster layers
 #'
 #' @param xyi Spatrast stack
-#' @param k carrying capaciy, which is the maximum LAI that can be attained.
+#' @param k carrying capacity, which is the maximum LAI that can be attained.
 #'  This value can be cultivar-dependent. The default is fixed to 6
 #' @param tm numeric, form of dates from each raster layer in `xyi`
 #' @param t0 numeric, form of date from first raster layer in `xyi`

@@ -1,8 +1,8 @@
 #' Calculate epidemic onset
 #'
-#' @param start posixct, start date in which to begin calculating the epidemic
+#' @param start POSIXct, start date in which to begin calculating the epidemic
 #'  onset, if not specified, the first date in the weather data will be used.
-#' @param end posixct, end date, last date to complete calculating the epidemic
+#' @param end POSIXct, end date, last date to complete calculating the epidemic
 #'  onset, if not specified, the last date in the weather data will be used.
 #' @param c_closure POSIXct formatted date to start the model running the model
 #'  This is usually at canopy closure (Wolf)
@@ -10,12 +10,12 @@
 #' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
 #'  "S" susceptible, "MR" moderately resistant ect.
 #'
-#' @return `$wolf_date:` If the input weather is conducive for epidemic, the function returns a
-#'  POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
-#'  proportion indicating the progress an epidemic is returned
-#'  `racca_percent:` If the input weather is conducive for epidemic, the function returns a
-#'  POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
-#'  proportion indicating the progress an epidemic is returned
+#' @return `$wolf_date:` If the input weather is conducive for epidemic, the
+#'  function returns a POSIX_ct date when epidemic commences. If no epidemic
+#'  occurs, a numeric, proportion indicating the progress an epidemic is returned
+#'  `racca_percent:` If the input weather is conducive for epidemic, the function
+#'  returns a POSIX_ct date when epidemic commences. If no epidemic occurs, a
+#'  numeric, proportion indicating the progress an epidemic is returned
 #' @export
 #'
 #' @examples

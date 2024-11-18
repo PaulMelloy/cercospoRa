@@ -59,7 +59,7 @@ VignetteBuilder: knitr
 Remotes: 
     PaulMelloy/epiphytoolR
 Depends: 
-    R (>= 2.10)
+    R (>= 4.0.0)
 LazyData: true
 URL: https://paulmelloy.github.io/cercospoRa/
 BugReports: https://github.com/PaulMelloy/cercospoRa/issues

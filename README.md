@@ -116,9 +116,9 @@ This produces a `data.table` detailing the daily infection value for each day us
 the method described in Wolf and Verreet (2005). 
 
 **Note:** Missing humidity values do not prevent the model from running and these
-days are assumed to not progress the model. The Racca and Jörg model returns `NA` values 
-and the Wolf model returns `0` as seen in the `calc_DIV(dat = bris_formated)` function 
-output.  
+days are assumed to not progress the model. The Racca and Jörg model returns `NA` 
+values and the Wolf model returns `0` as seen in the `calc_DIV(dat = bris_formated)` 
+function output.  
 
 <br>  
 
@@ -133,5 +133,8 @@ might be helpful for future versions.
 <br>  
 
 ## References  
-Wolf, P. F., & Verreet, J. A. (2005). Factors Affecting the Onset of Cercospora Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring Thresholds. *Phytopathology*, 95(3), 269-274.  
-Racca, P., and Jörg, E. (2007). CERCBET 3 – a forecaster for epidemic development of *Cercospora beticola*. *EPPO Bulletin*, 37(2), 344-349.  
+Wolf, P. F., & Verreet, J. A. (2005). Factors Affecting the Onset of Cercospora 
+Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring 
+Thresholds. *Phytopathology*, 95(3), 269-274.  
+Racca, P., and Jörg, E. (2007). CERCBET 3 – a forecaster for epidemic development 
+of *Cercospora beticola*. *EPPO Bulletin*, 37(2), 344-349.  

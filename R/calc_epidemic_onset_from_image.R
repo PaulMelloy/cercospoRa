@@ -1,15 +1,14 @@
 #' Calculate epidemic onset from image
 #'
-#' @param start posixct, start date in which to begin calculating the epidemic
+#' @param start POSIXct, start date in which to begin calculating the epidemic
 #'  onset, if not specified, the first date in the weather data will be used.
-#' @param end posixct, end date, last date to complete calculating the epidemic
+#' @param end POSIXct, end date, last date to complete calculating the epidemic
 #'  onset, if not specified, the last date in the weather data will be used.
 #' @param c_closure map of canopy closure dates formatted as number of days since
 #' 1970-01-01. It defines the date to start running the model (Wolf)
 #' @param weather data.table, formatted with `epiphytoolR::format_weather`
 #' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
 #'  "S" susceptible, "MR" moderately resistant ect.
-#' @importFrom terra plot
 #' @return `$wolf_date:` If the input weather is conducive for epidemic, the function returns a
 #'  POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
 #'  proportion indicating the progress an epidemic is returned

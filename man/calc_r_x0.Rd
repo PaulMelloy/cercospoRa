@@ -2,31 +2,36 @@
 % Please edit documentation in R/calc_r_x0.R
 \name{calc_r_x0}
 \alias{calc_r_x0}
-\title{Calculate growth rate(r) and LAI0 at time t0}
+\title{Calculate growth rate and LAI at t0}
 \usage{
 calc_r_x0(param_r, min_r = 0.02, max_r = 0.05, k = 6)
 }
 \arguments{
-\item{param_r}{Output of the function \link[cercospoRa]{read_sb_growth_parameter}, which
-produces a list containing the LAI images and the associated dates}
+\item{param_r}{Output of the function \link[cercospoRa]{read_sb_growth_parameter},
+which produces a list containing the LAI images and the associated dates}
 
 \item{min_r}{minimum growth rate for sugar beet. Default \code{min_r} is fixed to
-0.02 to ensure that the growth rate at the inflexion point of the sigmiod is
+0.02 to ensure that the growth rate at the inflexion point of the sigmoid is
 at least 1 unit of LAI per month.}
 
-\item{max_r}{manimum growth rate for sugar beet. Default \code{max_r} is fixed to
+\item{max_r}{maximum growth rate for sugar beet. Default \code{max_r} is fixed to
 0.05 to ensure that the growth rate at the inflexion point of the sigmoid is
 at most 2.5 units of LAI per month.}
 
-\item{k}{carrying capaciy, which is the maximum LAI that can be attained.
+\item{k}{carrying capacity, which is the maximum LAI that can be attained.
 This value can be cultivar-dependent. The default is fixed to 6}
 }
 \value{
-\verb{param_rxt:} list containing parameters that are necessary to calculate \code{c_closure}. These parameters are \code{r}, the
-growth rate, \code{x0}, the initial LAI value, and \code{t0}, the initial date.
+\verb{param_rxt:} list containing parameters that are necessary to calculate
+\code{c_closure}. These parameters are \code{r}, the growth rate, \code{x0}, the initial LAI
+value, and \code{t0}, the initial date.
 }
 \description{
-Calculate growth rate(r) and LAI0 at time t0
+Calculate growth rate and LAI at t0
+}
+\details{
+Fits a non-linear model to remotely sensed LAI values and estimates the leaf
+area index (LAI) and growth rate \emph{r} at the start of the time window \emph{t0}.
 }
 \examples{
 img_dir <- system.file("extdata", "uav_img",package = "cercospoRa")

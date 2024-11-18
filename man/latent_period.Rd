@@ -27,5 +27,6 @@ e(-0.35 x (Tm - 10)). See issue #22 on github for additional information.
 }
 \references{
 \insertRef{wolf_factors_2005}{cercospoRa}; equation 4
+
 \insertRef{el_jarroudi_weather-based_2021}{cercospoRa}; equation 1
 }
