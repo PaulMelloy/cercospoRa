@@ -1,7 +1,7 @@
 {
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
-  "@id": "https://github.com/PaulMelloy/cercospoRa",
+  "@id": "https://paulmelloy.github.io/cercospoRa/",
   "identifier": "cercospoRa",
   "description": "This package provides functions to recreate the negative prognosis epidemiological model for describing when the model can't be certain a chance Cercospora leaf spot (_Cercospora beticola_) epidemic has not commenced. The model is based on the work of Wolf and Verreet (2005 <https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269>).",
   "name": "cercospoRa: Mechanistic Epidemiological Model for Cercospora Leaf Spot of Sugar Beet",
@@ -219,7 +219,9 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2515.082KB",
+  "fileSize": "2515.167KB",
   "relatedLink": "https://paulmelloy.github.io/cercospoRa/",
-  "releaseNotes": "https://github.com/PaulMelloy/cercospoRa/blob/master/NEWS.md"
+  "releaseNotes": "https://github.com/PaulMelloy/cercospoRa/blob/master/NEWS.md",
+  "readme": "https://github.com/PaulMelloy/cercospoRa/blob/main/README.md",
+  "developmentStatus": "https://www.repostatus.org/#active"
 }

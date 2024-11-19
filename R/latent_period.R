@@ -12,6 +12,7 @@
 #' @return numeric, Latent period for a given hour. `ref = "jarroudi"` returns
 #'  latent period in days.
 #' @references \insertRef{wolf_factors_2005}{cercospoRa}; equation 4
+#'
 #'  \insertRef{el_jarroudi_weather-based_2021}{cercospoRa}; equation 1
 latent_period <- function(Tm, ref = "wolf"){
   if(ref == "wolf"){

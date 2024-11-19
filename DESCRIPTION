@@ -1,16 +1,16 @@
 Package: cercospoRa
-Title: Mechanistic Epidemiological Model for Cercospora Leaf Spot of Sugar Beet
-Version: 0.0.0.9002
+Title: Process based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet
+Version: 0.0.0.9003
 Authors@R: c(
     person(given = "Paul",
            family = "Melloy",
-           role = c("aut", "cre", "trl"),
+           role = c("aut", "cre", "trl","cph"),
            email = "p.melloy@uq.edu.au",
            comment = c(ORCID = "0000-0003-4253-7167",
                        "Translated equations from literature and developed package.")),
     person(given = "Rene",
            family = "Heim",
-           role = c("aut"),
+           role = c("aut", "cph"),
            email = "heim@ifz-goettingen.de",
            comment = c(ORCID = "0000-0002-0666-2588",
                        "Code review and development of leaf area index model")),
@@ -30,10 +30,10 @@ Authors@R: c(
            family = "Mahlein",
            role = c("ctb"),
            comment = c(ORCID = "0000-0003-1091-3690")))
-Description: This package provides functions to recreate the negative prognosis 
-    epidemiological model for describing when the model can't be certain a 
-    chance Cercospora leaf spot (_Cercospora beticola_) epidemic has not 
-    commenced. The model is based on the work of Wolf and Verreet 
+Description: This package provides functions to estimate sugar beet canopy 
+    closure with remotely sensed LAI and estimate when action might be needed to
+    protect the crop from a Cercospora leaf spot (_Cercospora beticola_) epidemic
+    with a negative prognosis model based on the work of Wolf and Verreet 
     (2005 <https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269>).
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -59,8 +59,7 @@ VignetteBuilder: knitr
 Remotes: 
     PaulMelloy/epiphytoolR
 Depends: 
-    R (>= 2.10)
+    R (>= 4.0.0)
 LazyData: true
 URL: https://paulmelloy.github.io/cercospoRa/
 BugReports: https://github.com/PaulMelloy/cercospoRa/issues
-

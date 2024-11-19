@@ -1,4 +1,8 @@
-#' Calculate growth rate(r) and LAI0 at time t0
+#' Calculate canopy closure date
+#'
+#' @details
+#'  Calculates canopy closure dates from LAI and growth rate parameters
+#'
 #'
 #' @param param_rxt Output of the function \link{calc_r_x0}, which produces a
 #'  list containing parameters that are necessary to calculate `c_closure`.
@@ -12,8 +16,6 @@
 #' @return `c_closure` date at which 90% canopy closure is reached at each location.
 #'
 #' @export
-#'
-#'
 #' @examples
 #' img_dir <- system.file("extdata", "uav_img",package = "cercospoRa")
 #' epidemic_onset_param <-

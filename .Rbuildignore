@@ -9,3 +9,5 @@
 ^pkgdown$
 ^\.github$
 .Rprofile
+^cran-comments\.md$
+codemeta.json

@@ -7,10 +7,10 @@
 calc_epidemic_onset(start, end, c_closure, weather, cultivar_sus = 5)
 }
 \arguments{
-\item{start}{posixct, start date in which to begin calculating the epidemic
+\item{start}{POSIXct, start date in which to begin calculating the epidemic
 onset, if not specified, the first date in the weather data will be used.}
 
-\item{end}{posixct, end date, last date to complete calculating the epidemic
+\item{end}{POSIXct, end date, last date to complete calculating the epidemic
 onset, if not specified, the last date in the weather data will be used.}
 
 \item{c_closure}{POSIXct formatted date to start the model running the model
@@ -22,12 +22,12 @@ This is usually at canopy closure (Wolf)}
 "S" susceptible, "MR" moderately resistant ect.}
 }
 \value{
-\verb{$wolf_date:} If the input weather is conducive for epidemic, the function returns a
-POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
-proportion indicating the progress an epidemic is returned
-\verb{racca_percent:} If the input weather is conducive for epidemic, the function returns a
-POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
-proportion indicating the progress an epidemic is returned
+\verb{$wolf_date:} If the input weather is conducive for epidemic, the
+function returns a POSIX_ct date when epidemic commences. If no epidemic
+occurs, a numeric, proportion indicating the progress an epidemic is returned
+\verb{racca_percent:} If the input weather is conducive for epidemic, the function
+returns a POSIX_ct date when epidemic commences. If no epidemic occurs, a
+numeric, proportion indicating the progress an epidemic is returned
 }
 \description{
 Calculate epidemic onset

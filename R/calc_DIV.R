@@ -1,19 +1,19 @@
 #' Calculate daily infection values
 #'
-#' This function calculates the daily infection values for *Cercospora berticola*
+#' This function calculates the daily infection values for *Cercospora beticola*
 #'  on sugar beet. Functions were adapted from \insertCite{wolf_factors_2005}{cercospoRa}
 #'  and \insertCite{wolf_zum_2001}{cercospoRa}
 #'
 #' @param date_time POSIX_ct, date time the weather recording was taken
-#' @param Tm numeric, temperature, in celcius' at time increment in `date_time`
+#' @param Tm numeric, temperature, in Celsius' at time increment in `date_time`
 #' @param RH numeric, relative humidity (%) at time increment in `date_time`
-#' @param rain numeric, volume of rain in millimeters recorded between time recordings
+#' @param rain numeric, volume of rain in millimetres recorded between time recordings
 #' @param dat data.frame, containing column names "times","temp","rh","rain" with
 #'  each of the respective arguments for input. provided as a convenience
 #'
 #' @return data.table, with probability of infection for each day, between 0 and 1
 #'  Undertaken with two methods by Wolf \insertCite{wolf_factors_2005}{cercospoRa}
-#'  under the `DIV` column and method by Racca et. al \insertCite{racca_cercbet_2007}{cercospoRa}
+#'  under the `DIV` column and method by Racca et al. \insertCite{racca_cercbet_2007}{cercospoRa}
 #'  described in the `DIV_racca` column.
 #' @export
 #' @references \insertAllCited{}
@@ -68,8 +68,8 @@ calc_DIV <- function(date_time, Tm,RH, rain,dat){
           "moist_ind") := list(temperature_index(temp),
                               moisture_index(rh,rain,70))]
 
-  DIV <- dat[, list(DIV = mean(fifelse(test = Tm_index == 0 | moist_ind == 0,
-                                  yes = 0, no = (Tm_index * moist_ind)))),
+  DIV <- dat[, list(DIV = round(mean(fifelse(test = Tm_index == 0 | moist_ind == 0,
+                                  yes = 0, no = Tm_index * moist_ind)),digits = 7)),
              by = c("Year", "Month", "Day")]
 
   return(DIV)

@@ -13,10 +13,10 @@ calc_epidemic_onset_from_image(
 )
 }
 \arguments{
-\item{start}{posixct, start date in which to begin calculating the epidemic
+\item{start}{POSIXct, start date in which to begin calculating the epidemic
 onset, if not specified, the first date in the weather data will be used.}
 
-\item{end}{posixct, end date, last date to complete calculating the epidemic
+\item{end}{POSIXct, end date, last date to complete calculating the epidemic
 onset, if not specified, the last date in the weather data will be used.}
 
 \item{c_closure}{map of canopy closure dates formatted as number of days since

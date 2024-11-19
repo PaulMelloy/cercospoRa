@@ -1,4 +1,6 @@
-# cercospoRa (development version)
+# cercospoRa (development version)  
+
+# cercospoRa 0.0.0.9003
 ## New Features and minor improvements
   - Four functions have been added to deal with spatial heterogeneity:
     - `read_sb_growth_parameter`: read in and format raster images to allow 
@@ -10,11 +12,16 @@
   - Example datasets have been provided to check the functions. 
   It consists of a folder containing two LAI maps computed from UAV images.  
 
+## Features removed  
+  - Removed methods from Racca paper and set them to a new branch 
+  [plus_racca](https://github.com/PaulMelloy/cercospoRa/tree/plus_racca)
+
 ## Documentation fixes  
   - add metadata  
   - Further simplification of `main` and `dev` branches to only the Wolf and 
   Verreet functions.  
-  - add badge
+  - add badge  
+  - spelling and grammar fixes
   
 
 # cercospoRa 0.0.0.9001
