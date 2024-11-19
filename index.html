@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Mechanistic Epidemiological Model for Cercospora Leaf Spot of Sugar Beet • cercospoRa</title>
+<title>Process based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet • cercospoRa</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Mechanistic Epidemiological Model for Cercospora Leaf Spot of Sugar Beet">
-<meta name="description" content="This package provides functions to recreate the negative prognosis epidemiological model for describing when the model can't be certain a chance Cercospora leaf spot (_Cercospora beticola_) epidemic has not commenced. The model is based on the work of Wolf and Verreet (2005 &lt;https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269&gt;).">
-<meta property="og:description" content="This package provides functions to recreate the negative prognosis epidemiological model for describing when the model can't be certain a chance Cercospora leaf spot (_Cercospora beticola_) epidemic has not commenced. The model is based on the work of Wolf and Verreet (2005 &lt;https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269&gt;).">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Process based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet">
+<meta name="description" content="This package provides functions to estimate sugar beet canopy closure with remotely sensed LAI and estimate when action might be needed to protect the crop from a Cercospora leaf spot (_Cercospora beticola_) epidemic with a negative prognosis model based on the work of Wolf and Verreet (2005 &lt;https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269&gt;).">
+<meta property="og:description" content="This package provides functions to estimate sugar beet canopy closure with remotely sensed LAI and estimate when action might be needed to protect the crop from a Cercospora leaf spot (_Cercospora beticola_) epidemic with a negative prognosis model based on the work of Wolf and Verreet (2005 &lt;https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269&gt;).">
 <meta property="og:image" content="https://paulmelloy.github.io/cercospoRa/logo.png">
 </head>
 <body>
@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">cercospoRa</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,8 @@
 </div>
 <!-- badges: start -->
 
-<p><code>cercospoRa</code> is a mechanistic epidemiological model for estimating epidemics of <em>Cercospora beticola</em> in sugar beet farms, available as an R package.</p>
+<p>This R package, <code>cercospoRa</code>, takes steps to automate the epidemiological modelling of Cercospora leaf spot epidemics in <em>Cercospora beticola</em> in sugar beet farms, available as an R package. The package contains functions to use remotely sensed spatially explicit empirical data to estimate leaf area index (LAI) when the crop canopy closes. Crop canopy closure is a key variable in modelling the estimating when growers will need to be vigilant and protect their crop with fungicides to prevent a yield limiting cercospora leaf spot epidemic.</p>
+<p><code>cercospoRa</code> uses functions described by Wolf and Verreet (2005) “Factors Affecting the Onset of Cercospora Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring Thresholds” <em>Phytopathology</em></p>
 <p><br></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -79,15 +80,16 @@
 <h3 id="format-weather-data">Format weather data<a class="anchor" aria-label="anchor" href="#format-weather-data"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulmelloy.github.io/epiphytoolR/" class="external-link">epiphytoolR</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulmelloy.github.io/epiphytoolR/" class="external-link">epiphytoolR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulmelloy.github.io/cercospoRa/">cercospoRa</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Inspect raw weather station data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">cercospoRa</span><span class="fu">::</span><span class="va"><a href="reference/weathr.html">weathr</a></span><span class="op">)</span></span></code></pre></div>
-<p><code>weathr</code> is a data.table containing weather data recorded at a sugar beet field trial observing the spread and severity of <em>C. beticola</em>.</p>
+<p><code>weathr</code> is a <code>data.table</code> containing weather data recorded at a sugar beet field trial observing the spread and severity of <em>C. beticola</em>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make a copy of the data</span></span>
-<span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="op">(</span><span class="va">weathr</span><span class="op">)</span></span>
+<span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="va">weathr</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Format times to POSIXct time with UTC timezone</span></span>
 <span><span class="va">wthr</span><span class="op">[</span>,<span class="va">Time</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">Datum</span>, <span class="st">" "</span>,<span class="va">Stunde</span>,<span class="st">":00"</span><span class="op">)</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span><span class="op">]</span></span>
@@ -154,21 +156,22 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/calc_DIV.html">calc_DIV</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">wthr</span><span class="op">)</span></span></code></pre></div>
 <p>This produces a <code>data.table</code> detailing the daily infection value for each day using the method described in Wolf and Verreet (2005).</p>
-<p><strong>Note:</strong> Missing humidity values do not prevent the model from running and these days are assumed to not progress the model. The Racca and Jörg model returns <code>NA</code> values and the Wolf model returns <code>0</code> as seen in the <code>calc_DIV(dat = bris_formated)</code> function output.</p>
+<p><strong>Note:</strong> Missing humidity values do not prevent the model from running and these days are assumed to not progress the model. The Racca and Jörg model returns <code>NA</code> values and the Wolf model returns <code>0</code>.</p>
 <p><br></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="notes-for-contributors">Notes for contributors<a class="anchor" aria-label="anchor" href="#notes-for-contributors"></a>
 </h2>
-<p>The <code>main</code> branch is the production branch and only provides functions to recreate the model described in Wolf and Verreet (2005) as explained in the paper. The <code>main</code> branch is locked, please contribute to the <code>dev</code> branch. The <code>dev</code> (development) branch also includes functions to recreate other <em>C. beticola</em> mechanistic models published by Racca and Jörg (2007) and auxiliary functions which might be helpful for future versions.</p>
+<p>The <code>main</code> branch is the production branch and only provides functions to recreate the model described in Wolf and Verreet (2005) as explained in the paper. The <code>main</code> branch is locked, please contribute to the <code>dev</code> branch.<br>
+The <code>plus_racca</code> (development) branch also includes functions to recreate other <em>C. beticola</em> mechanistic models published by Racca and Jörg (2007) and auxiliary functions which might be helpful for future versions.</p>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p>Wolf, P. F., &amp; Verreet, J. A. (2005). Factors Affecting the Onset of Cercospora Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring Thresholds. <em>Phytopathology</em>, 95(3), 269-274.<br>
-Racca, P., and Jörg, E. (2007). CERCBET 3 – a forecaster for epidemic development of <em>Cercospora beticola</em>. <em>EPPO Bulletin</em>, 37(2), 344-349.</p>
+<p>Wolf, P. F., &amp; Verreet, J. A. (2005). Factors Affecting the Onset of Cercospora Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring Thresholds. <em>Phytopathology</em>, 95(3), 269-274.</p>
+<p>Racca, P., and Jörg, E. (2007). CERCBET 3 – a forecaster for epidemic development of <em>Cercospora beticola</em>. <em>EPPO Bulletin</em>, 37(2), 344-349.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -198,8 +201,8 @@ Racca, P., and Jörg, E. (2007). CERCBET 3 – a forecaster for epidemic develop
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Paul Melloy <br><small class="roles"> Author, maintainer, translator </small> <a href="https://orcid.org/0000-0003-4253-7167" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Rene Heim <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0666-2588" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Paul Melloy <br><small class="roles"> Author, maintainer, translator, copyright holder </small> <a href="https://orcid.org/0000-0003-4253-7167" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Rene Heim <br><small class="roles"> Author, copyright holder </small> <a href="https://orcid.org/0000-0002-0666-2588" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
