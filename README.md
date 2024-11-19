@@ -5,8 +5,18 @@
 <!-- badges: end -->
 <br>
 
-`cercospoRa` is a mechanistic epidemiological model for estimating epidemics of 
-_Cercospora beticola_ in sugar beet farms, available as an R package.  
+This R package, `cercospoRa`, takes steps to automate the epidemiological 
+modelling of Cercospora leaf spot epidemics in _Cercospora beticola_ in sugar 
+beet farms, available as an R package.
+The package contains functions to use remotely sensed spatially explicit empirical
+data to estimate leaf area index (LAI) when the crop canopy closes. 
+Crop canopy closure is a key variable in modelling the estimating when growers 
+will need to be vigilant and protect their crop with fungicides to prevent a 
+yield limiting cercospora leaf spot epidemic.  
+
+`cercospoRa` uses functions described by Wolf and Verreet (2005) "Factors 
+Affecting the Onset of Cercospora Leaf Spot Epidemics in Sugar Beet and 
+Establishment of Disease-Monitoring Thresholds" _Phytopathology_  
 
 <br>  
 
@@ -28,6 +38,7 @@ remotes::install_github(repo = "PaulMelloy/cercospoRa")
 ## Getting started  
 ### Format weather data  
 ```r
+library(data.table)
 library(epiphytoolR)
 library(cercospoRa)
 
@@ -35,7 +46,7 @@ library(cercospoRa)
 head(cercospoRa::weathr)
 ```
 
-`weathr` is a data.table containing weather data recorded at a sugar beet field 
+`weathr` is a `data.table` containing weather data recorded at a sugar beet field 
 trial observing the spread and severity of *C. beticola*.
 
 ```r
@@ -97,8 +108,8 @@ calc_epidemic_onset(c_closure = as.POSIXct("2022-07-01"),
                     cultivar_sus = 5)                    
                     
 ```
-This returns a `POSIXct` date for the onset of an epidemic for the susceptible and
-more resistant cultivar.
+This returns a `POSIXct` date for the onset of an epidemic for the susceptible 
+and more resistant cultivar.
 If the input weather data does not provide a window where a epidemic onset date 
 is met, the proportional progress towards an epidemic is returned.
 
@@ -117,18 +128,17 @@ the method described in Wolf and Verreet (2005).
 
 **Note:** Missing humidity values do not prevent the model from running and these
 days are assumed to not progress the model. The Racca and Jörg model returns `NA` 
-values and the Wolf model returns `0` as seen in the `calc_DIV(dat = bris_formated)` 
-function output.  
+values and the Wolf model returns `0`.  
 
 <br>  
 
 ## Notes for contributors  
 The `main` branch is the production branch and only provides functions to recreate
 the model described in Wolf and Verreet (2005) as explained in the paper. 
-The `main` branch is locked, please contribute to the `dev` branch.
-The `dev` (development) branch also includes functions to recreate other *C. beticola*
-mechanistic models published by Racca and Jörg (2007) and auxiliary functions which
-might be helpful for future versions.  
+The `main` branch is locked, please contribute to the `dev` branch.  
+The `plus_racca` (development) branch also includes functions to recreate other 
+*C. beticola* mechanistic models published by Racca and Jörg (2007) and auxiliary 
+functions which might be helpful for future versions.  
 
 <br>  
 
@@ -136,5 +146,6 @@ might be helpful for future versions.
 Wolf, P. F., & Verreet, J. A. (2005). Factors Affecting the Onset of Cercospora 
 Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring 
 Thresholds. *Phytopathology*, 95(3), 269-274.  
+
 Racca, P., and Jörg, E. (2007). CERCBET 3 – a forecaster for epidemic development 
 of *Cercospora beticola*. *EPPO Bulletin*, 37(2), 344-349.  
