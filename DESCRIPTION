@@ -16,7 +16,7 @@ Authors@R: c(
                        "Code review and development of leaf area index model")),
     person(given = "Nathan",
            family = "Okole",
-           role = c("ctb"),
+           role = c("ctb","cph"),
            email = "okole@ifz-goettingen.de",
            comment = c(ORCID = "0000-0002-5375-2420",
                        "Code review and development of leaf area index model")),
@@ -28,7 +28,7 @@ Authors@R: c(
                        "Code review")),
     person(given = "Anne-Katrin",
            family = "Mahlein",
-           role = c("ctb"),
+           role = c("ctb","cph"),
            comment = c(ORCID = "0000-0003-1091-3690")))
 Description: Estimates sugar beet canopy closure with remotely sensed leaf area
     index and estimates when action might be needed to protect the crop from a 
