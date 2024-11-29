@@ -10,21 +10,21 @@ calc_r_x0(param_r, min_r = 0.02, max_r = 0.05, k = 6)
 \item{param_r}{Output of the function \link[cercospoRa]{read_sb_growth_parameter},
 which produces a list containing the LAI images and the associated dates}
 
-\item{min_r}{minimum growth rate for sugar beet. Default \code{min_r} is fixed to
-0.02 to ensure that the growth rate at the inflexion point of the sigmoid is
-at least 1 unit of LAI per month.}
+\item{min_r}{minimum growth rate for sugar beet. Default \code{min_r} is fixed
+to 0.02 to ensure that the growth rate at the inflexion point of the sigmoid
+is at least 1 unit of LAI per month.}
 
-\item{max_r}{maximum growth rate for sugar beet. Default \code{max_r} is fixed to
-0.05 to ensure that the growth rate at the inflexion point of the sigmoid is
-at most 2.5 units of LAI per month.}
+\item{max_r}{maximum growth rate for sugar beet. Default \code{max_r} is fixed
+to 0.05 to ensure that the growth rate at the inflexion point of the sigmoid
+is at most 2.5 units of LAI per month.}
 
 \item{k}{carrying capacity, which is the maximum LAI that can be attained.
 This value can be cultivar-dependent. The default is fixed to 6}
 }
 \value{
-\verb{param_rxt:} list containing parameters that are necessary to calculate
-\code{c_closure}. These parameters are \code{r}, the growth rate, \code{x0}, the initial LAI
-value, and \code{t0}, the initial date.
+param_rxt: list containing parameters that are necessary to calculate
+\code{c_closure}. These parameters are \code{r}, the growth rate, \code{x0},
+the initial LAI value, and \code{t0}, the initial date.
 }
 \description{
 Calculate growth rate and LAI at t0

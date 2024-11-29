@@ -2,22 +2,23 @@
 % Please edit documentation in R/latent_period.R
 \name{latent_period}
 \alias{latent_period}
-\title{Calculate Cercospora latent period}
+\title{Calculate Cercospora Latent Period}
 \usage{
 latent_period(Tm, ref = "wolf")
 }
 \arguments{
 \item{Tm}{numeric, Average temperature in degrees Celsius for a hour of the day}
 
-\item{ref}{character, method for calculating latent period. Default is \code{"wolf"}
-also available \code{"jarroudi"}. See references for where formulas were used}
+\item{ref}{character, method for calculating latent period. Default is
+\code{"wolf"} also available \code{"jarroudi"}. See references for where
+formulas were used}
 }
 \value{
-numeric, Latent period for a given hour. \code{ref = "jarroudi"} returns
-latent period in days.
+numeric, Latent period for a given hour. \code{ref = "jarroudi"}
+returns latent period in days.
 }
 \description{
-Calculate Cercospora latent period
+Calculate Cercospora Latent Period
 }
 \details{
 Calculates the latent period for \emph{Cercospora beticola} infections on

@@ -1,4 +1,4 @@
-#' Calculate Cercospora latent period
+#' Calculate Cercospora Latent Period
 #'
 #' @details Calculates the latent period for *Cercospora beticola* infections on
 #' sugar beet. Note the published formula in \insertCite{wolf_factors_2005}{cercospoRa}
@@ -6,11 +6,12 @@
 #' e(-0.35 x (Tm - 10)). See issue #22 on github for additional information.
 #'
 #' @param Tm numeric, Average temperature in degrees Celsius for a hour of the day
-#' @param ref character, method for calculating latent period. Default is `"wolf"`
-#' also available `"jarroudi"`. See references for where formulas were used
+#' @param ref character, method for calculating latent period. Default is
+#'  \code{"wolf"} also available \code{"jarroudi"}. See references for where
+#'  formulas were used
 #'
-#' @return numeric, Latent period for a given hour. `ref = "jarroudi"` returns
-#'  latent period in days.
+#' @return numeric, Latent period for a given hour. \code{ref = "jarroudi"}
+#'  returns latent period in days.
 #' @references \insertRef{wolf_factors_2005}{cercospoRa}; equation 4
 #'
 #'  \insertRef{el_jarroudi_weather-based_2021}{cercospoRa}; equation 1

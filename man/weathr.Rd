@@ -5,7 +5,7 @@
 \alias{weathr}
 \title{Weather station data}
 \source{
-Facundo Ispizua
+Climavi One + Climavi Soil, Agvolution GmbH, Gottingen, Germany
 A data frame with 8,016 rows and 15 columns:
 Weather station that accompanied field trial described in cercospora
 manuscript
