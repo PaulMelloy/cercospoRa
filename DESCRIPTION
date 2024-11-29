@@ -61,5 +61,5 @@ Remotes:
 Depends: 
     R (>= 4.0.0)
 LazyData: true
-URL: https://paulmelloy.github.io/cercospoRa/
+URL: https://paulmelloy.github.io/cercospoRa/, https://github.com/PaulMelloy/cercospoRa
 BugReports: https://github.com/PaulMelloy/cercospoRa/issues
