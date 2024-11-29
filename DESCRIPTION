@@ -5,7 +5,7 @@ Authors@R: c(
     person(given = "Paul",
            family = "Melloy",
            role = c("aut", "cre", "trl","cph"),
-           email = "p.melloy@uq.edu.au",
+           email = "paul@melloy.com.au",
            comment = c(ORCID = "0000-0003-4253-7167",
                        "Translated equations from literature and developed package.")),
     person(given = "Rene",
