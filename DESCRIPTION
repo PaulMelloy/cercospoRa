@@ -34,7 +34,7 @@ Description: Estimates sugar beet canopy closure with remotely sensed leaf area
     index and estimates when action might be needed to protect the crop from a 
     Cercospora  leaf spot (_Cercospora beticola_) epidemic with a negative 
     prognosis model based on the work of Wolf and Verreet 
-    (2005 <https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269>).
+    (2005) https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
