@@ -56,8 +56,6 @@ Imports:
     minpack.lm
 RdMacros: Rdpack
 VignetteBuilder: knitr
-Remotes: 
-    PaulMelloy/epiphytoolR
 Depends: 
     R (>= 4.0.0)
 LazyData: true
