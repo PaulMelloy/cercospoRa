@@ -28,7 +28,7 @@ onset, if not specified, the last date in the weather data will be used.}
 "S" susceptible, "MR" moderately resistant ect.}
 }
 \value{
-\verb{$wolf_date:} If the input weather is conducive for epidemic, the function returns a
+If the input weather is conducive for epidemic, the function returns a
 POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
 proportion indicating the progress an epidemic is returned
 }

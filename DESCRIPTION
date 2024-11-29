@@ -1,5 +1,5 @@
 Package: cercospoRa
-Title: Process based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet
+Title: Process Based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet
 Version: 0.0.0.9003
 Authors@R: c(
     person(given = "Paul",
@@ -30,10 +30,10 @@ Authors@R: c(
            family = "Mahlein",
            role = c("ctb"),
            comment = c(ORCID = "0000-0003-1091-3690")))
-Description: This package provides functions to estimate sugar beet canopy 
-    closure with remotely sensed LAI and estimate when action might be needed to
-    protect the crop from a Cercospora leaf spot (_Cercospora beticola_) epidemic
-    with a negative prognosis model based on the work of Wolf and Verreet 
+Description: Estimates sugar beet canopy closure with remotely sensed leaf area
+    index and estimates when action might be needed to protect the crop from a 
+    Cercospora  leaf spot (_Cercospora beticola_) epidemic with a negative 
+    prognosis model based on the work of Wolf and Verreet 
     (2005 <https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269>).
 License: MIT + file LICENSE
 Encoding: UTF-8

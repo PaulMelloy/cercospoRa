@@ -5,7 +5,7 @@
 #' @name weathr
 #' @docType data
 #' @author Facundo Ispizua
-#' @source Facundo Ispizua
+#' @source Climavi One + Climavi Soil, Agvolution GmbH, Gottingen, Germany
 #' A data frame with 8,016 rows and 15 columns:
 #' Weather station that accompanied field trial described in cercospora
 #' manuscript

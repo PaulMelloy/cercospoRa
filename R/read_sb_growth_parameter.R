@@ -2,16 +2,17 @@
 #'
 #' @param img_files character vector providing the file paths of at least two
 #'  georeferenced images for the study location. Dates of image capture need to
-#'  be defined in `img_dates` respectively.
+#'  be defined in \code{img_dates} respectively.
 #' @param img_dates POSIXct vector of dates corresponding to the images supplied in
-#'  `img_files` respectively.
-#'  To prevent timezone issues use UTC timezone (tz = "UTC").
-#' @param target_res desired spatial resolution. `target_res` should be equal to
-#'  or larger than the actual resolution of the images expressed in meters.
+#'  \code{img_files} respectively.
+#'  To prevent timezone issues use UTC timezone \code{tz = "UTC"}.
+#' @param target_res desired spatial resolution. \code{target_res} should be
+#'  equal to or larger than the actual resolution of the images expressed in
+#'  meters.
 #'
-#' @return `SpatRast` with a layer for each input layer. Each layer contains is
-#'  named according to the `img_dates`. The output `SpatRast` is suitable for
-#'  input in `calc_r_x0()`
+#' @return \code{SpatRast} with a layer for each input layer. Each layer
+#'  contains is named according to the \code{img_dates}. The output
+#'  \code{SpatRast} is suitable for input in \code{calc_r_x0()}
 #'
 #' @export
 #'

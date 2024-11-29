@@ -7,18 +7,18 @@
 #'
 #' @param param_r Output of the function \link[cercospoRa]{read_sb_growth_parameter},
 #'  which produces a list containing the LAI images and the associated dates
-#' @param min_r minimum growth rate for sugar beet. Default `min_r` is fixed to
-#'  0.02 to ensure that the growth rate at the inflexion point of the sigmoid is
-#'  at least 1 unit of LAI per month.
-#' @param max_r maximum growth rate for sugar beet. Default `max_r` is fixed to
-#'  0.05 to ensure that the growth rate at the inflexion point of the sigmoid is
-#'  at most 2.5 units of LAI per month.
+#' @param min_r minimum growth rate for sugar beet. Default \code{min_r} is fixed
+#'  to 0.02 to ensure that the growth rate at the inflexion point of the sigmoid
+#'  is at least 1 unit of LAI per month.
+#' @param max_r maximum growth rate for sugar beet. Default \code{max_r} is fixed
+#'  to 0.05 to ensure that the growth rate at the inflexion point of the sigmoid
+#'  is at most 2.5 units of LAI per month.
 #' @param k carrying capacity, which is the maximum LAI that can be attained.
 #'  This value can be cultivar-dependent. The default is fixed to 6
 #'
-#' @return `param_rxt:` list containing parameters that are necessary to calculate
-#' `c_closure`. These parameters are `r`, the growth rate, `x0`, the initial LAI
-#'  value, and `t0`, the initial date.
+#' @return param_rxt: list containing parameters that are necessary to calculate
+#'  \code{c_closure}. These parameters are \code{r}, the growth rate, \code{x0},
+#'  the initial LAI value, and \code{t0}, the initial date.
 #'
 #' @export
 #'

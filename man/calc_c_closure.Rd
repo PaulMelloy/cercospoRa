@@ -9,8 +9,8 @@ calc_c_closure(param_rxt, x1 = 1.3, k = 6)
 \arguments{
 \item{param_rxt}{Output of the function \link{calc_r_x0}, which produces a
 list containing parameters that are necessary to calculate \code{c_closure}.
-These parameters are \code{r}, the growth rate, \code{x0}, the initial LAI value, and
-\code{t0}, the initial date and the associated dates}
+These parameters are \code{r}, the growth rate, \code{x0}, the initial LAI
+value, and \code{t0}, the initial date and the associated dates}
 
 \item{x1}{LAI value at which 90\% canopy closure is reached. It is fixed to
 1.3 for sugar beet.}
@@ -19,7 +19,8 @@ These parameters are \code{r}, the growth rate, \code{x0}, the initial LAI value
 This value can be cultivar-dependent. The default is fixed to 6}
 }
 \value{
-\code{c_closure} date at which 90\% canopy closure is reached at each location.
+\code{c_closure} date at which 90\% canopy closure is reached at each
+location.
 }
 \description{
 Calculate canopy closure date

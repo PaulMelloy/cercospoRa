@@ -9,7 +9,8 @@ calc_DIV(date_time, Tm, RH, rain, dat)
 \arguments{
 \item{date_time}{POSIX_ct, date time the weather recording was taken}
 
-\item{Tm}{numeric, temperature, in Celsius' at time increment in \code{date_time}}
+\item{Tm}{numeric, temperature, in Celsius' at time increment in
+\code{date_time}}
 
 \item{RH}{numeric, relative humidity (\%) at time increment in \code{date_time}}
 
@@ -21,8 +22,6 @@ each of the respective arguments for input. provided as a convenience}
 \value{
 data.table, with probability of infection for each day, between 0 and 1
 Undertaken with two methods by Wolf \insertCite{wolf_factors_2005}{cercospoRa}
-under the \code{DIV} column and method by Racca et al. \insertCite{racca_cercbet_2007}{cercospoRa}
-described in the \code{DIV_racca} column.
 }
 \description{
 This function calculates the daily infection values for \emph{Cercospora beticola}

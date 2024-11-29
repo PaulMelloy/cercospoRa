@@ -13,15 +13,16 @@ be defined in \code{img_dates} respectively.}
 
 \item{img_dates}{POSIXct vector of dates corresponding to the images supplied in
 \code{img_files} respectively.
-To prevent timezone issues use UTC timezone (tz = "UTC").}
+To prevent timezone issues use UTC timezone \code{tz = "UTC"}.}
 
-\item{target_res}{desired spatial resolution. \code{target_res} should be equal to
-or larger than the actual resolution of the images expressed in meters.}
+\item{target_res}{desired spatial resolution. \code{target_res} should be
+equal to or larger than the actual resolution of the images expressed in
+meters.}
 }
 \value{
-\code{SpatRast} with a layer for each input layer. Each layer contains is
-named according to the \code{img_dates}. The output \code{SpatRast} is suitable for
-input in \code{calc_r_x0()}
+\code{SpatRast} with a layer for each input layer. Each layer
+contains is named according to the \code{img_dates}. The output
+\code{SpatRast} is suitable for input in \code{calc_r_x0()}
 }
 \description{
 Read LAI images at several time points
