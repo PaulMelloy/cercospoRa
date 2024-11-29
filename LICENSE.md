@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c)(CC-BY-SA-4.0) 2023 cercospoRa authors
+Copyright (c)(CC-BY-SA-4.0) 2024 cercospoRa authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
