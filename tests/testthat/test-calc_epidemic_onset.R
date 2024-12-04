@@ -1,10 +1,6 @@
 # load the weather data to be formatted
 # import BOM data file
 set.seed(321)
-brisvegas <-
-  data.table::fread(
-    system.file("extdata", "wthr_complete.csv", package = "cercospoRa"))
-
 # Remove NAs
 brisvegas[is.na(wind_dir_deg), wind_dir_deg := 90]
 
