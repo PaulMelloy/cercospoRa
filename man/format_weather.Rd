@@ -147,17 +147,10 @@ created by specifying the file path to a \acronym{CSV} file using
 }
 \examples{
 # load the weather data to be formatted
-scaddan <-
-   system.file("extdata", "scaddan_weather.csv",package = "cercospoRa")
-naddacs <-
-   system.file("extdata", "naddacs_weather.csv",package = "cercospoRa")
-
-weather_file_list <- list(scaddan, naddacs)
 weather_station_data <-
-   lapply(X = weather_file_list, FUN = read.csv)
-
-weather_station_data <- do.call("rbind", weather_station_data)
-
+   read.csv(system.file("extdata",
+                        "scaddan_weather.csv",
+                        package = "cercospoRa"))
 weather_station_data$Local.Time <-
    as.POSIXct(weather_station_data$Local.Time, format = "\%Y-\%m-\%d \%H:\%M:\%S",
               tz = "UTC")
