@@ -2,41 +2,17 @@
 # import BOM data file
 set.seed(321)
 brisvegas <-
-  system.file("extdata", "bris_weather_obs.csv", package = "cercospoRa")
-bris <- data.table::fread(brisvegas)
-# Format times
-bris[,aifstime_utc := as.POSIXct(aifstime_utc,tz = "UTC")]
+  data.table::fread(
+    system.file("extdata", "wthr_complete.csv", package = "cercospoRa"))
 
-# fill time gaps
-bris <- epiphytoolR::fill_time_gaps(bris,"aifstime_utc")
-
-# replace dashes with zeros
-bris[rain_trace == "-", rain_trace := "0"]
-bris[, rain_trace := as.numeric(rain_trace)]
-# get rainfall for each time
-bris[, rain := rain_trace - data.table::shift(rain_trace,
-                                              type = "lead")][
-                                                rain < 0, rain := rain_trace ]
-
-# order the data by time
-bris <- bris[order(aifstime_utc)]
-
-#impute temperature
-bris[is.na(air_temp),
-     air_temp := epiphytoolR::impute_diurnal(
-       aifstime_utc,
-       min_obs = 10,
-       max_obs = 28,
-       max_hour = 14,
-       min_hour = 5
-     )]
-bris[is.na(rain), rain := 0]
+# Remove NAs
+brisvegas[is.na(wind_dir_deg), wind_dir_deg := 90]
 
 test_that("Relative humidity formats",{
 
   bris_formated <-
     format_weather(
-      w = bris,
+      w = brisvegas,
       POSIXct_time = "aifstime_utc",
       time_zone = "UTC",
       temp = "air_temp",
@@ -47,8 +23,7 @@ test_that("Relative humidity formats",{
       station = "name",
       lon = "lon",
       lat = "lat",
-      data_check = c("temp","rain"),
-      print_warnings = FALSE,
+      data_check = c("temp","rain")
    )
 
    # fill NAs with the same relative humidity as the previous day
@@ -60,7 +35,7 @@ test_that("Relative humidity formats",{
 
 test_that("epidemic onset produces expected outcome", {
   bris_formated <- format_weather(
-    w = bris,
+    w = brisvegas,
     POSIXct_time = "aifstime_utc",
     time_zone = "UTC",
     temp = "air_temp",
@@ -71,8 +46,7 @@ test_that("epidemic onset produces expected outcome", {
     station = "name",
     lon = "lon",
     lat = "lat",
-    data_check = c("temp","rain"),
-    print_warnings = FALSE,
+    data_check = c("temp","rain")
   )
   bris_formated[,rh := fifelse(is.na(rh),shift(rh,n=24,type = "lag"),
                                rh)]
