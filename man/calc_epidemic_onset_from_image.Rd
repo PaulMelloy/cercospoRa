@@ -22,7 +22,7 @@ onset, if not specified, the last date in the weather data will be used.}
 \item{c_closure}{map of canopy closure dates formatted as number of days since
 1970-01-01. It defines the date to start running the model (Wolf)}
 
-\item{weather}{data.table, formatted with \code{epiphytoolR::format_weather}}
+\item{weather}{data.table, formatted with \code{\link{format_weather}}}
 
 \item{cultivar_sus}{character, susceptibility of the cultivar in "R" resistant,
 "S" susceptible, "MR" moderately resistant ect.}
@@ -38,7 +38,7 @@ Calculate epidemic onset from image
 \examples{
 wethr <- read.csv(system.file("extdata", "clean_weather.csv",
                   package = "cercospoRa"))
-wethr <- epiphytoolR::format_weather(wethr,time_zone = "UTC")
+wethr <- format_weather(wethr,time_zone = "UTC")
 
 img_dir <- system.file("extdata", "uav_img",package = "cercospoRa")
 

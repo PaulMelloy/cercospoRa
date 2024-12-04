@@ -16,7 +16,7 @@ onset, if not specified, the last date in the weather data will be used.}
 \item{c_closure}{POSIXct formatted date to start the model running the model
 This is usually at canopy closure (Wolf)}
 
-\item{weather}{data.table, formatted with \code{epiphytoolR::format_weather}}
+\item{weather}{data.table, formatted with \code{\link{format_weather}}}
 
 \item{cultivar_sus}{character, susceptibility of the cultivar in "R" resistant,
 "S" susceptible, "MR" moderately resistant ect.}
@@ -32,7 +32,7 @@ Calculate epidemic onset
 \examples{
 wethr <- read.csv(system.file("extdata", "clean_weather.csv",
                   package = "cercospoRa"))
-wethr <- epiphytoolR::format_weather(wethr,time_zone = "UTC")
+wethr <- format_weather(wethr,time_zone = "UTC")
 
 calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
                     end = as.POSIXct("2022-09-30",tz = "UTC"),

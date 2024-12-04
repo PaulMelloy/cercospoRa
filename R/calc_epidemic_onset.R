@@ -6,7 +6,7 @@
 #'  onset, if not specified, the last date in the weather data will be used.
 #' @param c_closure POSIXct formatted date to start the model running the model
 #'  This is usually at canopy closure (Wolf)
-#' @param weather data.table, formatted with `epiphytoolR::format_weather`
+#' @param weather data.table, formatted with \code{\link{format_weather}}
 #' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
 #'  "S" susceptible, "MR" moderately resistant ect.
 #'
@@ -18,7 +18,7 @@
 #' @examples
 #' wethr <- read.csv(system.file("extdata", "clean_weather.csv",
 #'                   package = "cercospoRa"))
-#' wethr <- epiphytoolR::format_weather(wethr,time_zone = "UTC")
+#' wethr <- format_weather(wethr,time_zone = "UTC")
 #'
 #' calc_epidemic_onset(start = as.POSIXct("2022-04-25",tz = "UTC"),
 #'                     end = as.POSIXct("2022-09-30",tz = "UTC"),
@@ -31,7 +31,7 @@ calc_epidemic_onset <- function(start,
                                 cultivar_sus = 5){
   rh <- times <- DIV <- Year <- Month <- Day <- DIV_racca <- NULL
   if(inherits(weather,"epiphy.weather") == FALSE){
-    stop("'weather' has not been formatted with 'epiphytoolR::format_weather().")
+    stop("'weather' has not been formatted with 'format_weather().")
   }
   if(missing(start)) start <- as.Date(weather$times[1])
   if(missing(end)) end <- as.Date(last(weather$times))
