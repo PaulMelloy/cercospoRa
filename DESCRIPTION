@@ -43,13 +43,13 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    lubridate,
     remotes,
     stats
 Config/testthat/edition: 3
 Imports: 
     data.table,
     Rdpack,
+    lubridate,
     sf,
     terra,
     minpack.lm,
