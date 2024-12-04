@@ -5,15 +5,6 @@ test_that("temperature_index() examples works", {
   expect_equal(temperature_index(-28),0, tolerance = 0.000001)
 })
 
-# # plot temperature index function
-# plot(temperature_index(0:40),type = "l",
-#      xlab = "Temperature C")
-#
-# plot(latent_period(0:40),type = "l",
-#      xlab = "Temperature C")
-
-
-
 test_that("latent_period() examples work", {
   expect_equal(latent_period(25), 7.136435, tolerance = 0.000001)
   expect_equal(latent_period(0), 868.002, tolerance = 0.000001)
@@ -58,8 +49,8 @@ test_that("moisture_index(method =2) examples work", {
   expect_equal(moisture_index(55,rh_thresh = 50, method = 2), 0.00540259, tolerance = 0.00001)
 })
 
-# see issue #22
-plot(latent_period(9:35), x = 9:35,
-     xlab = "Temperature C",
-     ylab = "days",
-     pch = 16)
+# # see issue #22
+# plot(latent_period(9:35), x = 9:35,
+#      xlab = "Temperature C",
+#      ylab = "days",
+#      pch = 16)
