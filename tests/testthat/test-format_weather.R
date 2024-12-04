@@ -698,9 +698,10 @@ test_that("lat and lon are correctly parsed from file to dataset", {
 test_that("preformated weather read back in can be reformatted",{
    # since R 4.3 write.csv saves midnight date-times as date without 00:00:00
    # therefore we need data.tables fwrite function
-   write.csv(test10, file = paste(tempdir(), "weather_saved.csv", sep = "\\"),
+   tmp_fname <- paste(tempdir(), "weather_saved.csv", sep = "\\")
+   write.csv(test10, file = tmp_fname,
              row.names = FALSE)
-   weather2 <- read.csv(paste(tempdir(), "weather_saved.csv", sep = "\\"),
+   weather2 <- read.csv(tmp_fname,
                         stringsAsFactors = FALSE)
 
    expect_warning(test11 <- format_weather(weather2, time_zone = "UTC",
@@ -718,6 +719,7 @@ test_that("preformated weather read back in can be reformatted",{
    expect_warning(format_weather(weather2, time_zone = "Australia/Sydney",
                                  data_check = c("temp","rain","ws","wd")),
                      regexp = "All temperature values are 'NA' or missing*")
+   unlink(tmp_fname)
 })
 
 
