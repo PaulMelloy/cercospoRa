@@ -11,3 +11,4 @@
 .Rprofile
 ^cran-comments\.md$
 codemeta.json
+^codemeta\.json$
