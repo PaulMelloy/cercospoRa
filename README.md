@@ -22,12 +22,7 @@ Establishment of Disease-Monitoring Thresholds" _Phytopathology_
 
 ## Installation  
 
-This package imports [`epiphytoolR`](https://github.com/PaulMelloy/epiphytoolR). 
-To install this package run the following code in `R`.  
-```
-remotes::install_github(repo = "PaulMelloy/epiphytoolR")
-```
-Next install the package  
+Install the package from this github repository  
 
 ```
 remotes::install_github(repo = "PaulMelloy/cercospoRa")
@@ -39,7 +34,6 @@ remotes::install_github(repo = "PaulMelloy/cercospoRa")
 ### Format weather data  
 ```r
 library(data.table)
-library(epiphytoolR)
 library(cercospoRa)
 
 # Inspect raw weather station data
@@ -75,24 +69,24 @@ wthr[is.na(WG200),WG200 := 0]
 # set NA wind direction values to 20 degrees. Wind is not important for this model
 wthr[is.na(WR200),WR200 := 20]
 
-# format_weather() is a function from epiphytoolR that formats weather data to 
+# format_weather() formats weather data to 
 #  hourly and checks for missing data or any issues that may cause downstream faults
 #  in the model.
 wthr <- 
-  epiphytoolR::format_weather(wthr,
-                              POSIXct_time = "Time",
-                              time_zone = "UTC",
-                              temp = "T200",
-                              rain = "N100",
-                              rh = "F200",
-                              wd = "WR200",
-                              ws = "WG200",
-                              station = "Station",
-                              lon = "lon",
-                              lat = "lat",
-                              wd_sd = "wd_std",
-                              data_check = FALSE # this stops the function from checking for faults
-                         )
+  format_weather(wthr,
+                      POSIXct_time = "Time",
+                      time_zone = "UTC",
+                      temp = "T200",
+                      rain = "N100",
+                      rh = "F200",
+                      wd = "WR200",
+                      ws = "WG200",
+                      station = "Station",
+                      lon = "lon",
+                      lat = "lat",
+                      wd_sd = "wd_std",
+                      data_check = FALSE # this stops the function from checking for faults
+                      )
 ```
 <br>  
 

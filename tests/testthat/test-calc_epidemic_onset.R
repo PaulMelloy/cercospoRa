@@ -2,7 +2,7 @@
 # import BOM data file
 set.seed(321)
 brisvegas <-
-  system.file("extdata", "bris_weather_obs.csv", package = "epiphytoolR")
+  system.file("extdata", "bris_weather_obs.csv", package = "cercospoRa")
 bris <- data.table::fread(brisvegas)
 # Format times
 bris[,aifstime_utc := as.POSIXct(aifstime_utc,tz = "UTC")]
@@ -34,7 +34,8 @@ bris[is.na(rain), rain := 0]
 
 test_that("Relative humidity formats",{
 
-  bris_formated <- epiphytoolR::format_weather(
+  bris_formated <-
+    format_weather(
       w = bris,
       POSIXct_time = "aifstime_utc",
       time_zone = "UTC",
@@ -58,7 +59,7 @@ test_that("Relative humidity formats",{
 })
 
 test_that("epidemic onset produces expected outcome", {
-  bris_formated <- epiphytoolR::format_weather(
+  bris_formated <- format_weather(
     w = bris,
     POSIXct_time = "aifstime_utc",
     time_zone = "UTC",
@@ -107,7 +108,7 @@ test_that("different start dates provide different epidemic dates",{
   w_dat[is.na(WG200),WG200 := 0]
 
 
-  w_dat <- epiphytoolR::format_weather(w_dat,
+  w_dat <- format_weather(w_dat,
                          POSIXct_time = "Time",
                          time_zone = "UTC",
                          temp = "T200",

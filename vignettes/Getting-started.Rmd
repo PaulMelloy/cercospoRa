@@ -25,20 +25,6 @@ The `cercospoRa` package estimates the daily infection values which tracks the
 progress towards a *Cercospora beticola* epidemic on sugar beet.
 The package requires formatted hourly weather data in a format which the model 
 recognises.
-The R package `epiphytoolR` contains functions which automatically checks the weather
-data and returns it in the required hourly format.  
-
-We will need to install `epiphytoolR`  
-
-```{r}
-# install epiphytoolR package if it is not installed
-if("epiphytoolR" %in% installed.packages()[,1] == FALSE){
-  remotes::install_github("PaulMelloy/epiphytoolR", dependencies = TRUE)
-}
-library(epiphytoolR)
-```
-
-
 
 ### Format weather station data  
 
@@ -78,7 +64,7 @@ wthr[is.na(WG200), WG200 := 0]
 wthr[is.na(WR200),WR200 := 20]
 ```
 
-Now we can use the `epiphytoolR::format_weather()` function.  
+Now we can use the `format_weather()` function.  
 
 ```{r format_wdata}
 wthr <- format_weather(wthr,
