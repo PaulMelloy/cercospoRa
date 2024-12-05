@@ -1,3 +1,5 @@
+# cercospoRa 1.0.0
+
 # cercospoRa (development version)  
 ## minor improvements
   - moved format_weather fundtion into `cercospoRa` package to avoid `epiphytoolR`
