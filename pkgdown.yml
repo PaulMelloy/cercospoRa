@@ -2,9 +2,8 @@ pandoc: 3.1.11
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  Additional_usability: Additional_usability.html
   Getting-started: Getting-started.html
-last_built: 2024-11-19T00:24Z
+last_built: 2024-12-05T02:44Z
 urls:
-  reference: https://paulmelloy.github.io/cercospoRa/reference
-  article: https://paulmelloy.github.io/cercospoRa/articles
+  reference: http://paul.melloy.com.au/cercospoRa/reference
+  article: http://paul.melloy.com.au/cercospoRa/articles

@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Getting-started • cercospoRa</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -16,11 +22,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">cercospoRa</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,8 +39,7 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/Additional_usability.html">Additional_usability</a></li>
-    <li><a class="dropdown-item" href="../articles/Getting-started.html">Getting-started</a></li>
+<li><a class="dropdown-item" href="../articles/Getting-started.html">Getting-started</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -69,21 +74,12 @@
 <h2 id="setup-and-requirements">Setup and Requirements<a class="anchor" aria-label="anchor" href="#setup-and-requirements"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulmelloy.github.io/cercospoRa/">cercospoRa</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paul.melloy.com.au/cercospoRa/" class="external-link">cercospoRa</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span></code></pre></div>
 <p>The <code>cercospoRa</code> package estimates the daily infection
 values which tracks the progress towards a <em>Cercospora beticola</em>
 epidemic on sugar beet. The package requires formatted hourly weather
-data in a format which the model recognises. The R package
-<code>epiphytoolR</code> contains functions which automatically checks
-the weather data and returns it in the required hourly format.</p>
-<p>We will need to install <code>epiphytoolR</code></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install epiphytoolR package if it is not installed</span></span>
-<span><span class="kw">if</span><span class="op">(</span><span class="st">"epiphytoolR"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">installed.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"PaulMelloy/epiphytoolR"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulmelloy.github.io/epiphytoolR/" class="external-link">epiphytoolR</a></span><span class="op">)</span></span></code></pre></div>
+data in a format which the model recognises.</p>
 <div class="section level3">
 <h3 id="format-weather-station-data">Format weather station data<a class="anchor" aria-label="anchor" href="#format-weather-station-data"></a>
 </h3>
@@ -94,7 +90,7 @@ use without returning errors due to inconsistencies and
 <code>NAs</code>, which are common in weather data. This will require
 the user to think about how to replace the <code>NAs</code> or state
 default values to complete the data set.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># classify to data.table</span></span>
 <span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="va">weathr</span><span class="op">)</span></span>
 <span></span>
@@ -123,10 +119,9 @@ default values to complete the data set.</p>
 <span><span class="co">#&gt; Warning in `[.data.table`(wthr, is.na(WR200), `:=`(WR200, 20)): 20.000000 (type</span></span>
 <span><span class="co">#&gt; 'double') at RHS position 1 taken as TRUE when assigning to type 'logical'</span></span>
 <span><span class="co">#&gt; (column 10 named 'WR200')</span></span></code></pre></div>
-<p>Now we can use the <code><a href="https://paulmelloy.github.io/epiphytoolR/reference/format_weather.html" class="external-link">epiphytoolR::format_weather()</a></code>
-function.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulmelloy.github.io/epiphytoolR/reference/format_weather.html" class="external-link">format_weather</a></span><span class="op">(</span><span class="va">wthr</span>,</span>
+<p>Now we can use the <code><a href="../reference/format_weather.html">format_weather()</a></code> function.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_weather.html">format_weather</a></span><span class="op">(</span><span class="va">wthr</span>,</span>
 <span>                         POSIXct_time <span class="op">=</span> <span class="st">"Time"</span>,</span>
 <span>                         time_zone <span class="op">=</span> <span class="st">"UTC"</span>,</span>
 <span>                         temp <span class="op">=</span> <span class="st">"T200"</span>,</span>
@@ -155,7 +150,7 @@ start point for the model. This is due to an observation by Wolf canopy
 closure pr</p>
 <p>This date is determined by the negative prognosis models to be the
 last day for which a epidemic is likely not to start.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">cercospoRa</span><span class="fu">::</span><span class="fu"><a href="../reference/calc_epidemic_onset.html">calc_epidemic_onset</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-04-25"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
 <span>                    end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-09-30"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
 <span>                    c_closure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-07-01"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
@@ -169,7 +164,7 @@ last day for which a epidemic is likely not to start.</p>
 methods permits canopy closure date estimation from remotely sensed
 data. UAV or satellite data can be used to produce georeferenced leaf
 area index (LAI) rasters.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get file location of example rasters with LAI values</span></span>
 <span><span class="va">image_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"uav_img"</span>,package <span class="op">=</span> <span class="st">"cercospoRa"</span><span class="op">)</span>,</span>
 <span>                          pattern <span class="op">=</span> <span class="st">"tif"</span>,</span>
@@ -193,21 +188,21 @@ area index (LAI) rasters.</p>
 <span><span class="co">#&gt; min values  :  0.5216454,  0.8607956 </span></span>
 <span><span class="co">#&gt; max values  :  2.9568495,  3.3260000</span></span></code></pre></div>
 <p>The next function calculates the sugar beet growth rate.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">param_rxt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calc_r_x0.html">calc_r_x0</a></span><span class="op">(</span><span class="va">epidemic_onset_param</span>,</span>
 <span>                      min_r <span class="op">=</span> <span class="fl">0.02</span>,</span>
 <span>                      max_r <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>                      k <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
 <p>Calculate canopy closure uses a logistic regression to estimate the
 canopy closure date for each raster cell.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">canopy_closure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calc_c_closure.html">calc_c_closure</a></span><span class="op">(</span><span class="va">param_rxt</span>,</span>
 <span>                                 x1 <span class="op">=</span> <span class="fl">1.3</span>,</span>
 <span>                                 k<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span></code></pre></div>
 <p>Finally we can use a specialised wrapper function to calculate the
 earliest possible onset of a cercospora leaf spot epidemic when chemical
 intervention might be needed.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epidemic_onset_map</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/calc_epidemic_onset_from_image.html">calc_epidemic_onset_from_image</a></span><span class="op">(</span>start <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-04-25"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
 <span>                                 end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-09-30"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
@@ -224,11 +219,11 @@ intervention might be needed.</p>
 <span><span class="co">#&gt; min value   : 1653350400 </span></span>
 <span><span class="co">#&gt; max value   : 1659312000</span></span></code></pre></div>
 <p>plot the heterogeneity of onset date</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">epidemic_onset_map</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Getting-started_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<p><img src="Getting-started_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>Convert numeric date back to POSIXct format</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">epidemic_onset_map</span><span class="op">)</span><span class="op">[</span><span class="fl">120</span><span class="op">:</span><span class="fl">130</span><span class="op">]</span>,</span>
 <span>           tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
 <span>           origin <span class="op">=</span> <span class="st">"1970-01-01"</span><span class="op">)</span></span>

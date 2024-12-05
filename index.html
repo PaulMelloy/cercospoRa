@@ -5,25 +5,31 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Process based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet • cercospoRa</title>
+<title>Process Based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet • cercospoRa</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Process based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet">
-<meta name="description" content="This package provides functions to estimate sugar beet canopy closure with remotely sensed LAI and estimate when action might be needed to protect the crop from a Cercospora leaf spot (_Cercospora beticola_) epidemic with a negative prognosis model based on the work of Wolf and Verreet (2005 &lt;https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269&gt;).">
-<meta property="og:description" content="This package provides functions to estimate sugar beet canopy closure with remotely sensed LAI and estimate when action might be needed to protect the crop from a Cercospora leaf spot (_Cercospora beticola_) epidemic with a negative prognosis model based on the work of Wolf and Verreet (2005 &lt;https://apsjournals.apsnet.org/doi/abs/10.1094/PHYTO-95-0269&gt;).">
-<meta property="og:image" content="https://paulmelloy.github.io/cercospoRa/logo.png">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Process Based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet">
+<meta name="description" content="Estimates sugar beet canopy closure with remotely sensed leaf area index and estimates when action might be needed to protect the crop from a Cercospora leaf spot (_Cercospora beticola_) epidemic with a negative prognosis model based on the work of Wolf and Verreet (2005) Phytopathology, 95, no.3, 269-74.">
+<meta property="og:description" content="Estimates sugar beet canopy closure with remotely sensed leaf area index and estimates when action might be needed to protect the crop from a Cercospora leaf spot (_Cercospora beticola_) epidemic with a negative prognosis model based on the work of Wolf and Verreet (2005) Phytopathology, 95, no.3, 269-74.">
+<meta property="og:image" content="http://paul.melloy.com.au/cercospoRa/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="index.html">cercospoRa</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,8 +42,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/Additional_usability.html">Additional_usability</a></li>
-    <li><a class="dropdown-item" href="articles/Getting-started.html">Getting-started</a></li>
+<li><a class="dropdown-item" href="articles/Getting-started.html">Getting-started</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -67,9 +72,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>This package imports <a href="https://github.com/PaulMelloy/epiphytoolR" class="external-link"><code>epiphytoolR</code></a>. To install this package run the following code in <code>R</code>.</p>
-<pre><code><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"PaulMelloy/epiphytoolR"</span><span class="op">)</span></span></code></pre>
-<p>Next install the package</p>
+<p>Install the package from this github repository</p>
 <pre><code><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"PaulMelloy/cercospoRa"</span><span class="op">)</span></span></code></pre>
 <p><br></p>
 </div>
@@ -79,15 +82,14 @@
 <div class="section level3">
 <h3 id="format-weather-data">Format weather data<a class="anchor" aria-label="anchor" href="#format-weather-data"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulmelloy.github.io/epiphytoolR/" class="external-link">epiphytoolR</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulmelloy.github.io/cercospoRa/">cercospoRa</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paul.melloy.com.au/cercospoRa/" class="external-link">cercospoRa</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Inspect raw weather station data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">cercospoRa</span><span class="fu">::</span><span class="va"><a href="reference/weathr.html">weathr</a></span><span class="op">)</span></span></code></pre></div>
 <p><code>weathr</code> is a <code>data.table</code> containing weather data recorded at a sugar beet field trial observing the spread and severity of <em>C. beticola</em>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make a copy of the data</span></span>
 <span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="va">weathr</span><span class="op">)</span></span>
 <span></span>
@@ -113,30 +115,30 @@
 <span><span class="co"># set NA wind direction values to 20 degrees. Wind is not important for this model</span></span>
 <span><span class="va">wthr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">WR200</span><span class="op">)</span>,<span class="va">WR200</span> <span class="op">:=</span> <span class="fl">20</span><span class="op">]</span></span>
 <span></span>
-<span><span class="co"># format_weather() is a function from epiphytoolR that formats weather data to </span></span>
+<span><span class="co"># format_weather() formats weather data to </span></span>
 <span><span class="co">#  hourly and checks for missing data or any issues that may cause downstream faults</span></span>
 <span><span class="co">#  in the model.</span></span>
 <span><span class="va">wthr</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu">epiphytoolR</span><span class="fu">::</span><span class="fu"><a href="https://paulmelloy.github.io/epiphytoolR/reference/format_weather.html" class="external-link">format_weather</a></span><span class="op">(</span><span class="va">wthr</span>,</span>
-<span>                              POSIXct_time <span class="op">=</span> <span class="st">"Time"</span>,</span>
-<span>                              time_zone <span class="op">=</span> <span class="st">"UTC"</span>,</span>
-<span>                              temp <span class="op">=</span> <span class="st">"T200"</span>,</span>
-<span>                              rain <span class="op">=</span> <span class="st">"N100"</span>,</span>
-<span>                              rh <span class="op">=</span> <span class="st">"F200"</span>,</span>
-<span>                              wd <span class="op">=</span> <span class="st">"WR200"</span>,</span>
-<span>                              ws <span class="op">=</span> <span class="st">"WG200"</span>,</span>
-<span>                              station <span class="op">=</span> <span class="st">"Station"</span>,</span>
-<span>                              lon <span class="op">=</span> <span class="st">"lon"</span>,</span>
-<span>                              lat <span class="op">=</span> <span class="st">"lat"</span>,</span>
-<span>                              wd_sd <span class="op">=</span> <span class="st">"wd_std"</span>,</span>
-<span>                              data_check <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># this stops the function from checking for faults</span></span>
-<span>                         <span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="reference/format_weather.html">format_weather</a></span><span class="op">(</span><span class="va">wthr</span>,</span>
+<span>                      POSIXct_time <span class="op">=</span> <span class="st">"Time"</span>,</span>
+<span>                      time_zone <span class="op">=</span> <span class="st">"UTC"</span>,</span>
+<span>                      temp <span class="op">=</span> <span class="st">"T200"</span>,</span>
+<span>                      rain <span class="op">=</span> <span class="st">"N100"</span>,</span>
+<span>                      rh <span class="op">=</span> <span class="st">"F200"</span>,</span>
+<span>                      wd <span class="op">=</span> <span class="st">"WR200"</span>,</span>
+<span>                      ws <span class="op">=</span> <span class="st">"WG200"</span>,</span>
+<span>                      station <span class="op">=</span> <span class="st">"Station"</span>,</span>
+<span>                      lon <span class="op">=</span> <span class="st">"lon"</span>,</span>
+<span>                      lat <span class="op">=</span> <span class="st">"lat"</span>,</span>
+<span>                      wd_sd <span class="op">=</span> <span class="st">"wd_std"</span>,</span>
+<span>                      data_check <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># this stops the function from checking for faults</span></span>
+<span>                      <span class="op">)</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level3">
 <h3 id="calculate-the-proportional-progress-towards-an-epidemic">Calculate the proportional progress towards an epidemic<a class="anchor" aria-label="anchor" href="#calculate-the-proportional-progress-towards-an-epidemic"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># susceptible cultivar</span></span>
 <span><span class="fu"><a href="reference/calc_epidemic_onset.html">calc_epidemic_onset</a></span><span class="op">(</span>c_closure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-07-01"</span><span class="op">)</span>,</span>
 <span>                    weather <span class="op">=</span> <span class="va">wthr</span>,</span>
@@ -153,7 +155,7 @@
 <div class="section level3">
 <h3 id="calculate-daily-infection-values">Calculate daily infection values<a class="anchor" aria-label="anchor" href="#calculate-daily-infection-values"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/calc_DIV.html">calc_DIV</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">wthr</span><span class="op">)</span></span></code></pre></div>
 <p>This produces a <code>data.table</code> detailing the daily infection value for each day using the method described in Wolf and Verreet (2005).</p>
 <p><strong>Note:</strong> Missing humidity values do not prevent the model from running and these days are assumed to not progress the model. The Racca and Jörg model returns <code>NA</code> values and the Wolf model returns <code>0</code>.</p>
@@ -210,7 +212,7 @@ The <code>plus_racca</code> (development) branch also includes functions to recr
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://paulmelloy.github.io/cercospoRa/"><img src="reference/figures/logo.png" align="right" height="138" alt="cercospoRa website"></a></li>
+<li><a href="https://paul.melloy.com.au/cercospoRa/" class="external-link"><img src="reference/figures/logo.png" align="right" height="138" alt="cercospoRa website"></a></li>
 <li><a href="https://www.repostatus.org/#active" class="external-link"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="repo status"></a></li>
 </ul>
 </div>
