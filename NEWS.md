@@ -1,6 +1,6 @@
 # cercospoRa 0.0.1
 
-# cercospoRa (development version)  
+ 
 ## minor improvements
   - moved format_weather fundtion into `cercospoRa` package to avoid `epiphytoolR`
   suggests problems with CRAN.  
