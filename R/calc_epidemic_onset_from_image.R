@@ -8,7 +8,7 @@
 #' 1970-01-01. It defines the date to start running the model (Wolf)
 #' @param weather data.table, formatted with \code{\link{format_weather}}
 #' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
-#'  "S" susceptible, "MR" moderately resistant ect.
+#'  "S" susceptible, "MR" moderately resistant etc.
 #' @return If the input weather is conducive for epidemic, the function returns a
 #'  POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
 #'  proportion indicating the progress an epidemic is returned
