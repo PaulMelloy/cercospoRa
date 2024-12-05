@@ -1,9 +1,10 @@
 # cercospoRa (development version)  
 ## minor improvements
   - moved format_weather fundtion into `cercospoRa` package to avoid `epiphytoolR`
-  suggests problems with CRAN.
+  suggests problems with CRAN.  
   - Moved some _./ext_ data to internal data for testing only to reduce package 
-  size.
+  size.  
+  - weathr data attribution updated  
 
 # cercospoRa 0.0.0.9003
 ## New Features and minor improvements

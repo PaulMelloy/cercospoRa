@@ -14,10 +14,14 @@ manuscript
 \item{Datum}{Date}
 \item{Stunde}{hour}
 \item{Minute}{minute}
-\item{T-005}{Temperature at 5cm}
-\item{T-200}{Temperature at 200cm}
-\item{T-020}{Temperature at 20cm}
-\item{F-200}{Relative humidity at 200cm}
+\item{T-005}{Temperature in degrees celcius at 5cm}
+\item{T-200}{Temperature in degrees celcius at 200cm}
+\item{T-020}{Temperature in degrees celcius at 20cm}
+\item{F-200}{Percentage Relative humidity at 200cm}
+\item{GS200}{Global radiation (W/m2) at 200cm}
+\item{WR200}{Wind direction degrees at 200cm}
+\item{N100}{Precipitation (mm) at 100cm}
+\item{WG200}{Wind Speed (m/s) at 200cm}
 ...
 }
 }
@@ -25,5 +29,5 @@ manuscript
 A unformatted weather station dataset from Germany
 }
 \author{
-Facundo Ispizua
+Institute for Sugar Beet Research - IFZ
 }

@@ -4,8 +4,7 @@
 #'
 #' @name weathr
 #' @docType data
-#' @author Interdisciplinary Research Centre for Technology, Work and Culture
-#'  (IFZ)
+#' @author Institute for Sugar Beet Research - IFZ
 #' @source Climavi One + Climavi Soil, Agvolution GmbH, Gottingen, Germany
 #' A data frame with 8,016 rows and 15 columns:
 #' Weather station that accompanied field trial described in cercospora
@@ -15,14 +14,14 @@
 #'   \item{Datum}{Date}
 #'   \item{Stunde}{hour}
 #'   \item{Minute}{minute}
-#'   \item{T-005}{Temperature at 5cm}
-#'   \item{T-200}{Temperature at 200cm}
-#'   \item{T-020}{Temperature at 20cm}
-#'   \item{F-200}{Relative humidity at 200cm}
-#'   \item{GS200}{Global radiation at 200cm}
-#'   \item{WR200}{Wind direction at 200cm}
-#'   \item{N100}{Precipitation at 100cm}
-#'   \item{WG200}{Wind Speed at 200cm}
+#'   \item{T-005}{Temperature in degrees celcius at 5cm}
+#'   \item{T-200}{Temperature in degrees celcius at 200cm}
+#'   \item{T-020}{Temperature in degrees celcius at 20cm}
+#'   \item{F-200}{Percentage Relative humidity at 200cm}
+#'   \item{GS200}{Global radiation (W/m2) at 200cm}
+#'   \item{WR200}{Wind direction degrees at 200cm}
+#'   \item{N100}{Precipitation (mm) at 100cm}
+#'   \item{WG200}{Wind Speed (m/s) at 200cm}
 #'   ...
 #' }
 NULL
