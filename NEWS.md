@@ -1,4 +1,4 @@
-# cercospoRa 1.0.0
+# cercospoRa 0.0.1
 
 # cercospoRa (development version)  
 ## minor improvements
