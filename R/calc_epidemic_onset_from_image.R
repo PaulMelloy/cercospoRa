@@ -36,13 +36,14 @@
 #' c_closure <- calc_c_closure(param_rxt,
 #'                             x1 = 1.3,
 #'                             k=6 )
-#'
+#'\donttest{ # this takes about 20 sec to run
 #' epidemic_onset_map <- calc_epidemic_onset_from_image(start = as.POSIXct("2022-04-25",tz = "UTC"),
 #'                                                      end = as.POSIXct("2022-09-30",tz = "UTC"),
 #'                                                      c_closure = c_closure,
 #'                                                      weather = wethr)
 #'
 #' terra::plot(epidemic_onset_map)
+#' }
 calc_epidemic_onset_from_image <- function(start,
                                            end,
                                            c_closure,
