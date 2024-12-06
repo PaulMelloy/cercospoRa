@@ -16,7 +16,7 @@ Authors@R: c(
                        "Code review and development of leaf area index model")),
     person(given = "Nathan",
            family = "Okole",
-           role = c("ctb","cph"),
+           role = c("aut","ctb","cph"),
            email = "okole@ifz-goettingen.de",
            comment = c(ORCID = "0000-0002-5375-2420",
                        "Code review and development of leaf area index model")),
