@@ -8,7 +8,7 @@
 #'  This is usually at canopy closure (Wolf)
 #' @param weather data.table, formatted with \code{\link{format_weather}}
 #' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
-#'  "S" susceptible, "MR" moderately resistant ect.
+#'  "S" susceptible, "MR" moderately resistant etc.
 #'
 #' @return If the input weather is conducive for epidemic, the
 #'  function returns a POSIX_ct date when epidemic commences. If no epidemic

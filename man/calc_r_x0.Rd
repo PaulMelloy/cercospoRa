@@ -11,11 +11,11 @@ calc_r_x0(param_r, min_r = 0.02, max_r = 0.05, k = 6)
 which produces a list containing the LAI images and the associated dates}
 
 \item{min_r}{minimum growth rate for sugar beet. Default \code{min_r} is fixed
-to 0.02 to ensure that the growth rate at the inflexion point of the sigmoid
+to 0.02 to ensure that the growth rate at the inflection point of the sigmoid
 is at least 1 unit of LAI per month.}
 
 \item{max_r}{maximum growth rate for sugar beet. Default \code{max_r} is fixed
-to 0.05 to ensure that the growth rate at the inflexion point of the sigmoid
+to 0.05 to ensure that the growth rate at the inflection point of the sigmoid
 is at most 2.5 units of LAI per month.}
 
 \item{k}{carrying capacity, which is the maximum LAI that can be attained.

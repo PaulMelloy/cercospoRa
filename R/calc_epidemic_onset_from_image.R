@@ -8,7 +8,7 @@
 #' 1970-01-01. It defines the date to start running the model (Wolf)
 #' @param weather data.table, formatted with \code{\link{format_weather}}
 #' @param cultivar_sus character, susceptibility of the cultivar in "R" resistant,
-#'  "S" susceptible, "MR" moderately resistant ect.
+#'  "S" susceptible, "MR" moderately resistant etc.
 #' @return If the input weather is conducive for epidemic, the function returns a
 #'  POSIX_ct date when epidemic commences. If no epidemic occurs, a numeric,
 #'  proportion indicating the progress an epidemic is returned
@@ -36,13 +36,14 @@
 #' c_closure <- calc_c_closure(param_rxt,
 #'                             x1 = 1.3,
 #'                             k=6 )
-#'
+#'\donttest{ # this takes about 20 sec to run
 #' epidemic_onset_map <- calc_epidemic_onset_from_image(start = as.POSIXct("2022-04-25",tz = "UTC"),
 #'                                                      end = as.POSIXct("2022-09-30",tz = "UTC"),
 #'                                                      c_closure = c_closure,
 #'                                                      weather = wethr)
 #'
 #' terra::plot(epidemic_onset_map)
+#' }
 calc_epidemic_onset_from_image <- function(start,
                                            end,
                                            c_closure,

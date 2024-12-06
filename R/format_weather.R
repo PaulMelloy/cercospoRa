@@ -87,7 +87,7 @@
 #'   \tabular{rl}{
 #'   **times**: \tab Time in POSIXct format with "UTC" time-zone\cr
 #'   **rain**: \tab Rainfall in mm \cr
-#'   **temp**: \tab Temperature in degrees celcius \cr
+#'   **temp**: \tab Temperature in degrees Celsius \cr
 #'   **ws**: \tab Wind speed in km / h \cr
 #'   **wd**: \tab Wind direction in compass degrees \cr
 #'   **wd_sd**: \tab Wind direction standard deviation in compass degrees \cr

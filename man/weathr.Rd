@@ -14,9 +14,9 @@ manuscript
 \item{Datum}{Date}
 \item{Stunde}{hour}
 \item{Minute}{minute}
-\item{T-005}{Temperature in degrees celcius at 5cm}
-\item{T-200}{Temperature in degrees celcius at 200cm}
-\item{T-020}{Temperature in degrees celcius at 20cm}
+\item{T-005}{Temperature in degrees Celcius at 5cm}
+\item{T-200}{Temperature in degrees Celcius at 200cm}
+\item{T-020}{Temperature in degrees Celcius at 20cm}
 \item{F-200}{Percentage Relative humidity at 200cm}
 \item{GS200}{Global radiation (W/m2) at 200cm}
 \item{WR200}{Wind direction degrees at 200cm}

@@ -8,10 +8,10 @@
 #' @param param_r Output of the function \link[cercospoRa]{read_sb_growth_parameter},
 #'  which produces a list containing the LAI images and the associated dates
 #' @param min_r minimum growth rate for sugar beet. Default \code{min_r} is fixed
-#'  to 0.02 to ensure that the growth rate at the inflexion point of the sigmoid
+#'  to 0.02 to ensure that the growth rate at the inflection point of the sigmoid
 #'  is at least 1 unit of LAI per month.
 #' @param max_r maximum growth rate for sugar beet. Default \code{max_r} is fixed
-#'  to 0.05 to ensure that the growth rate at the inflexion point of the sigmoid
+#'  to 0.05 to ensure that the growth rate at the inflection point of the sigmoid
 #'  is at most 2.5 units of LAI per month.
 #' @param k carrying capacity, which is the maximum LAI that can be attained.
 #'  This value can be cultivar-dependent. The default is fixed to 6

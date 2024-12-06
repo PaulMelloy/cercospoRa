@@ -2,7 +2,7 @@
 
 
 ## minor improvements
-  - moved format_weather fundtion into `cercospoRa` package to avoid `epiphytoolR`
+  - moved format_weather function into `cercospoRa` package to avoid `epiphytoolR`
   suggests problems with CRAN.  
   - Moved some _./ext_ data to internal data for testing only to reduce package 
   size.  
