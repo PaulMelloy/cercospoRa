@@ -22,9 +22,17 @@ Temperatures at or above the optimum temperature for the disease cycle will
 yield 1 and the lower the temperature the infinitely longer the latent period.
 }
 \details{
-For equations and original documentation, see \insertCite{wolf_factors_2005}{cercospoRa}
-and \insertCite{wolf_zum_2001}{cercospoRa}
+For equations and original documentation, see Wolf and Verreet (2005)
+and Wolf et al. (2001)
 }
 \references{
-\insertAllCited{}
+Wolf, P. F. J., and J. A. Verreet. “Factors Affecting the Onset of Cercospora
+Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring
+Thresholds.” \emph{Phytopathology®} 95, no. 3 (March 2005): 269–74.
+https://doi.org/10.1094/PHYTO-95-0269.
+
+Wolf, P. F. J., F.-J. Weis, and J.-A. Verreet. “Threshold Values as
+Indicators of Fungicide Treatments for the Control of Leaf Blotching Caused
+by Cercospora Beticola (Sacc.) in Sugar Beets.”
+\emph{Journal of Plant Diseases and Protection} 108, no. 3 (2001): 244–57.
 }

@@ -1,7 +1,7 @@
 #' Relative humidity index
 #'
 #' Confirms the humidity threshold has been met by returning a 1 or not met by
-#'  returning a 0. See \insertCite{wolf_factors_2005}{cercospoRa}
+#'  returning a 0. See Wolf and Verreet (2005)
 #'
 #' @param RH numeric, relative humidity as a percentage
 #' @param rh_thresh numeric, humidity threshold where if humidity is below this
@@ -11,7 +11,10 @@
 #' @return numeric, either a 1 or 0
 #' @noRd
 #' @references
-#'    \insertAllCited{}
+#' Wolf, P. F. J., and J. A. Verreet. “Factors Affecting the Onset of Cercospora
+#'  Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring
+#'  Thresholds.” *Phytopathology®* 95, no. 3 (March 2005): 269–74.
+#'  https://doi.org/10.1094/PHYTO-95-0269.
 moisture_index <- function(RH,
                            rain = 0,
                            rh_thresh = 70,
