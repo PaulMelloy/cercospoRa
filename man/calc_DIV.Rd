@@ -21,12 +21,12 @@ each of the respective arguments for input. provided as a convenience}
 }
 \value{
 data.table, with probability of infection for each day, between 0 and 1
-Undertaken with two methods by Wolf \insertCite{wolf_factors_2005}{cercospoRa}
+Undertaken with two methods by Wolf and Verreet (2005)
 }
 \description{
 This function calculates the daily infection values for \emph{Cercospora beticola}
-on sugar beet. Functions were adapted from \insertCite{wolf_factors_2005}{cercospoRa}
-and \insertCite{wolf_zum_2001}{cercospoRa}
+on sugar beet. Functions were adapted from Wolf and Verreet (2005)
+and Wolf et al (2001)
 }
 \examples{
 date_t <- Sys.time() + seq(0, 179 * 60 * 10, (60 * 10))
@@ -42,5 +42,12 @@ rain = rain
 )
 }
 \references{
-\insertAllCited{}
+Wolf, P. F. J., and J. A. Verreet. “Factors Affecting the Onset of Cercospora
+Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring
+Thresholds.” \emph{Phytopathology®} 95, no. 3 (March 2005): 269–74.
+https://doi.org/10.1094/PHYTO-95-0269.
+
+Wolf, P. F. J., M. Heindl, and J. A. Verreet. “Influence of Sugar Beet Leaf Mass
+Development on Predisposition of the Crop to Cercospora Beticola (Sacc.).”
+\emph{Journal of Plant Diseases and Protection} 108, no. 6 (2001): 578–92.
 }

@@ -19,7 +19,7 @@ This is usually at canopy closure (Wolf)}
 \item{weather}{data.table, formatted with \code{\link{format_weather}}}
 
 \item{cultivar_sus}{character, susceptibility of the cultivar in "R" resistant,
-"S" susceptible, "MR" moderately resistant ect.}
+"S" susceptible, "MR" moderately resistant etc.}
 }
 \value{
 If the input weather is conducive for epidemic, the

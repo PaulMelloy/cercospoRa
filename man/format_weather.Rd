@@ -102,7 +102,7 @@ requirements for. Some of the columns returned are as follows:
 \tabular{rl}{
 \strong{times}: \tab Time in POSIXct format with "UTC" time-zone\cr
 \strong{rain}: \tab Rainfall in mm \cr
-\strong{temp}: \tab Temperature in degrees celcius \cr
+\strong{temp}: \tab Temperature in degrees Celsius \cr
 \strong{ws}: \tab Wind speed in km / h \cr
 \strong{wd}: \tab Wind direction in compass degrees \cr
 \strong{wd_sd}: \tab Wind direction standard deviation in compass degrees \cr

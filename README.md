@@ -12,7 +12,7 @@ The package contains functions to use remotely sensed spatially explicit empiric
 data to estimate leaf area index (LAI) when the crop canopy closes. 
 Crop canopy closure is a key variable in modelling the estimating when growers 
 will need to be vigilant and protect their crop with fungicides to prevent a 
-yield limiting cercospora leaf spot epidemic.  
+yield limiting Cercospora leaf spot epidemic.  
 
 `cercospoRa` uses functions described by Wolf and Verreet (2005) "Factors 
 Affecting the Onset of Cercospora Leaf Spot Epidemics in Sugar Beet and 
