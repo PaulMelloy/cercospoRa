@@ -1,6 +1,6 @@
 Package: cercospoRa
 Title: Process Based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: c(
     person(given = "Paul",
            family = "Melloy",
