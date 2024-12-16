@@ -1,5 +1,7 @@
 # cercospoRa (development version)
 
+  - Update README 
+
 # cercospoRa 0.0.1
 
 

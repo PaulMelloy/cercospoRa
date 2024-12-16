@@ -23,7 +23,13 @@ Establishment of Disease-Monitoring Thresholds" _Phytopathology_
 
 ## Installation  
 
-Install the package from this github repository  
+Install the stable release version from CRAN  
+
+```
+install.packages("cercospoRa")
+```
+
+... or the development version from github  
 
 ```
 remotes::install_github(repo = "PaulMelloy/cercospoRa")
