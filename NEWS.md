@@ -1,6 +1,8 @@
 # cercospoRa (development version)
 
-  - Update README 
+  - Update README  
+  - Add spelling package to suggests  
+  - Corrected unit tests
 
 # cercospoRa 0.0.1
 
