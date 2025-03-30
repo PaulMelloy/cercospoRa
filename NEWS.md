@@ -2,7 +2,8 @@
 
   - Update README  
   - Add spelling package to suggests  
-  - Corrected unit tests
+  - Corrected unit tests  
+  - expand vignette to look at range of pixelwise epidemic onsets
 
 # cercospoRa 0.0.1
 

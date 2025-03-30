@@ -19,6 +19,9 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(cercospoRa)
 library(data.table)
+library(terra)
+library(sf)
+library(ggplot2)
 ```
 
 The `cercospoRa` package estimates the daily infection values which tracks the 
@@ -58,10 +61,6 @@ wthr <- wthr[Datum < as.POSIXct("2022-10-01")]
 
 # set NA wind speed values to zero
 wthr[is.na(WG200), WG200 := 0]
-
-# set NA wind direction values to 20 degrees. 
-#  Wind is not important for this model
-wthr[is.na(WR200),WR200 := 20]
 ```
 
 Now we can use the `format_weather()` function.  
@@ -127,7 +126,7 @@ epidemic_onset_param <-
                                                   tz = "UTC"),
                            target_res = 10)
 
-epidemic_onset_param
+terra::plot(epidemic_onset_param)
 ```
 
 The next function calculates the sugar beet growth rate. 
@@ -146,6 +145,7 @@ date for each raster cell.
 canopy_closure <- calc_c_closure(param_rxt,
                                  x1 = 1.3,
                                  k=6)
+terra::plot(canopy_closure)
 ```
 
 Finally we can use a specialised wrapper function to calculate the earliest possible
@@ -168,8 +168,89 @@ terra::plot(epidemic_onset_map)
 
 Convert numeric date back to POSIXct format
 ```{r}
-as.POSIXct(terra::values(epidemic_onset_map)[120:130],
+onset_dates <- as.POSIXct(terra::values(epidemic_onset_map),
+                          tz = "UTC",
+                          origin = "1970-01-01")
+```
+
+```{r}
+library(ggplot2)
+s_date <- as.POSIXct(terra::values(epidemic_onset_map),
+                     tz = "UTC",
+                     origin = "1970-01-01")
+
+# convert to a data.table
+dtdate <- data.table(cell = seq_along(s_date))
+dtdate$Dates <- s_date
+
+# Summarise the range of epidemic onset dates
+summary(s_date[is.na(s_date)== FALSE])
+
+
+# Plot dates on boxplot
+dtdate[is.na(Dates) == FALSE,] |>
+ggplot2::ggplot(aes(y=Dates))+
+  geom_boxplot()
+```
+
+
+### Random transects  
+
+Lets randomise some transects in the field.  
+
+100 leaves are taken for the disease assessment. 
+If we randomly choose 50 meter transects, 2 leaves sampled per meter, we can 
+estimate the possible variation in scouting in this field.  
+
+Transects are usually taken at a 45 degree angle and avoid the edge.  
+
+```{r}
+#initilise 1000 points in the raster
+rcoordinates <- 
+      spatSample(epidemic_onset_map,1000,
+             replace = TRUE,
+             na.rm = TRUE,
+             xy = TRUE)
+
+# Add extra columns for the transect end coordinates
+rcoordinates <- 
+  cbind(rcoordinates,
+        data.frame(lon = NA_real_,lat = NA_real_), e_date = NA_real_)
+
+# Loop over each row and find a transect that does not leave the field
+for(i in 1:1000){
+  in_or_out <- TRUE
+  
+  while(in_or_out){
+    d1 <- geosphere::destPoint(rcoordinates[i,1:2],
+                               sample(c(45,135,225,315),size = 1),
+                               50)
+
+  in_or_out <- 
+    d1[1] < ext(epidemic_onset_map)[1] |
+    d1[1] > ext(epidemic_onset_map)[2] |
+    d1[2] < ext(epidemic_onset_map)[3] |
+    d1[2] > ext(epidemic_onset_map)[4]
+}
+ rcoordinates[i,"lon"] <- d1[1]
+ rcoordinates[i,"lat"] <- d1[2]
+ 
+ dat1 <-rbind(rcoordinates[i,1:2],
+              c(d1[1],d1[2]), make.row.names = FALSE)
+ 
+ v1 <- vect(st_linestring(as.matrix(dat1)))
+
+ rcoordinates[i,"e_date"] <- 
+   extract(epidemic_onset_map,v1,fun = "mean")[,2] 
+}
+
+rcoordinates$e_date <- 
+  as.POSIXct(rcoordinates$e_date,
            tz = "UTC",
            origin = "1970-01-01")
+
+rcoordinates |>
+ggplot2::ggplot(aes(y=e_date))+
+  geom_boxplot()
 ```
 
