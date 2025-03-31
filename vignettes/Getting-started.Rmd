@@ -205,9 +205,11 @@ estimate the possible variation in scouting in this field.
 Transects are usually taken at a 45 degree angle and avoid the edge.  
 
 ```{r}
-#initilise 1000 points in the raster
+n_transect <- 1000
+
+#initialise 1000 points in the raster
 rcoordinates <- 
-      spatSample(epidemic_onset_map,1000,
+      spatSample(epidemic_onset_map,n_transect,
              replace = TRUE,
              na.rm = TRUE,
              xy = TRUE)
@@ -218,10 +220,11 @@ rcoordinates <-
         data.frame(lon = NA_real_,lat = NA_real_), e_date = NA_real_)
 
 # Loop over each row and find a transect that does not leave the field
-for(i in 1:1000){
+for(i in 1:n_transect){
   in_or_out <- TRUE
   
   while(in_or_out){
+    # get the coordinate 50 meters from the randomly chosen starting point
     d1 <- geosphere::destPoint(rcoordinates[i,1:2],
                                sample(c(45,135,225,315),size = 1),
                                50)
@@ -241,7 +244,7 @@ for(i in 1:1000){
  v1 <- vect(st_linestring(as.matrix(dat1)))
 
  rcoordinates[i,"e_date"] <- 
-   extract(epidemic_onset_map,v1,fun = "mean")[,2] 
+   extract(epidemic_onset_map,v1,fun = "mean",na.rm = TRUE)[,2] 
 }
 
 rcoordinates$e_date <- 
