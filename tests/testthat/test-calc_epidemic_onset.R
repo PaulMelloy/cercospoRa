@@ -30,36 +30,41 @@ test_that("Relative humidity formats",{
 })
 
 test_that("epidemic onset produces expected outcome", {
-  bris_formated <- format_weather(
-    w = brisvegas,
-    POSIXct_time = "aifstime_utc",
-    time_zone = "UTC",
-    temp = "air_temp",
-    rh = "rel_hum",
-    rain = "rain_trace",
-    ws = "wind_spd_kmh",
-    wd = "wind_dir_deg",
-    station = "name",
-    lon = "lon",
-    lat = "lat",
-    data_check = c("temp","rain")
-  )
-  bris_formated[,rh := fifelse(is.na(rh),shift(rh,n=24,type = "lag"),
-                               rh)]
+  # bris_formated <- format_weather(
+  #   w = wethr,
+  #   POSIXct_time = "aifstime_utc",
+  #   time_zone = "UTC",
+  #   temp = "air_temp",
+  #   rh = "rel_hum",
+  #   rain = "rain_trace",
+  #   ws = "wind_spd_kmh",
+  #   wd = "wind_dir_deg",
+  #   station = "name",
+  #   lon = "lon",
+  #   lat = "lat",
+  #   data_check = c("temp","rain")
+  # )
+  # bris_formated[,rh := fifelse(is.na(rh),shift(rh,n=24,type = "lag"),
+  #                              rh)]
 
   # susceptible cultivar
-  sus_out <- calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01", tz = "UTC"),
-                      weather = bris_formated,
-                      cultivar_sus = 3)
+  sus_out <- calc_epidemic_onset(c_closure = as.POSIXct("2022-06-01", tz = "UTC"),
+                      weather = wethr,
+                      cultivar_sus = 6)
   expect_type(sus_out,"double")
-  expect_equal(sus_out, as.POSIXct("2023-06-07",tz = "UTC"))
+  expect_equal(sus_out, as.POSIXct("2022-06-27",tz = "UTC"))
 
   # resistant cultivar
-  res_out <- calc_epidemic_onset(c_closure = as.POSIXct("2023-06-01", tz = "UTC"),
-                      weather = bris_formated,
-                      cultivar_sus = 5)
+  res_out <- calc_epidemic_onset(c_closure = as.POSIXct("2022-06-01", tz = "UTC"),
+                      weather = wethr,
+                      cultivar_sus = 4)
   expect_type(res_out,"double")
-  expect_equal(res_out, as.POSIXct("2023-06-17",tz = "UTC"),tolerance = 0.0000001)
+  expect_equal(res_out, as.POSIXct("2022-07-22",tz = "UTC"),tolerance = 0.0000001)
+
+  # resistant cultivar
+  expect_warning(calc_epidemic_onset(c_closure = as.POSIXct("2022-06-01", tz = "UTC"),
+                                 weather = wethr[times < as.POSIXct("2022-07-01", tz = "UTC")],
+                                 cultivar_sus = 1))
 
 })
 
