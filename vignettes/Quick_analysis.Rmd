@@ -1,0 +1,182 @@
+---
+title: "analysis"
+author: "Paul Melloy"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(RANN)
+library(flextable)
+```
+
+### Read in data
+```{r read_data}
+dat <- fread("../data/20250607_cercospoRa_analysis_df.csv")
+```
+
+### Inspect data
+```{r inspect_data}
+head(dat)
+summary(dat)
+unique(dat$treatment)
+unique(dat$region)
+unique(dat$source)
+```
+
+### Rename variables
+```{r rename_data}
+setnames(dat,
+         old = c("region","treatment"),
+         new = c("inoculum","fungicide"))
+dat[inoculum == "roi", inoculum := "non_inoc"]
+```
+
+### Get nearest neighbour
+Associate the closest observed epidemic onset date (EO) to the UAS or S2 
+Earliest Estimated Epidemic Onset (EEEO) date.  
+
+```{r nearest_neighbour}
+obs_nearest <- nn2(data = dat[source == "observation",.(x,y)],
+                   query = dat[,.(x,y)],
+                   k = 2)
+
+range(obs_nearest$nn.idx[,1])
+
+# associate RS estimated EO with closest observation
+dat[, obs_das:= dat[source == "observation",das][obs_nearest$nn.idx[,1]]]
+```
+
+Do a quick check on aov of the data to inspect average differences between 
+inoculation and fungicide treatments.
+
+```{r lm_check}
+# check variance averages 
+mod1 <- lm(das ~ source + inoculum + fungicide, data = dat)
+summary(mod1)
+```
+
+### Plot data
+```{r plot_data}
+# plot EO data from each source an treatment
+library(ggplot2)
+dat[source != "observation",] |>
+  ggplot(aes(x = obs_das, y = das, color = inoculum)) +
+  geom_point(size = 4,alpha = .5,shape = 16) +
+  facet_wrap(~fungicide + source) +
+  theme_bw() +
+  labs(title = "Epidemic onset by spatial location",
+       x = "Observation",
+       y = "UAS Estimated earliest EO") +
+  #scale_color_manual(values = c("red", "blue", "green")) +
+  theme(legend.position = "top")+
+  xlim(c(90,180))+
+  ylim(c(90,180))+
+  geom_abline(slope = 1, intercept = 0, color = "black", linetype = "dashed")+
+  scale_color_viridis_d()
+```
+
+### Model data  
+
+> What are the average influences independent of other treatments?  
+
+We will use Generalized Additive Models (GAM) to model the data, adding a spline
+to account for the spatial location of the data.  
+
+```{r model_data2}
+library(mgcv)
+# what are the average influences independant of other treatments
+mod2 <- gam(das ~ s(x,y) + source + inoculum + fungicide,
+          data = dat,
+          method = "REML")
+summary(mod2)
+```
+
+Fungicide treated areas on average were not significantly different to untreated
+for epidemic onset days.  
+
+> Is there a significant interaction between measurement source and inoculum?  
+
+```{r model_data3}
+mod3 <- gam(das ~ s(x,y) + source * inoculum + fungicide,
+            data = dat,
+            method = "REML")
+summary(mod3)
+```
+
+There is a significant interaction in inoculated areas observed epidemic onset 
+was not significantly different to S2 earliest estimated epidemic onset dates.  
+
+> Three-way interaction?  
+
+```{r model_data4}
+mod4 <- gam(das ~ s(x,y) + source * inoculum * fungicide,
+            data = dat,
+            method = "REML")
+summary(mod4)
+```
+The observed EO within inoculated areas with fungicide treatment:  
+ - were significantly later than  
+     - EEEO days from S2 and  
+     - EEEO days from UAV  
+ - and significantly earlier than  
+     - EO days observed non-inoculated areas  
+ - But not significantly later than  
+     - EO days untreated fungicide areas  
+     
+Non-inoculated areas showed with fungicide treatment showed:  
+ - no difference in EO to areas without fungicide treatment  
+
+ S2 EEEO within inoculated areas with fungicide treatment:  
+ - were significantly later than  
+     - EEEO dates in non-inoculated areas              **against expectations**  
+ - and significantly earlier than  
+     - EEEO dates in areas without fungicide treatment **against expectations**  
+ - However S2 EEEO in non-inoculated areas without fungicide treatment
+     - were significantly earlier than fungicide treated areas
+
+ UAS EEEO within inoculated areas with fungicide treatment:  
+ - were significantly later than  
+     - EEEO dates in non-inoculated areas              **against expectations**  
+ - and significantly earlier than  
+     - EEEO dates in areas without fungicide treatment **against expectations**  
+ - Additionally UAS EEEO in non-inoculated areas without fungicide treatment
+     - were not significantly earlier than fungicide treated areas
+
+
+### Proportional successes 
+
+> What is the proportion of observed EO occuring later than EEEO?  
+
+This should show us how successful the negative prognosis model is
+
+```{r prop_success}
+dat[source != "observation", 
+    list("prop_success" = sum(das < obs_das)/NROW(das)), 
+    by = .(source, inoculum, fungicide)] |>
+flextable()
+```
+
+
+Lets visualise the densities of the observed and estimated epidemic onset dates
+
+```{r prop_success}
+dat[, obs_dif := das - obs_das]
+
+dat[source != "observation"] |>
+  ggplot(aes(x = obs_dif, fill = inoculum)) +
+  geom_density(alpha = .5) +
+  facet_wrap(~source + fungicide) +
+  theme_bw() +
+  labs(x = "Difference between observed EO and Earliest estimated EO",
+       y = "Density") +
+  theme(legend.position = "top")+
+  scale_fill_viridis_d()+
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black", size = 1)
+
+```
+
+
+
+
+
