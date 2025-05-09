@@ -8,6 +8,8 @@ output: html_document
 ```{r setup, include=FALSE}
 library(RANN)
 library(flextable)
+library(officer)
+library(data.table)
 ```
 
 ### Read in data
@@ -24,12 +26,16 @@ unique(dat$region)
 unique(dat$source)
 ```
 
-### Rename variables
+### Rename variables  
 ```{r rename_data}
 setnames(dat,
          old = c("region","treatment"),
          new = c("inoculum","fungicide"))
 dat[inoculum == "roi", inoculum := "non_inoc"]
+
+# Relevel fungicide factor
+dat[,fungicide := factor(fungicide, levels = c("untreated", "treated"))]
+dat[,inoculum := factor(inoculum, levels = c("non_inoc", "ino"))]
 ```
 
 ### Get nearest neighbour
@@ -62,13 +68,12 @@ summary(mod1)
 library(ggplot2)
 dat[source != "observation",] |>
   ggplot(aes(x = obs_das, y = das, color = inoculum)) +
-  geom_point(size = 4,alpha = .5,shape = 16) +
+   geom_point(size = 4,alpha = .5,shape = 16) +
   facet_wrap(~fungicide + source) +
   theme_bw() +
   labs(title = "Epidemic onset by spatial location",
        x = "Observation",
        y = "UAS Estimated earliest EO") +
-  #scale_color_manual(values = c("red", "blue", "green")) +
   theme(legend.position = "top")+
   xlim(c(90,180))+
   ylim(c(90,180))+
@@ -110,38 +115,65 @@ was not significantly different to S2 earliest estimated epidemic onset dates.
 > Three-way interaction?  
 
 ```{r model_data4}
-mod4 <- gam(das ~ s(x,y) + source * inoculum * fungicide,
-            data = dat,
-            method = "REML")
+mod4 <- gam(das ~ s(x,y) + source * inoculum,# * fungicide,
+            data = dat[fungicide != "treated"])
 summary(mod4)
 ```
-The observed EO within inoculated areas with fungicide treatment:  
- - were significantly later than  
-     - EEEO days from S2 and  
-     - EEEO days from UAV  
- - and significantly earlier than  
-     - EO days observed non-inoculated areas  
- - But not significantly later than  
-     - EO days untreated fungicide areas  
-     
-Non-inoculated areas showed with fungicide treatment showed:  
- - no difference in EO to areas without fungicide treatment  
 
- S2 EEEO within inoculated areas with fungicide treatment:  
- - were significantly later than  
-     - EEEO dates in non-inoculated areas              **against expectations**  
- - and significantly earlier than  
-     - EEEO dates in areas without fungicide treatment **against expectations**  
- - However S2 EEEO in non-inoculated areas without fungicide treatment
-     - were significantly earlier than fungicide treated areas
+#### fungicide treatment  
 
- UAS EEEO within inoculated areas with fungicide treatment:  
- - were significantly later than  
-     - EEEO dates in non-inoculated areas              **against expectations**  
- - and significantly earlier than  
-     - EEEO dates in areas without fungicide treatment **against expectations**  
- - Additionally UAS EEEO in non-inoculated areas without fungicide treatment
-     - were not significantly earlier than fungicide treated areas
+Overall there was no sigificant effects of fungicide treated part of the field.
+The only significant result showed remote sensing methods S2 and UAS resulted in
+earlier EEEO dates in fungicide treated compared to untreated.  
+The fungicide treated area seemed to show thicker canopy and I think this result
+can be put down to spatial field effects.  
+
+Therefore the fungicide variable will be removed and this area treated as a 
+field replicate.  
+
+```{r model_data5}
+mod5 <- gam(das ~ s(x,y) + source * inoculum,
+            data = dat)
+summary(mod5)
+```
+#### Intercept  
+The intercept here represents:
+ > Observed EO dates in non-inoculated areas  
+
+and averages around `r round(unname(mod5$coefficients["(Intercept)"]),2)` days
+after sowing.  
+  
+#### Remote sensing variables  
+Sentinel 2 estimated epidemic onset an average of `r round(unname(mod5$coefficients["sources2"]),2)`
+days earlier than observed EO.  
+
+UAS estimated epidemic onset an average of `r round(unname(mod5$coefficients["sourceuav"]),2)`
+days earlier than observed EO.  
+
+#### Inoculation effect
+
+Observed EO dates within inoculated areas were on average `r round(unname(mod5$coefficients["inoculumino"]),2)`
+days earlier than non-inoculated areas.  
+
+However EEEO dates in inoculated areas produced by remote sensing methods S2 and UAS were
+`r round(unname(mod5$coefficients["sources2:inoculumino"]),2)` and 
+`r round(unname(mod5$coefficients["sourceuav:inoculumino"]),2)` days later than
+the observed EO days.  
+
+#### spatial effect  
+```{r}
+plot(mod5)
+```
+
+Model comparisons
+
+```{r}
+AIC(mod2,
+    mod3,
+    mod4,
+    mod5)
+anova(mod4,mod5)
+```
 
 
 ### Proportional successes 
@@ -151,10 +183,25 @@ Non-inoculated areas showed with fungicide treatment showed:
 This should show us how successful the negative prognosis model is
 
 ```{r prop_success}
-dat[source != "observation", 
-    list("prop_success" = sum(das < obs_das)/NROW(das)), 
-    by = .(source, inoculum, fungicide)] |>
-flextable()
+tbl_prop_success <- 
+    dat[source != "observation" & fungicide != "treated", 
+      list("prop_success" = round(sum(das < obs_das)/NROW(das),3),
+           n = .N), 
+      by = .(source, inoculum, fungicide)][,.(source,
+                                              inoculum,
+                                              prop_success)] |>
+  flextable() |>
+  align_text_col(align = "center") |>
+  set_header_labels(source = "RS method",
+                    inoculum = "Inoculum",
+                    prop_success = "∝ success") |>
+   fontsize(size = 8, part = "body") |>
+   fontsize(size = 10, part = "header") |>
+   bg(i = seq(2,5,2),bg = "grey80",part = "body")|>
+   set_caption("Proportion of RS earliest estimated onset dates occurring prior to observed epidemic onset")
+
+tbl_prop_success
+save_as_docx(tbl_prop_success, path = "./prop_success.docx")
 ```
 
 
