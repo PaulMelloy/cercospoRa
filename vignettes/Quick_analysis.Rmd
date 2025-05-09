@@ -122,7 +122,7 @@ summary(mod4)
 
 #### fungicide treatment  
 
-Overall there was no sigificant effects of fungicide treated part of the field.
+Overall there was no significant effects of fungicide treated part of the field.
 The only significant result showed remote sensing methods S2 and UAS resulted in
 earlier EEEO dates in fungicide treated compared to untreated.  
 The fungicide treated area seemed to show thicker canopy and I think this result
@@ -165,6 +165,41 @@ the observed EO days.
 plot(mod5)
 ```
 
+```{r model_data5a}
+mod5a <- gam(das ~ s(x,y) + source * inoculum,
+            data = dat[fungicide != "treated"])
+summary(mod5a)
+```
+#### Intercept  
+The intercept here represents:
+ > Observed EO dates in non-inoculated areas  
+
+and averages around `r round(unname(mod5a$coefficients["(Intercept)"]),2)` days
+after sowing.  
+  
+#### Remote sensing variables  
+Sentinel 2 estimated epidemic onset an average of `r round(unname(mod5a$coefficients["sources2"]),2)`
+days earlier than observed EO.  
+
+UAS estimated epidemic onset an average of `r round(unname(mod5a$coefficients["sourceuav"]),2)`
+days earlier than observed EO.  
+
+#### Inoculation effect
+
+Observed EO dates within inoculated areas were on average `r round(unname(mod5a$coefficients["inoculumino"]),2)`
+days earlier than non-inoculated areas.  
+
+However EEEO dates in inoculated areas produced by remote sensing methods S2 and UAS were
+`r round(unname(mod5a$coefficients["sources2:inoculumino"]),2)` and 
+`r round(unname(mod5a$coefficients["sourceuav:inoculumino"]),2)` days later than
+the observed EO days.  
+
+#### spatial effect  
+```{r}
+plot(mod5a)
+```
+
+
 Model comparisons
 
 ```{r}
@@ -189,6 +224,7 @@ tbl_prop_success <-
            n = .N), 
       by = .(source, inoculum, fungicide)][,.(source,
                                               inoculum,
+                                              n,
                                               prop_success)] |>
   flextable() |>
   align_text_col(align = "center") |>
