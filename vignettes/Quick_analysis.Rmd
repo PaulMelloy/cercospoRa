@@ -451,7 +451,7 @@ plot(mod5)
 ```
 
 ```{r model_data5a}
-mod5a <- gam(das ~ s(x,y) + source * inoculum,
+mod5a <- gam(das ~ s(x,y, k = 8) + source * inoculum,
             data = dat[fungicide != "treated"])
 summary(mod5a)
 ```
