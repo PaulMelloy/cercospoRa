@@ -12,6 +12,7 @@ library(officer)
 library(data.table)
 library(ggplot2)
 library(mgcv) # gam models
+library(cercospoRa)
 ```
 
 ### Read in data
@@ -302,6 +303,8 @@ eeeo[source != "observation",] |>
 
 ### Model data  
 
+#### Model 1  
+
 > What are the average influences independent of other treatments?  
 
 We will use Generalized Additive Models (GAM) to model the data, adding a spline
@@ -327,20 +330,22 @@ plot(mod1_eo)
 This looks slightly over fit. 
 We should use fewer knots.  
 
+#### Model 2  
+
 
 ```{r eo_mod2}
-mod2_eo <- gam(das ~ s(x,y, k = 11) + source + inoculum + fungicide,
+mod2_eo <- gam(das ~ s(x,y, k = 8) + source + inoculum + fungicide,
           data = eeeo,
           method = "REML")
 plot(mod2_eo)
 ```
 
-
+#### Model 3  
 
 > Is there a significant interaction between measurement source and inoculum?  
 
 ```{r eo_model_data3}
-mod3_eo <- gam(das ~ s(x,y, k = 11) + source * inoculum + fungicide,
+mod3_eo <- gam(das ~ s(x,y, k = 8) + source * inoculum + fungicide,
             data = eeeo,
             method = "REML")
 summary(mod3_eo)
@@ -349,62 +354,68 @@ summary(mod3_eo)
 There is a significant interaction in inoculated areas observed epidemic onset 
 was not significantly different to S2 earliest estimated epidemic onset dates.  
 
+#### Model 4  
+
 
 > Three-way interaction?  
 
 ```{r eo_model_data4}
-mod4_eo <- gam(das ~ s(x,y, k = 11) + source * inoculum * fungicide,
+mod4_eo <- gam(das ~ s(x,y, k = 8) + source * inoculum * fungicide,
             data = eeeo)
 summary(mod4_eo)
 ```
 
-#### fungicide treatment  
+### Drop Fungicide Treatment  
 
-Overall there was no significant effects of fungicide treated part of the field.
-The only significant result showed remote sensing methods S2 and UAS resulted in
-earlier EEEO dates in fungicide treated compared to untreated.  
-The fungicide treated area seemed to show thicker canopy and I think this result
-can be put down to spatial field effects.  
+The fungicide variable will be removed, initially I will test the model 
+using fungicide as field replicate, then drop fungicide treated areas from the 
+analysis.  
 
-Therefore the fungicide variable will be removed and this area treated as a 
-field replicate.  
+#### Model 5  
 
 ```{r eo_model_data5}
-mod5_eo <- gam(das ~ s(x,y) + source * inoculum,
+mod5_eo <- gam(das ~ s(x,y, k =8) + source * inoculum,
             data = eeeo)
-summary(mod5)
+summary(mod5_eo)
 ```
-#### Intercept  
-The intercept here represents:
+
+##### Intercept  
+The intercept here represents:  
  > Observed EO dates in non-inoculated areas  
 
-and averages around `r round(unname(mod5_eo$coefficients["(Intercept)"]),2)` days
-after sowing.  
+and averages around `r interpret_gam(mod5_eo, 0)` days 
+`r interpret_gam(mod5_eo, 4)` sowing.  
   
 #### Remote sensing variables  
-Sentinel 2 estimated epidemic onset an average of `r round(unname(mod5_eo$coefficients["sources2"]),2)`
-days earlier than observed EO.  
+Sentinel 2 estimated epidemic onset an average of 
+`r interpret_gam(mod5_eo, 0,"sources2")` days 
+`r interpret_gam(mod5_eo, 5,"sources2")` than observed EO.  
 
-UAS estimated epidemic onset an average of `r round(unname(mod5_eo$coefficients["sourceuav"]),2)`
-days earlier than observed EO.  
+UAS estimated epidemic onset an average of 
+`r interpret_gam(mod5_eo, 0,"sourceuas")` days 
+`r interpret_gam(mod5_eo, 5,"sources2")` than observed EO.  
 
 #### Inoculation effect
 
-Observed EO dates within inoculated areas were on average `r round(unname(mod5_eo$coefficients["inoculumino"]),2)`
+Observed EO dates within inoculated areas were on average 
+`r interpret_gam(mod5_eo, 0,"inoculumino")` days 
+`r interpret_gam(mod5_eo, 5,"inoculumino")` 
 days earlier than non-inoculated areas.  
 
-However EEEO dates in inoculated areas produced by remote sensing methods S2 and UAS were
-`r round(unname(mod5_eo$coefficients["sources2:inoculumino"]),2)` and 
-`r round(unname(mod5_eo$coefficients["sourceuav:inoculumino"]),2)` days later than
-the observed EO days.  
+However EEEO dates in inoculated areas produced by remote sensing methods 
+S2 and UAS were
+`r interpret_gam(mod5_eo, 0,"sources2:inoculuminoculated")` and 
+`r interpret_gam(mod5_eo, 0,"sourceuav:inoculumino")` days 
+`r interpret_gam(mod5_eo, 5,"sourceuas:inoculuminoculated")` than the observed EO days.  
 
 #### spatial effect  
+
 ```{r mod5_spatial}
 plot(mod5_eo)
 ```
 
-```{r eo_model_data5a}
-mod5a <- gam(das ~ s(x,y, k = 8) + source * inoculum,
+```{r eo_model_data6}
+mod6 <- gam(das ~ s(x,y, k = 8) + source * inoculum,
             data = eeeo[fungicide != "treated"])
 summary(mod5a)
 ```
