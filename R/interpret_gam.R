@@ -18,9 +18,9 @@
 #' interpret
 interpret_gam <- function(mod,
                           words = 1,
-                          rounding = 2,
                           coeff = "(Intercept)",
-                          sig = FALSE) {
+                          sig = FALSE,
+                          rounding = 2) {
 
   words <- as.character(words)
 
@@ -37,8 +37,8 @@ interpret_gam <- function(mod,
                 "1" = ifelse(mod$coefficients[coeff] > 0, "more", "less"),
                 "2" = ifelse(mod$coefficients[coeff] > 0, "greater", "fewer"),
                 "3" = ifelse(mod$coefficients[coeff] > 0, "higher", "lower"),
-                "4" = ifelse(mod$coefficients[coeff] > 0, "before", "after"),
-                "5" = ifelse(mod$coefficients[coeff] > 0, "earlier", "later"))
+                "4" = ifelse(mod$coefficients[coeff] > 0, "after", "before"),
+                "5" = ifelse(mod$coefficients[coeff] > 0, "later", "earlier"))
   }
 
   return(unname(out))
