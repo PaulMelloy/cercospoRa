@@ -277,6 +277,10 @@ No significant difference, use simpler model mod6.
 ## Epidemic Onset  
 
 
+```{r subset_eeeo}
+eeeo <- dat[data == "epidemic_onset"]
+```
+
 ### Plot data
 ```{r plot_data}
 # plot EO data from each source an treatment
@@ -303,36 +307,55 @@ eeeo[source != "observation",] |>
 We will use Generalized Additive Models (GAM) to model the data, adding a spline
 to account for the spatial location of the data.  
 
-```{r model_data2}
-library(mgcv)
+```{r eo_model_data1}
 # what are the average influences independant of other treatments
-mod2 <- gam(das ~ s(x,y) + source + inoculum + fungicide,
+mod1_eo <- gam(das ~ s(x,y) + source + inoculum + fungicide,
           data = eeeo,
           method = "REML")
-summary(mod2)
+summary(mod1_eo)
 ```
 
 Fungicide treated areas on average were not significantly different to untreated
 for epidemic onset days.  
 
+#### check spatial fit  
+
+```{r eo_spatial_fit}
+plot(mod1_eo)
+```
+
+This looks slightly over fit. 
+We should use fewer knots.  
+
+
+```{r eo_mod2}
+mod2_eo <- gam(das ~ s(x,y, k = 11) + source + inoculum + fungicide,
+          data = eeeo,
+          method = "REML")
+plot(mod2_eo)
+```
+
+
+
 > Is there a significant interaction between measurement source and inoculum?  
 
-```{r model_data3}
-mod3 <- gam(das ~ s(x,y) + source * inoculum + fungicide,
+```{r eo_model_data3}
+mod3_eo <- gam(das ~ s(x,y, k = 11) + source * inoculum + fungicide,
             data = eeeo,
             method = "REML")
-summary(mod3)
+summary(mod3_eo)
 ```
 
 There is a significant interaction in inoculated areas observed epidemic onset 
 was not significantly different to S2 earliest estimated epidemic onset dates.  
 
+
 > Three-way interaction?  
 
-```{r model_data4}
-mod4 <- gam(das ~ s(x,y) + source * inoculum,# * fungicide,
-            data = eeeo[fungicide != "treated"])
-summary(mod4)
+```{r eo_model_data4}
+mod4_eo <- gam(das ~ s(x,y, k = 11) + source * inoculum * fungicide,
+            data = eeeo)
+summary(mod4_eo)
 ```
 
 #### fungicide treatment  
@@ -346,8 +369,8 @@ can be put down to spatial field effects.
 Therefore the fungicide variable will be removed and this area treated as a 
 field replicate.  
 
-```{r model_data5}
-mod5 <- gam(das ~ s(x,y) + source * inoculum,
+```{r eo_model_data5}
+mod5_eo <- gam(das ~ s(x,y) + source * inoculum,
             data = eeeo)
 summary(mod5)
 ```
@@ -355,32 +378,32 @@ summary(mod5)
 The intercept here represents:
  > Observed EO dates in non-inoculated areas  
 
-and averages around `r round(unname(mod5$coefficients["(Intercept)"]),2)` days
+and averages around `r round(unname(mod5_eo$coefficients["(Intercept)"]),2)` days
 after sowing.  
   
 #### Remote sensing variables  
-Sentinel 2 estimated epidemic onset an average of `r round(unname(mod5$coefficients["sources2"]),2)`
+Sentinel 2 estimated epidemic onset an average of `r round(unname(mod5_eo$coefficients["sources2"]),2)`
 days earlier than observed EO.  
 
-UAS estimated epidemic onset an average of `r round(unname(mod5$coefficients["sourceuav"]),2)`
+UAS estimated epidemic onset an average of `r round(unname(mod5_eo$coefficients["sourceuav"]),2)`
 days earlier than observed EO.  
 
 #### Inoculation effect
 
-Observed EO dates within inoculated areas were on average `r round(unname(mod5$coefficients["inoculumino"]),2)`
+Observed EO dates within inoculated areas were on average `r round(unname(mod5_eo$coefficients["inoculumino"]),2)`
 days earlier than non-inoculated areas.  
 
 However EEEO dates in inoculated areas produced by remote sensing methods S2 and UAS were
-`r round(unname(mod5$coefficients["sources2:inoculumino"]),2)` and 
-`r round(unname(mod5$coefficients["sourceuav:inoculumino"]),2)` days later than
+`r round(unname(mod5_eo$coefficients["sources2:inoculumino"]),2)` and 
+`r round(unname(mod5_eo$coefficients["sourceuav:inoculumino"]),2)` days later than
 the observed EO days.  
 
 #### spatial effect  
-```{r}
-plot(mod5)
+```{r mod5_spatial}
+plot(mod5_eo)
 ```
 
-```{r model_data5a}
+```{r eo_model_data5a}
 mod5a <- gam(das ~ s(x,y, k = 8) + source * inoculum,
             data = eeeo[fungicide != "treated"])
 summary(mod5a)
