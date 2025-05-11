@@ -12,7 +12,7 @@ library(officer)
 library(data.table)
 library(ggplot2)
 library(mgcv) # gam models
-library(cercospoRa)
+source("../R/interpret_gam.R")
 ```
 
 ### Read in data
@@ -236,29 +236,28 @@ summary(mod6)
 ```
 
 
-##### Intercept  
-The intercept here represents:
- > Canopy closure dates in inoculated areas determined by sentinal-2  
-
+##### **Intercept**  
+The intercept here represents: 
+canopy closure dates in inoculated areas determined by sentinel-2 
 and averages around `r interpret_gam(mod6, words = 0)` days
 `r interpret_gam(mod6, words = 4)` sowing.  
   
-##### Remote sensing variables  
+##### **Remote sensing variables**  
 UAS estimated epidemic onset an average of 
 `r interpret_gam(mod6, words = 0, coeff = "sourceuas")` days 
-`r interpret_gam(mod6, words = 5, coeff = "sourceuas")`than Sentinal 2.  
+`r interpret_gam(mod6, words = 5, coeff = "sourceuas")` than Sentinel 2.  
 
-##### Inoculation effect
+##### **Inoculation effect**
 
 Non-inoculated areas were on average 
-`r rinterpret_gam(mod6, words = 0, coeff = "inoculumnon-inoculated"` days 
-`r rinterpret_gam(mod6, words = 5, coeff = "inoculumnon-inoculated"` 
-than inoculated areas.  
+`r interpret_gam(mod6, words = 0, coeff = "inoculuminoculated")` days 
+`r interpret_gam(mod6, words = 5, coeff = "inoculuminoculated")` 
+than non-inoculated areas.  
 
-As shown in mod5 there is no interactive effect of source, indicating both 
+As shown in `mod5` there is no interactive effect of source, indicating both 
 remote sensing platforms showed inoculated areas had retarded phenology.
 
-##### Spatial effect  
+##### **Spatial effect**  
 ```{r}
 plot(mod6)
 ```
@@ -274,6 +273,8 @@ anova(mod5,mod6)
 No significant difference, use simpler model mod6.  
 
 ***  
+<br>  
+<br>  
 
 ## Epidemic Onset  
 
@@ -281,9 +282,10 @@ No significant difference, use simpler model mod6.
 ```{r subset_eeeo}
 eeeo <- dat[data == "epidemic_onset"]
 ```
+<br>  
 
 ### Plot data
-```{r plot_data}
+```{r plot_eo_data}
 # plot EO data from each source an treatment
 library(ggplot2)
 eeeo[source != "observation",] |>
@@ -300,6 +302,9 @@ eeeo[source != "observation",] |>
   geom_abline(slope = 1, intercept = 0, color = "black", linetype = "dashed")+
   scale_color_viridis_d()
 ```
+
+<br>  
+<br>  
 
 ### Model data  
 
@@ -334,7 +339,7 @@ We should use fewer knots.
 
 
 ```{r eo_mod2}
-mod2_eo <- gam(das ~ s(x,y, k = 8) + source + inoculum + fungicide,
+mod2_eo <- gam(das ~ s(x,y, k = 5) + source + inoculum + fungicide,
           data = eeeo,
           method = "REML")
 plot(mod2_eo)
@@ -345,7 +350,7 @@ plot(mod2_eo)
 > Is there a significant interaction between measurement source and inoculum?  
 
 ```{r eo_model_data3}
-mod3_eo <- gam(das ~ s(x,y, k = 8) + source * inoculum + fungicide,
+mod3_eo <- gam(das ~ s(x,y, k = 5) + source * inoculum + fungicide,
             data = eeeo,
             method = "REML")
 summary(mod3_eo)
@@ -360,7 +365,7 @@ was not significantly different to S2 earliest estimated epidemic onset dates.
 > Three-way interaction?  
 
 ```{r eo_model_data4}
-mod4_eo <- gam(das ~ s(x,y, k = 8) + source * inoculum * fungicide,
+mod4_eo <- gam(das ~ s(x,y, k = 5) + source * inoculum * fungicide,
             data = eeeo)
 summary(mod4_eo)
 ```
@@ -374,8 +379,8 @@ analysis.
 #### Model 5  
 
 ```{r eo_model_data5}
-mod5_eo <- gam(das ~ s(x,y, k =8) + source * inoculum,
-            data = eeeo)
+mod5_eo <- gam(das ~ s(x,y, k =5) + source * inoculum,
+            data = eeeo[fungicide != "treated"])
 summary(mod5_eo)
 ```
 
@@ -386,7 +391,7 @@ The intercept here represents:
 and averages around `r interpret_gam(mod5_eo, 0)` days 
 `r interpret_gam(mod5_eo, 4)` sowing.  
   
-#### Remote sensing variables  
+##### Remote sensing variables  
 Sentinel 2 estimated epidemic onset an average of 
 `r interpret_gam(mod5_eo, 0,"sources2")` days 
 `r interpret_gam(mod5_eo, 5,"sources2")` than observed EO.  
@@ -395,72 +400,89 @@ UAS estimated epidemic onset an average of
 `r interpret_gam(mod5_eo, 0,"sourceuas")` days 
 `r interpret_gam(mod5_eo, 5,"sources2")` than observed EO.  
 
-#### Inoculation effect
+##### Inoculation effect
 
 Observed EO dates within inoculated areas were on average 
-`r interpret_gam(mod5_eo, 0,"inoculumino")` days 
-`r interpret_gam(mod5_eo, 5,"inoculumino")` 
+`r interpret_gam(mod5_eo, 0,"inoculuminoculated")` days 
+`r interpret_gam(mod5_eo, 5,"inoculuminoculated")` 
 days earlier than non-inoculated areas.  
 
 However EEEO dates in inoculated areas produced by remote sensing methods 
 S2 and UAS were
 `r interpret_gam(mod5_eo, 0,"sources2:inoculuminoculated")` and 
-`r interpret_gam(mod5_eo, 0,"sourceuav:inoculumino")` days 
+`r interpret_gam(mod5_eo, 0,"sourceuas:inoculuminoculated")` days 
 `r interpret_gam(mod5_eo, 5,"sourceuas:inoculuminoculated")` than the observed EO days.  
 
-#### spatial effect  
+##### Spatial Effect  
 
 ```{r mod5_spatial}
 plot(mod5_eo)
 ```
 
+The spatial effect shows northern parts of the field showed earlier observed 
+epidemic onset compared to Southern areas.
+
+
+#### Model 6  
+
+> Does the interaction still hold up when fungicide is excluded
+
 ```{r eo_model_data6}
-mod6 <- gam(das ~ s(x,y, k = 8) + source * inoculum,
+mod6_eo <- gam(das ~ s(x,y, k = 5) + source + inoculum,
             data = eeeo[fungicide != "treated"])
-summary(mod5a)
+summary(mod6_eo)
 ```
-#### Intercept  
+
+
+##### Intercept  
 The intercept here represents:
  > Observed EO dates in non-inoculated areas  
 
-and averages around `r round(unname(mod5a$coefficients["(Intercept)"]),2)` days
-after sowing.  
+
+and averages around `r interpret_gam(mod6_eo, 0)` days 
+`r interpret_gam(mod6_eo, 4)` sowing.  
   
-#### Remote sensing variables  
-Sentinel 2 estimated epidemic onset an average of `r round(unname(mod5a$coefficients["sources2"]),2)`
-days earlier than observed EO.  
+##### Remote sensing variables  
+Sentinel 2 estimated epidemic onset an average of 
+`r interpret_gam(mod6_eo, 0,"sources2")` days 
+`r interpret_gam(mod6_eo, 5,"sources2")` than observed EO.  
 
-UAS estimated epidemic onset an average of `r round(unname(mod5a$coefficients["sourceuav"]),2)`
-days earlier than observed EO.  
+UAS estimated epidemic onset an average of 
+`r interpret_gam(mod6_eo, 0,"sourceuas")` days 
+`r interpret_gam(mod6_eo, 5,"sourceuas")` than observed EO.  
 
-#### Inoculation effect
+##### Inoculation effect
 
-Observed EO dates within inoculated areas were on average `r round(unname(mod5a$coefficients["inoculumino"]),2)`
-days earlier than non-inoculated areas.  
+Observed EO dates within inoculated areas were on average 
+`r interpret_gam(mod6_eo, 0,"inoculuminoculated")` days 
+`r interpret_gam(mod6_eo, 5,"inoculuminoculated")` days 
+than non-inoculated areas.  
 
-However EEEO dates in inoculated areas produced by remote sensing methods S2 and UAS were
-`r round(unname(mod5a$coefficients["sources2:inoculumino"]),2)` and 
-`r round(unname(mod5a$coefficients["sourceuav:inoculumino"]),2)` days later than
-the observed EO days.  
+However EEEO dates in inoculated areas produced by remote sensing methods 
+S2 and UAS were
+`r interpret_gam(mod6_eo, 0,"sources2:inoculuminoculated")` and 
+`r interpret_gam(mod6_eo, 0,"sourceuav:inoculuminoculated")` days 
+`r interpret_gam(mod6_eo, 5,"sourceuas:inoculuminoculated")` than the observed EO days.  
 
-#### spatial effect  
+##### Spatial Effect  
 ```{r}
-plot(mod5a)
+plot(mod6_eo)
 ```
 
+The spatial effect shows northern parts of the field showed earlier observed 
+epidemic onset compared to Southern areas.
 
-Model comparisons
+### Model comparisons
 
-```{r}
-# AIC(mod2,
-#     mod3,
-#     mod4,
-#     mod5)
-# anova(mod4,mod5)
+```{r model_comparisons}
+anova(mod5_eo,mod6_eo)
+AIC(mod5_eo,mod6_eo)
 ```
 
+There is a significant difference between these models and model 5, with the
+interaction shows a lower AIC.  
 
-### Proportional successes 
+### Proportional successes  
 
 > What is the proportion of observed EO occuring later than EEEO?  
 
@@ -504,7 +526,7 @@ eeeo[source != "observation"] |>
        y = "Density") +
   theme(legend.position = "top")+
   scale_fill_viridis_d()+
-  geom_vline(xintercept = 0, linetype = "dashed", color = "black", size = 1)
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black", linewidth = 1)
 
 ```
 
