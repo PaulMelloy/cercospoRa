@@ -246,7 +246,8 @@ and inoculated areas.
 
 ```{r}
 cclosure_estimates <- 
-  as.data.frame(round(summary(mod5)$p.table,3)) |>
+  data.table(Variable = c("Intercept","UAS","Inoculated Area","UAS : Inoculated"),
+             round(summary(mod5)$p.table,3))[,c(1,2,3,5)] |>
    flextable() %>%
    align(align = "center", part = "all") %>%
    fontsize(size = 8, part = "body") %>%
@@ -260,8 +261,6 @@ cclosure_estimates <-
    autofit()
 
 cclosure_estimates
-
-data.table(Variable = c("Intercept","UAS,","inco","UAS:Inoc"),round(summary(mod5)$p.table,3))
 ```
 
 
@@ -520,6 +519,30 @@ plot(mod6_eo)
 
 The spatial effect shows northern parts of the field showed earlier observed 
 epidemic onset compared to Southern areas.
+
+<br>  
+
+##### Results Table  
+
+```{r}
+eeeo_estimates <- 
+  data.table(Variable = c("Intercept","Sentinal-2","UAS","Observed : Inoculated Area","S2 : Inoculated","UAS : Inoculated"),
+             round(summary(mod5_eo)$p.table,3))[,c(1,2,3,5)] |>
+   flextable() %>%
+   align(align = "center", part = "all") %>%
+   fontsize(size = 8, part = "body") %>%
+   fontsize(size = 10, part = "header") %>%
+   italic(italic = TRUE, part = "header") %>%
+   set_caption(
+      "Table ##: Estimated epidemic onset in days after sowing (DAS) and the mean
+      difference to the non-inoculated sentinal-2 data (intercept). 
+      P values indicate statistical significance in comparison to the intercept."
+   ) %>%
+   autofit()
+
+eeeo_estimates
+```
+
 
 <br>  
 <br>  
