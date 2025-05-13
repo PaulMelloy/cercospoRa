@@ -543,7 +543,9 @@ epidemic onset compared to Southern areas.
 
 ```{r}
 eeeo_estimates <- 
-  data.table(Variable = c("Intercept","Super Sentinal-2","Sentinal-2","UAS","Observed : Inoculated Area","Super S2 : Inoculated","S2 : Inoculated","UAS : Inoculated"),
+  data.table(Variable = c("Intercept","Sentinal-2","Super Sentinal-2","UAS",
+                          "Observed : Inoculated Area","S2 : Inoculated","Super S2 : Inoculated",
+                          "UAS : Inoculated"),
              round(summary(mod5_eo)$p.table,3))[,c(1,2,3,5)] |>
    flextable() |>
    align(align = "center", part = "all") |>
@@ -558,6 +560,7 @@ eeeo_estimates <-
    autofit()
 
 eeeo_estimates
+save_as_docx(eeeo_estimates, path = "./earliest_onsets_estimates.docx")
 ```
 
 
