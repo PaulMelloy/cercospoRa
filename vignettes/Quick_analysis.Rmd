@@ -17,8 +17,8 @@ source("../R/interpret_gam.R")
 
 ### Read in data
 ```{r read_data}
-cclo <- fread("../data/20250608_cercospoRa_analysis_df_cc(in).csv")[, "data" := "canopy_closure"]
-eeeo <- fread("../data/20250607_cercospoRa_analysis_df.csv")[, "data" := "epidemic_onset"]
+cclo <- fread("../data/2025-05-13_fulldf_cc_cercospoRa(in).csv")[, "data" := "canopy_closure"]
+eeeo <- fread("../data/2025-05-13_fulldf_eo_cercospoRa(in).csv")[, "data" := "epidemic_onset"]
 ```
 
 We will combine the data so we can associate observation locations with canopy 
@@ -36,11 +36,11 @@ We need to change the headings so they have the same names and join them.
 #### Rename variables  
 ```{r rename_cols}
 setnames(cclo,
-         old = c("cc","region","treatment"),
+         old = c("cc","area","treatment"),
          new = c("das","inoculum","fungicide"))
 
 setnames(eeeo,
-         old = c("region","treatment"),
+         old = c("area","treatment"),
          new = c("inoculum","fungicide"))
 
 # Remove date column
@@ -59,11 +59,11 @@ dat <- rbind(cclo,eeeo)
 unique(dat$fungicide)
 
 unique(dat$inoculum)
-dat[inoculum == "roi", inoculum := "non-inoculated"]
-dat[inoculum == "ino", inoculum := "inoculated"]
+# dat[inoculum == "roi", inoculum := "non-inoculated"]
+# dat[inoculum == "ino", inoculum := "inoculated"]
 
 unique(dat$source)
-dat[source == "uav", source := "uas"]
+#dat[source == "uav", source := "uas"]
 
 
 # Relevel fungicide factor
@@ -201,7 +201,12 @@ mod3 <- gam(das ~ s(x,y, k = 11) + source + inoculum * fungicide,
 summary(mod3)
 ```
 
-There is no significant interaction, however it seems close.  
+There is a 
+`r interpret_gam(mod3,coef = "inoculuminoculated:fungicidetreated" ,sig = TRUE)` interaction, 
+between fungicide and inoculum 
+(P = `r interpret_gam(mod3, 0,coef = "inoculuminoculated:fungicidetreated" ,sig = TRUE)`.  
+Inoculated areas in fungicide treated plots show 
+`r interpret_gam(mod3,5,coef = "inoculuminoculated:fungicidetreated",)` canopy closure date.
 
 <br>  
 
@@ -211,7 +216,8 @@ There is no significant interaction, however it seems close.
 
 ```{r model_data4}
 mod4 <- gam(das ~ s(x,y, k = 11) + source * fungicide + inoculum,
-            data = cclo)
+            data = cclo,
+            method = "REML")
 summary(mod4)
 ```
 
@@ -235,7 +241,8 @@ closure?
 
 ```{r model_data5}
 mod5 <- gam(das ~ s(x,y, k = 7) + source * inoculum,
-            data = cclo[fungicide == "untreated"])
+            data = cclo[fungicide == "untreated"],
+            method = "REML")
 summary(mod5)
 ```
 
@@ -244,20 +251,22 @@ and inoculated areas.
 
 ##### results table  
 
+
+
 ```{r}
 cclosure_estimates <- 
-  data.table(Variable = c("Intercept","UAS","Inoculated Area","UAS : Inoculated"),
+  data.table(Variable = c("Intercept","Super S2","UAS","Inoculated Area","Super S2 : Inoculated","UAS : Inoculated"),
              round(summary(mod5)$p.table,3))[,c(1,2,3,5)] |>
-   flextable() %>%
-   align(align = "center", part = "all") %>%
-   fontsize(size = 8, part = "body") %>%
-   fontsize(size = 10, part = "header") %>%
-   italic(italic = TRUE, part = "header") %>%
+   flextable() |>
+   align(align = "center", part = "all") |>
+   fontsize(size = 8, part = "body") |>
+   fontsize(size = 10, part = "header") |>
+   italic(italic = TRUE, part = "header") |>
    set_caption(
       "Table ##: Estimated canopy closure in days after sowing (DAS) and the mean
       difference to the non-inoculated sentinal-2 data (intercept). 
       P values indicate statistical significance in comparison to the intercept."
-   ) %>%
+   ) |>
    autofit()
 
 cclosure_estimates
@@ -270,7 +279,8 @@ cclosure_estimates
 
 ```{r model_data6}
 mod6 <- gam(das ~ s(x,y, k = 7) + source + inoculum,
-            data = cclo[fungicide == "untreated"])
+            data = cclo[fungicide == "untreated"],
+            method = "REML")
 summary(mod6)
 ```
 
@@ -310,6 +320,34 @@ anova(mod5,mod6)
 ```
 
 No significant difference, use simpler model mod6.  
+
+
+##### results table  
+
+
+
+```{r}
+cclosure_estimates6 <- 
+  data.table(Variable = c("Intercept","Super S2","UAS","Inoculated Area"),
+             round(summary(mod6)$p.table,3))[,c(1,2,3,5)] |>
+   flextable() |>
+   align(align = "center", part = "all") |>
+   fontsize(size = 8, part = "body") |>
+   fontsize(size = 10, part = "header") |>
+   italic(italic = TRUE, part = "header") |>
+   set_caption(
+      "Table ##: Estimated canopy closure in days after sowing (DAS) and the mean
+      difference to the non-inoculated sentinal-2 data (intercept). 
+      P values indicate statistical significance in comparison to the intercept."
+   ) |>
+   autofit()
+
+cclosure_estimates6
+save_as_docx(cclosure_estimates6, path = "./cclosure_estimates.docx")
+```
+
+
+<br>  
 
 <br>  
 <br>  
@@ -418,9 +456,27 @@ mod4_eo <- gam(das ~ s(x,y, k = 5) + source * inoculum * fungicide,
 summary(mod4_eo)
 ```
 
-As expected fungicide treated areas lead to later epidemic onset, 
+As fungicide treated areas lead to 
+`r interpret_gam(mod4_eo, 5 ,"fungicidetreated")` epidemic onset, 
 however this was not observed with remote sensing platforms.
+
+In the fungicide treated areas S2 showed 
+`r interpret_gam(mod4_eo, 5 ,"sources2:fungicidetreated")` estimated epidemic onset, 
+super S2 showed 
+`r interpret_gam(mod4_eo, 5 ,"sources2s:fungicidetreated")` estimated epidemic onset, 
+and USAS showed
+`r interpret_gam(mod4_eo, 5 ,"sourceuas:fungicidetreated")` estimated epidemic onset, 
 This was likely due to non-treated areas returning later canopy closure.  
+
+Inoculated areas in fungicide treated plots showed for S2
+`r interpret_gam(mod4_eo, 5 ,"sources2:inoculuminoculated:fungicidetreated")` estimated epidemic onset, 
+super S2 showed 
+`r interpret_gam(mod4_eo, 5 ,"sources2s:inoculuminoculated:fungicidetreated")` estimated epidemic onset, 
+and USAS showed
+`r interpret_gam(mod4_eo, 5 ,"sourceuas:inoculuminoculated:fungicidetreated")` estimated epidemic onset, 
+compared to non-inoculated areas.
+
+
 
 ### Drop Fungicide Treatment  
 
@@ -451,11 +507,15 @@ Sentinel 2 estimated epidemic onset an average of
 `r interpret_gam(mod5_eo, 0,"sources2")` days 
 `r interpret_gam(mod5_eo, 5,"sources2")` than observed EO.  
 
-UAS estimated epidemic onset an average of 
-`r interpret_gam(mod5_eo, 0,"sourceuas")` days 
-`r interpret_gam(mod5_eo, 5,"sources2")` than observed EO.  
+Super Resolution Sentinel 2 estimated earliest epidemic onset an average of 
+`r interpret_gam(mod5_eo, 0,"sources2s")` days 
+`r interpret_gam(mod5_eo, 5,"sources2s")` than observed EO.  
 
-##### **Inoculation effect**
+UAS estimated earliest estimated epidemic onset an average of 
+`r interpret_gam(mod5_eo, 0,"sourceuas")` days 
+`r interpret_gam(mod5_eo, 5,"sourceuas")` than observed EO.  
+
+##### **Inoculation effect**  
 
 Observed EO dates within inoculated areas were on average 
 `r interpret_gam(mod5_eo, 0,"inoculuminoculated")` days 
@@ -463,8 +523,9 @@ Observed EO dates within inoculated areas were on average
 days earlier than non-inoculated areas.  
 
 However EEEO dates in inoculated areas produced by remote sensing methods 
-S2 and UAS were
-`r interpret_gam(mod5_eo, 0,"sources2:inoculuminoculated")` and 
+S2 , super S2 and UAS were
+`r interpret_gam(mod5_eo, 0,"sources2:inoculuminoculated")`,
+`r interpret_gam(mod5_eo, 0,"sources2s:inoculuminoculated")` and 
 `r interpret_gam(mod5_eo, 0,"sourceuas:inoculuminoculated")` days 
 `r interpret_gam(mod5_eo, 5,"sourceuas:inoculuminoculated")` than the observed EO days.  
 
@@ -476,6 +537,29 @@ plot(mod5_eo)
 
 The spatial effect shows northern parts of the field showed earlier observed 
 epidemic onset compared to Southern areas.
+
+
+##### Results Table  
+
+```{r}
+eeeo_estimates <- 
+  data.table(Variable = c("Intercept","Super Sentinal-2","Sentinal-2","UAS","Observed : Inoculated Area","Super S2 : Inoculated","S2 : Inoculated","UAS : Inoculated"),
+             round(summary(mod5_eo)$p.table,3))[,c(1,2,3,5)] |>
+   flextable() |>
+   align(align = "center", part = "all") |>
+   fontsize(size = 8, part = "body") |>
+   fontsize(size = 10, part = "header") |>
+   italic(italic = TRUE, part = "header") |>
+   set_caption(
+      "Table ##: Estimated epidemic onset in days after sowing (DAS) and the mean
+      difference to the non-inoculated sentinal-2 data (intercept). 
+      P values indicate statistical significance in comparison to the intercept."
+   ) |>
+   autofit()
+
+eeeo_estimates
+```
+
 
 
 <br>  
@@ -501,6 +585,10 @@ Sentinel 2 estimated epidemic onset an average of
 `r interpret_gam(mod6_eo, 0,"sources2")` days 
 `r interpret_gam(mod6_eo, 5,"sources2")` than observed EO.  
 
+Super Resolution Sentinel 2 estimated epidemic onset an average of 
+`r interpret_gam(mod6_eo, 0,"sources2s")` days 
+`r interpret_gam(mod6_eo, 5,"sources2s")` than observed EO.  
+
 UAS estimated epidemic onset an average of 
 `r interpret_gam(mod6_eo, 0,"sourceuas")` days 
 `r interpret_gam(mod6_eo, 5,"sourceuas")` than observed EO.  
@@ -519,29 +607,6 @@ plot(mod6_eo)
 
 The spatial effect shows northern parts of the field showed earlier observed 
 epidemic onset compared to Southern areas.
-
-<br>  
-
-##### Results Table  
-
-```{r}
-eeeo_estimates <- 
-  data.table(Variable = c("Intercept","Sentinal-2","UAS","Observed : Inoculated Area","S2 : Inoculated","UAS : Inoculated"),
-             round(summary(mod5_eo)$p.table,3))[,c(1,2,3,5)] |>
-   flextable() %>%
-   align(align = "center", part = "all") %>%
-   fontsize(size = 8, part = "body") %>%
-   fontsize(size = 10, part = "header") %>%
-   italic(italic = TRUE, part = "header") %>%
-   set_caption(
-      "Table ##: Estimated epidemic onset in days after sowing (DAS) and the mean
-      difference to the non-inoculated sentinal-2 data (intercept). 
-      P values indicate statistical significance in comparison to the intercept."
-   ) %>%
-   autofit()
-
-eeeo_estimates
-```
 
 
 <br>  
