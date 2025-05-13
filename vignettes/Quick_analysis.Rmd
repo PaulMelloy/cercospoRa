@@ -554,7 +554,7 @@ eeeo_estimates <-
    italic(italic = TRUE, part = "header") |>
    set_caption(
       "Table ##: Estimated epidemic onset in days after sowing (DAS) and the mean
-      difference to the non-inoculated sentinal-2 data (intercept). 
+      difference to the non-inoculated observed epidemic onset days (intercept). 
       P values indicate statistical significance in comparison to the intercept."
    ) |>
    autofit()
@@ -651,11 +651,10 @@ tbl_prop_success <-
                     prop_success = "∝ success") |>
    fontsize(size = 8, part = "body") |>
    fontsize(size = 10, part = "header") |>
-   bg(i = seq(2,5,2),bg = "grey80",part = "body")|>
-   set_caption("Proportion of RS earliest estimated onset dates occurring prior to observed epidemic onset")
+   set_caption("Table ##: Proportion success of RS estimated onset dates occuring prior to spatially proximal observed epidemic onset")
 
 tbl_prop_success
-#save_as_docx(tbl_prop_success, path = "./prop_success.docx")
+save_as_docx(tbl_prop_success, path = "./prop_success.docx")
 ```
 
 
