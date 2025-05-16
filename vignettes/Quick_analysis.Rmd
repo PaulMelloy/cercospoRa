@@ -327,10 +327,14 @@ No significant difference, use simpler model mod6.
 
 
 ```{r}
-cclosure_estimates6 <- 
+icept <- round(unname(mod6$coefficients["(Intercept)"]),3)
+tbl_dat <-  
   data.table(Variable = c("Intercept","Super S2","UAS","Inoculated Area"),
-             round(summary(mod6)$p.table,3))[,c(1,2,3,5)] |>
-   flextable() |>
+             round(summary(mod6)$p.table,3))[,c(1,2,3,5)][
+               Estimate != icept, Estimate := Estimate + mod6$coefficients["(Intercept)"]]
+cclosure_estimates6 <- 
+  tbl_dat |>
+  flextable() |>
    align(align = "center", part = "all") |>
    fontsize(size = 8, part = "body") |>
    fontsize(size = 10, part = "header") |>
@@ -542,11 +546,36 @@ epidemic onset compared to Southern areas.
 ##### Results Table  
 
 ```{r}
+var_names <- names(mod5_eo$coefficients)
+
+icept <- round(unname(mod5_eo$coefficients["(Intercept)"]),3)
+
+adj_coefs <- unname(
+  c(mod5_eo$coefficients["(Intercept)"],
+    mod5_eo$coefficients["(Intercept)"] + mod5_eo$coefficients[var_names[2]],
+    mod5_eo$coefficients["(Intercept)"] + mod5_eo$coefficients[var_names[3]],
+    mod5_eo$coefficients["(Intercept)"] + mod5_eo$coefficients[var_names[4]],
+    mod5_eo$coefficients["(Intercept)"] + mod5_eo$coefficients[var_names[5]],
+    mod5_eo$coefficients["(Intercept)"] + mod5_eo$coefficients[var_names[2]] + 
+      mod5_eo$coefficients[var_names[5]] + mod5_eo$coefficients[var_names[6]],
+    mod5_eo$coefficients["(Intercept)"] + mod5_eo$coefficients[var_names[3]] + 
+      mod5_eo$coefficients[var_names[5]] + mod5_eo$coefficients[var_names[7]],
+    mod5_eo$coefficients["(Intercept)"] + mod5_eo$coefficients[var_names[4]] + 
+      mod5_eo$coefficients[var_names[5]] + mod5_eo$coefficients[var_names[7]]
+  ))
+
+
+tbl_dat <-  
+  data.table(Variable = c("Intercept","Super S2","UAS","Inoculated Area"),
+             round(summary(mod6)$p.table,3))[,c(1,2,3,5)][
+               Estimate != icept, Estimate := Estimate + mod6$coefficients["(Intercept)"]]
+
 eeeo_estimates <- 
   data.table(Variable = c("Intercept","Sentinal-2","Super Sentinal-2","UAS",
                           "Observed : Inoculated Area","S2 : Inoculated","Super S2 : Inoculated",
                           "UAS : Inoculated"),
-             round(summary(mod5_eo)$p.table,3))[,c(1,2,3,5)] |>
+             Estimate = round(adj_coefs,3),
+             round(summary(mod5_eo)$p.table[,c(2,4)],3)) |>
    flextable() |>
    align(align = "center", part = "all") |>
    fontsize(size = 8, part = "body") |>
