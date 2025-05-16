@@ -15,6 +15,20 @@ library(mgcv) # gam models
 source("../R/interpret_gam.R")
 ```
 
+```{r get_das}
+calc_das <- function(d,days, Sd = "2022-03-31"){
+  if(missing(days)){
+    as.POSIXct(d, format = "%Y-%m-%d") - as.POSIXct(Sd, format = "%Y-%m-%d")
+  }else{
+      if(missing(d)){
+        as.POSIXct(Sd, format = "%Y-%m-%d") + (days * 60 * 60 * 24)
+      }
+    }
+}
+calc_das("2022-05-15")
+calc_das(days = 156)
+```
+
 ### Read in data
 ```{r read_data}
 cclo <- fread("../data/2025-05-13_fulldf_cc_cercospoRa(in).csv")[, "data" := "canopy_closure"]
