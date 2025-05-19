@@ -32,7 +32,7 @@ install.packages("cercospoRa")
 ... or the development version from github  
 
 ```
-remotes::install_github(repo = "PaulMelloy/cercospoRa")
+remotes::install_github(repo = "PaulMelloy/cercospoRa", ref = "dev")
 ```
 
 <br>  
