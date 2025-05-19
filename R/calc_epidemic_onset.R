@@ -38,7 +38,7 @@ calc_epidemic_onset <- function(start,
   if(missing(end)) end <- as.Date(last(weather$times))
   if(missing(c_closure)){
     warning("'c_closure' not supplied, setting 'start' as canopy closure date")
-    start <- c_closure
+    c_closure <- start
   }
 
   c_closure <- as.POSIXct(c_closure,tz = "UTC")
