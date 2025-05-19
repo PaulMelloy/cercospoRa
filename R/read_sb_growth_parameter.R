@@ -11,8 +11,8 @@
 #'  meters.
 #'
 #' @return \code{SpatRast} with a layer for each input layer. Each layer
-#'  contains is named according to the \code{img_dates}. The output
-#'  \code{SpatRast} is suitable for input in \code{calc_r_x0()}
+#'  is named according to the \code{img_dates}.
+#'  The output \code{SpatRast} is suitable for input in \code{calc_r_x0()}
 #'
 #' @export
 #'

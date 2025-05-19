@@ -8,8 +8,9 @@
 #'  difference between low and highly susceptible cultivars minimum cDIV on each
 #'  starting time in Table 2 was 4.637.
 #'
-#' @param var_scale numeric, BBCH scale (1-9) of the sugar beet cultivars.
+#' @param var_scale numeric, bsa scale (1-9) of the sugar beet cultivars.
 #'  1 is the lowest susceptibility and 9 is the highest susceptibility.
+#'  See https://www.bundessortenamt.de and Wolf and Verreet (2005) Table 1.
 #'
 #' @returns numeric, cDIV threshold for the start of the epidemic
 #'

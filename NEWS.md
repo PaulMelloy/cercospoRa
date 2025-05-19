@@ -1,9 +1,15 @@
 # cercospoRa (development version)
 
+  - Improved estimations of cultivar susceptibility on epidemic onset date 
+  issue #38 and #42
+  - Clarify cultivar susceptibility references and bsa index.
   - Update README  
   - Add spelling package to suggests  
+  - relative humidity thresholds are now a variable on calc_epidemic_onset #40  
   - Corrected unit tests  
   - expand vignette to look at range of pixelwise epidemic onsets
+  - fix variable assignment bug, see issue #41  
+  - Formatting and grammar improvements  
 
 # cercospoRa 0.0.1
 
