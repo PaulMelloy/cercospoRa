@@ -49,6 +49,6 @@ calc_c_closure <- function(param_rxt,
   x0 <- param_rxt$x0
   r <- param_rxt$r
   t0 <- param_rxt$t0
-  c_closure <- as.numeric(t0)/(24*60*60) + round(log( x1*(k-x0)/(x0*(k-x1)))/r,0)
-  return(c_closure)
+  cc_r <- as.numeric(t0)/(24*60*60) + round(log( x1*(k-x0)/(x0*(k-x1)))/r,0)
+  return(cc_r)
 }
