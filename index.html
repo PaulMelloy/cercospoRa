@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Process Based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet • cercospoRa</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -29,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">cercospoRa</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,14 +65,17 @@
 </div>
 <!-- badges: start -->
 
-<p>This R package, <code>cercospoRa</code>, takes steps to automate the epidemiological modelling of Cercospora leaf spot epidemics in <em>Cercospora beticola</em> in sugar beet farms, available as an R package. The package contains functions to use remotely sensed spatially explicit empirical data to estimate leaf area index (LAI) when the crop canopy closes. Crop canopy closure is a key variable in modelling the estimating when growers will need to be vigilant and protect their crop with fungicides to prevent a yield limiting Cercospora leaf spot epidemic.</p>
+<p>This R package, <code>cercospoRa</code>, takes steps to automate the epidemiological modelling of Cercospora leaf spot (CLS) epidemics in <em>Cercospora beticola</em> in sugar beet farms. The package contains functions to use remotely sensed spatially explicit empirical data to estimate leaf area index (LAI) when the crop canopy closes. Crop canopy closure is one key variable in estimating when growers need to be vigilant, and commence scouting their crops for CLS disease incidence. Once CLS epidemic incidence shows at lease 50 % of leaves with one or more lesions, ‘epidemic onset’ is deemed to have occured. This negative prognosis model attempts to estimate the earliest possible date when ‘epidemic onset’ is likely to occur, based on weather conditions. Farmers can be reasonably confident an epidemic has not occured prior to the dates estimated by this model.</p>
+<p>Once epidemic onset has occured a decision to protect their crop with fungicides is needed to prevent yield limiting Cercospora leaf spot epidemic.</p>
 <p><code>cercospoRa</code> uses functions described by Wolf and Verreet (2005) “Factors Affecting the Onset of Cercospora Leaf Spot Epidemics in Sugar Beet and Establishment of Disease-Monitoring Thresholds” <em>Phytopathology</em></p>
 <p><br></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Install the package from this github repository</p>
-<pre><code><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"PaulMelloy/cercospoRa"</span><span class="op">)</span></span></code></pre>
+<p>Install the stable release version from CRAN</p>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"cercospoRa"</span><span class="op">)</span></span></code></pre>
+<p>… or the development version from github</p>
+<pre><code><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"PaulMelloy/cercospoRa"</span>, ref <span class="op">=</span> <span class="st">"dev"</span><span class="op">)</span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -82,16 +84,17 @@
 <div class="section level3">
 <h3 id="format-weather-data">Format weather data<a class="anchor" aria-label="anchor" href="#format-weather-data"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paul.melloy.com.au/cercospoRa/" class="external-link">cercospoRa</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulmelloy.com.au/cercospoRa/" class="external-link">cercospoRa</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Inspect raw weather station data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">cercospoRa</span><span class="fu">::</span><span class="va"><a href="reference/weathr.html">weathr</a></span><span class="op">)</span></span></code></pre></div>
 <p><code>weathr</code> is a <code>data.table</code> containing weather data recorded at a sugar beet field trial observing the spread and severity of <em>C. beticola</em>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># make a copy of the data</span></span>
-<span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="va">weathr</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Make a copy of the data so we can modify the formatting without affecting the </span></span>
+<span><span class="co">#  raw data</span></span>
+<span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="va">weathr</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Format times to POSIXct time with UTC timezone</span></span>
 <span><span class="va">wthr</span><span class="op">[</span>,<span class="va">Time</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">Datum</span>, <span class="st">" "</span>,<span class="va">Stunde</span>,<span class="st">":00"</span><span class="op">)</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span><span class="op">]</span></span>
@@ -101,18 +104,18 @@
 <span><span class="co">#  decide the closest weather station to pull weather from</span></span>
 <span><span class="va">wthr</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lon"</span>,<span class="st">"lat"</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">9.916</span>,<span class="fl">51.41866</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
-<span><span class="co"># weather is hourly and will error if we don't specify a standard deviation of </span></span>
+<span><span class="co"># Weather is hourly and will error if we don't specify a standard deviation of </span></span>
 <span><span class="co">#  weather direction. This is intentional to force the user to decide how variable</span></span>
 <span><span class="co">#  the wind direction data could be.</span></span>
 <span><span class="va">wthr</span><span class="op">[</span>, <span class="va">wd_std</span> <span class="op">:=</span> <span class="fl">20</span><span class="op">]</span></span>
 <span></span>
-<span><span class="co"># remove all data after September as it contains missing data</span></span>
+<span><span class="co"># Remove all data after September as it contains missing data</span></span>
 <span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="va">wthr</span><span class="op">[</span><span class="va">Datum</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-10-01"</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
-<span><span class="co"># set NA wind speed values to zero</span></span>
+<span><span class="co"># Set NA wind speed values to zero</span></span>
 <span><span class="va">wthr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">WG200</span><span class="op">)</span>,<span class="va">WG200</span> <span class="op">:=</span> <span class="fl">0</span><span class="op">]</span></span>
 <span></span>
-<span><span class="co"># set NA wind direction values to 20 degrees. Wind is not important for this model</span></span>
+<span><span class="co"># Set NA wind direction values to 20 degrees. Wind is not important for this model</span></span>
 <span><span class="va">wthr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">WR200</span><span class="op">)</span>,<span class="va">WR200</span> <span class="op">:=</span> <span class="fl">20</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># format_weather() formats weather data to </span></span>
@@ -138,34 +141,35 @@
 <div class="section level3">
 <h3 id="calculate-the-proportional-progress-towards-an-epidemic">Calculate the proportional progress towards an epidemic<a class="anchor" aria-label="anchor" href="#calculate-the-proportional-progress-towards-an-epidemic"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># susceptible cultivar</span></span>
-<span><span class="fu"><a href="reference/calc_epidemic_onset.html">calc_epidemic_onset</a></span><span class="op">(</span>c_closure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-07-01"</span><span class="op">)</span>,</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Resistant cultivar</span></span>
+<span><span class="fu"><a href="reference/calc_epidemic_onset.html">calc_epidemic_onset</a></span><span class="op">(</span>c_closure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-07-30"</span><span class="op">)</span>,</span>
 <span>                    weather <span class="op">=</span> <span class="va">wthr</span>,</span>
 <span>                    cultivar_sus <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co"># resistant cultivar                    </span></span>
-<span><span class="fu"><a href="reference/calc_epidemic_onset.html">calc_epidemic_onset</a></span><span class="op">(</span>c_closure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-07-01"</span><span class="op">)</span>,</span>
+<span><span class="co"># Susceptible cultivar                    </span></span>
+<span><span class="fu"><a href="reference/calc_epidemic_onset.html">calc_epidemic_onset</a></span><span class="op">(</span>c_closure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-07-30"</span><span class="op">)</span>,</span>
 <span>                    weather <span class="op">=</span> <span class="va">wthr</span>,</span>
-<span>                    cultivar_sus <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>                    </span>
+<span>                    cultivar_sus <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>                    </span>
 <span>                    </span></code></pre></div>
 <p>This returns a <code>POSIXct</code> date for the onset of an epidemic for the susceptible and more resistant cultivar. If the input weather data does not provide a window where a epidemic onset date is met, the proportional progress towards an epidemic is returned.</p>
-<p><code><a href="reference/calc_epidemic_onset.html">calc_epidemic_onset()</a></code> is a wrapper for <code><a href="reference/calc_DIV.html">calc_DIV()</a></code> which returns a data.table detailing the daily contribution towards the “daily infection values” (Wolf and Verreet, 2005). For more detailed output of daily infection values call <code><a href="reference/calc_DIV.html">calc_DIV()</a></code></p>
+<p><code><a href="reference/calc_epidemic_onset.html">calc_epidemic_onset()</a></code> is a wrapper for <code><a href="reference/calc_DIV.html">calc_DIV()</a></code> which implements the effect of the cultivar susceptibility on the epidemic onset date. <code><a href="reference/calc_DIV.html">calc_DIV()</a></code> however returns a data.table detailing the daily contribution towards the “daily infection values” (Wolf and Verreet, 2005) and is agnostic of cultivar susceptibility.<br>
+For more detailed output of daily infection values call <code><a href="reference/calc_DIV.html">calc_DIV()</a></code></p>
 <p><br></p>
 </div>
 <div class="section level3">
 <h3 id="calculate-daily-infection-values">Calculate daily infection values<a class="anchor" aria-label="anchor" href="#calculate-daily-infection-values"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/calc_DIV.html">calc_DIV</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">wthr</span><span class="op">)</span></span></code></pre></div>
 <p>This produces a <code>data.table</code> detailing the daily infection value for each day using the method described in Wolf and Verreet (2005).</p>
-<p><strong>Note:</strong> Missing humidity values do not prevent the model from running and these days are assumed to not progress the model. The Racca and Jörg model returns <code>NA</code> values and the Wolf model returns <code>0</code>.</p>
+<p><strong>Note:</strong> Missing humidity values do not prevent the model from running and these days are assumed to not progress the model.</p>
 <p><br></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="notes-for-contributors">Notes for contributors<a class="anchor" aria-label="anchor" href="#notes-for-contributors"></a>
 </h2>
-<p>The <code>main</code> branch is the production branch and only provides functions to recreate the model described in Wolf and Verreet (2005) as explained in the paper. The <code>main</code> branch is locked, please contribute to the <code>dev</code> branch.<br>
+<p>The <code>main</code> branch is the production branch and is the version available on CRAN. The <code>main</code> branch is locked, please contribute to the <code>dev</code> branch.<br>
 The <code>plus_racca</code> (development) branch also includes functions to recreate other <em>C. beticola</em> mechanistic models published by Racca and Jörg (2007) and auxiliary functions which might be helpful for future versions.</p>
 <p><br></p>
 </div>
@@ -204,9 +208,9 @@ The <code>plus_racca</code> (development) branch also includes functions to recr
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Paul Melloy <br><small class="roles"> Author, maintainer, translator, copyright holder </small> <a href="https://orcid.org/0000-0003-4253-7167" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Rene Heim <br><small class="roles"> Author, copyright holder </small> <a href="https://orcid.org/0000-0002-0666-2588" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Nathan Okole <br><small class="roles"> Author, contributor, copyright holder </small> <a href="https://orcid.org/0000-0002-5375-2420" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Paul Melloy <br><small class="roles"> Author, maintainer, translator, copyright holder </small> <a href="https://orcid.org/0000-0003-4253-7167" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Rene Heim <br><small class="roles"> Author, copyright holder </small> <a href="https://orcid.org/0000-0002-0666-2588" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Nathan Okole <br><small class="roles"> Author, contributor, copyright holder </small> <a href="https://orcid.org/0000-0002-5375-2420" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -214,7 +218,7 @@ The <code>plus_racca</code> (development) branch also includes functions to recr
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://paul.melloy.com.au/cercospoRa/" class="external-link"><img src="reference/figures/logo.png" align="right" height="138" alt="cercospoRa website"></a></li>
+<li><a href="https://paulmelloy.com.au/cercospoRa/" class="external-link"><img src="reference/figures/logo.png" align="right" height="138" alt="cercospoRa website"></a></li>
 <li><a href="https://www.repostatus.org/#active" class="external-link"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="repo status"></a></li>
 <li><a href="https://CRAN.R-project.org/package=cercospoRa" class="external-link"><img src="https://www.r-pkg.org/badges/version/cercospoRa" alt="CRAN status"></a></li>
 </ul>
@@ -229,7 +233,7 @@ The <code>plus_racca</code> (development) branch also includes functions to recr
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>

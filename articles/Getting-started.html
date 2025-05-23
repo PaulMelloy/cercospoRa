@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Getting-started • cercospoRa</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">cercospoRa</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,8 +73,18 @@
 <h2 id="setup-and-requirements">Setup and Requirements<a class="anchor" aria-label="anchor" href="#setup-and-requirements"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paul.melloy.com.au/cercospoRa/" class="external-link">cercospoRa</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulmelloy.com.au/cercospoRa/" class="external-link">cercospoRa</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; terra 1.8.50</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'terra'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:data.table':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     shift</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2() is TRUE</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <p>The <code>cercospoRa</code> package estimates the daily infection
 values which tracks the progress towards a <em>Cercospora beticola</em>
 epidemic on sugar beet. The package requires formatted hourly weather
@@ -92,7 +101,7 @@ the user to think about how to replace the <code>NAs</code> or state
 default values to complete the data set.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># classify to data.table</span></span>
-<span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="va">weathr</span><span class="op">)</span></span>
+<span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="va">weathr</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Use POSIXct formatted time.</span></span>
 <span><span class="va">wthr</span><span class="op">[</span>,<span class="va">Time</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">Datum</span>, <span class="st">" "</span>,<span class="va">Stunde</span>,<span class="st">":00"</span><span class="op">)</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span><span class="op">]</span></span>
@@ -111,14 +120,7 @@ default values to complete the data set.</p>
 <span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="va">wthr</span><span class="op">[</span><span class="va">Datum</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-10-01"</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># set NA wind speed values to zero</span></span>
-<span><span class="va">wthr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">WG200</span><span class="op">)</span>, <span class="va">WG200</span> <span class="op">:=</span> <span class="fl">0</span><span class="op">]</span></span>
-<span></span>
-<span><span class="co"># set NA wind direction values to 20 degrees. </span></span>
-<span><span class="co">#  Wind is not important for this model</span></span>
-<span><span class="va">wthr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">WR200</span><span class="op">)</span>,<span class="va">WR200</span> <span class="op">:=</span> <span class="fl">20</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Warning in `[.data.table`(wthr, is.na(WR200), `:=`(WR200, 20)): 20.000000 (type</span></span>
-<span><span class="co">#&gt; 'double') at RHS position 1 taken as TRUE when assigning to type 'logical'</span></span>
-<span><span class="co">#&gt; (column 10 named 'WR200')</span></span></code></pre></div>
+<span><span class="va">wthr</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">WG200</span><span class="op">)</span>, <span class="va">WG200</span> <span class="op">:=</span> <span class="fl">0</span><span class="op">]</span></span></code></pre></div>
 <p>Now we can use the <code><a href="../reference/format_weather.html">format_weather()</a></code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wthr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_weather.html">format_weather</a></span><span class="op">(</span><span class="va">wthr</span>,</span>
@@ -153,9 +155,10 @@ last day for which a epidemic is likely not to start.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">cercospoRa</span><span class="fu">::</span><span class="fu"><a href="../reference/calc_epidemic_onset.html">calc_epidemic_onset</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-04-25"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
 <span>                    end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-09-30"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
-<span>                    c_closure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-07-01"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
-<span>                    weather <span class="op">=</span> <span class="va">wthr</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2022-07-17 UTC"</span></span></code></pre></div>
+<span>                    c_closure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-07-30"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
+<span>                    weather <span class="op">=</span> <span class="va">wthr</span>,</span>
+<span>                    cultivar_sus <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "2022-08-17 UTC"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="estimate-canopy-closure">Estimate canopy closure<a class="anchor" aria-label="anchor" href="#estimate-canopy-closure"></a>
@@ -177,37 +180,41 @@ area index (LAI) rasters.</p>
 <span>                                                  tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
 <span>                           target_res <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">epidemic_onset_param</span></span>
-<span><span class="co">#&gt; class       : SpatRaster </span></span>
-<span><span class="co">#&gt; dimensions  : 17, 29, 2  (nrow, ncol, nlyr)</span></span>
-<span><span class="co">#&gt; resolution  : 0.0001103147, 6.885404e-05  (x, y)</span></span>
-<span><span class="co">#&gt; extent      : 9.915826, 9.919025, 51.49783, 51.499  (xmin, xmax, ymin, ymax)</span></span>
-<span><span class="co">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span></span>
-<span><span class="co">#&gt; source(s)   : memory</span></span>
-<span><span class="co">#&gt; names       : 2022-06-14, 2022-06-28 </span></span>
-<span><span class="co">#&gt; min values  :  0.5216454,  0.8607956 </span></span>
-<span><span class="co">#&gt; max values  :  2.9568495,  3.3260000</span></span></code></pre></div>
-<p>The next function calculates the sugar beet growth rate.</p>
+<span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">epidemic_onset_param</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Getting-started_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+</div>
+<div class="section level2">
+<h2 id="calculate-growth-rate">Calculate growth rate<a class="anchor" aria-label="anchor" href="#calculate-growth-rate"></a>
+</h2>
+<p><code>calc_r_x0</code> calculates the sugar beet growth rate based on
+a minimum of two images.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">param_rxt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calc_r_x0.html">calc_r_x0</a></span><span class="op">(</span><span class="va">epidemic_onset_param</span>,</span>
 <span>                      min_r <span class="op">=</span> <span class="fl">0.02</span>,</span>
 <span>                      max_r <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>                      k <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="calculate-canopy-closure-dates">Calculate canopy closure dates<a class="anchor" aria-label="anchor" href="#calculate-canopy-closure-dates"></a>
+</h2>
 <p>Calculate canopy closure uses a logistic regression to estimate the
 canopy closure date for each raster cell.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">canopy_closure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calc_c_closure.html">calc_c_closure</a></span><span class="op">(</span><span class="va">param_rxt</span>,</span>
 <span>                                 x1 <span class="op">=</span> <span class="fl">1.3</span>,</span>
-<span>                                 k<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+<span>                                 k<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span>
+<span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">canopy_closure</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Getting-started_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Finally we can use a specialised wrapper function to calculate the
-earliest possible onset of a cercospora leaf spot epidemic when chemical
-intervention might be needed.</p>
+earliest estimated cercospora leaf spot epidemic onset dates when
+chemical intervention might be needed.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epidemic_onset_map</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/calc_epidemic_onset_from_image.html">calc_epidemic_onset_from_image</a></span><span class="op">(</span>start <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-04-25"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
 <span>                                 end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2022-09-30"</span>,tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
-<span>                                 c_closure <span class="op">=</span> <span class="va">canopy_closure</span>,</span>
-<span>                                 weather <span class="op">=</span> <span class="va">wthr</span><span class="op">)</span></span>
+<span>                                 cc_r <span class="op">=</span> <span class="va">canopy_closure</span>,</span>
+<span>                                 weather <span class="op">=</span> <span class="va">wthr</span>,</span>
+<span>                                 cultivar_sus <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">epidemic_onset_map</span></span>
 <span><span class="co">#&gt; class       : SpatRaster </span></span>
 <span><span class="co">#&gt; dimensions  : 17, 29, 1  (nrow, ncol, nlyr)</span></span>
@@ -216,20 +223,38 @@ intervention might be needed.</p>
 <span><span class="co">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span></span>
 <span><span class="co">#&gt; source(s)   : memory</span></span>
 <span><span class="co">#&gt; name        :      lyr.1 </span></span>
-<span><span class="co">#&gt; min value   : 1653350400 </span></span>
-<span><span class="co">#&gt; max value   : 1659312000</span></span></code></pre></div>
-<p>plot the heterogeneity of onset date</p>
+<span><span class="co">#&gt; min value   : 1653264000 </span></span>
+<span><span class="co">#&gt; max value   : 1659571200</span></span></code></pre></div>
+<p>Plot the heterogeneity of onset date</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">epidemic_onset_map</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Getting-started_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>Convert numeric date back to POSIXct format</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">epidemic_onset_map</span><span class="op">)</span><span class="op">[</span><span class="fl">120</span><span class="op">:</span><span class="fl">130</span><span class="op">]</span>,</span>
-<span>           tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
-<span>           origin <span class="op">=</span> <span class="st">"1970-01-01"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "2022-07-22 UTC" "2022-07-22 UTC" "2022-07-22 UTC" "2022-07-21 UTC"</span></span>
-<span><span class="co">#&gt;  [5] "2022-07-14 UTC" "2022-07-14 UTC" "2022-07-09 UTC" "2022-07-08 UTC"</span></span>
-<span><span class="co">#&gt;  [9] "2022-07-09 UTC" "2022-07-11 UTC" "2022-07-11 UTC"</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">onset_dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">epidemic_onset_map</span><span class="op">)</span>,</span>
+<span>                          tz <span class="op">=</span> <span class="st">"UTC"</span>,</span>
+<span>                          origin <span class="op">=</span> <span class="st">"1970-01-01"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="plot-date-values">Plot date values<a class="anchor" aria-label="anchor" href="#plot-date-values"></a>
+</h2>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># convert to a data.table</span></span>
+<span><span class="va">dtdate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>pixel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">onset_dates</span><span class="op">)</span>,</span>
+<span>                     ODates <span class="op">=</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/IDateTime.html" class="external-link">as.IDate</a></span><span class="op">(</span><span class="va">onset_dates</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Summarise the range of epidemic onset dates</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">onset_dates</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">onset_dates</span><span class="op">)</span><span class="op">==</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                  Min.               1st Qu.                Median </span></span>
+<span><span class="co">#&gt; "2022-05-23 00:00:00" "2022-06-19 12:00:00" "2022-07-07 00:00:00" </span></span>
+<span><span class="co">#&gt;                  Mean               3rd Qu.                  Max. </span></span>
+<span><span class="co">#&gt; "2022-07-02 16:03:58" "2022-07-17 00:00:00" "2022-08-04 00:00:00"</span></span>
+<span></span>
+<span><span class="co"># Plot dates on boxplot</span></span>
+<span><span class="va">dtdate</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">ODates</span><span class="op">)</span> <span class="op">==</span> <span class="cn">FALSE</span>,<span class="op">]</span> <span class="op">|&gt;</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">ODates</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Getting-started_files/figure-html/rectrangle-1.png" width="700"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -242,7 +267,7 @@ intervention might be needed.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>
