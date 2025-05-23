@@ -1,6 +1,6 @@
 Package: cercospoRa
 Title: Process Based Epidemiological Model for Cercospora Leaf Spot of Sugar Beet
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(
     person(given = "Paul",
            family = "Melloy",
@@ -44,7 +44,9 @@ Suggests:
     testthat (>= 3.0.0),
     remotes,
     stats,
-    spelling
+    spelling,
+    geosphere,
+    ggplot2
 Config/testthat/edition: 3
 Imports: 
     data.table,
@@ -55,7 +57,7 @@ Imports:
     circular
 VignetteBuilder: knitr
 Depends: 
-    R (>= 4.0.0)
+    R (>= 4.3.0)
 LazyData: true
-URL: https://paul.melloy.com.au/cercospoRa/, https://github.com/PaulMelloy/cercospoRa, http://paul.melloy.com.au/cercospoRa/
+URL: https://paulmelloy.com.au/cercospoRa/, https://github.com/PaulMelloy/cercospoRa, https://paulmelloy.com.au/cercospoRa/
 BugReports: https://github.com/PaulMelloy/cercospoRa/issues

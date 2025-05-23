@@ -13,3 +13,4 @@
 codemeta.json
 ^codemeta\.json$
 ^CRAN-SUBMISSION$
+.Rprofile
