@@ -57,7 +57,7 @@ Imports:
     circular
 VignetteBuilder: knitr
 Depends: 
-    R (>= 4.0.0)
+    R (>= 4.3.0)
 LazyData: true
-URL: https://paul.melloy.com.au/cercospoRa/, https://github.com/PaulMelloy/cercospoRa, http://paul.melloy.com.au/cercospoRa/
+URL: https://paulmelloy.com.au/cercospoRa/, https://github.com/PaulMelloy/cercospoRa, http://paulmelloy.com.au/cercospoRa/
 BugReports: https://github.com/PaulMelloy/cercospoRa/issues
