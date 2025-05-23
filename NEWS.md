@@ -1,4 +1,4 @@
-# cercospoRa (development version)
+# cercospoRa 0.0.2
 
 ## Bug fixes  
   - fix variable assignment bug, see issue #41  
