@@ -3,8 +3,8 @@
 #' @details
 #'  Calculates canopy closure dates from LAI and growth rate parameters
 #'
-#' @param param_rxt \code{\link{SpatRast}}, output of the function
-#'  \link{calc_r_x0}, which produces a \code{\link{SpatRast}} list containing
+#' @param param_rxt \code{SpatRast}, output of the function
+#'  \link{calc_r_x0}, which produces a \code{SpatRast} list containing
 #'  parameters that are necessary to calculate canopy closure.
 #'  These parameters are \code{r}, the growth rate, \code{x0}, the initial LAI
 #'  value, and \code{t0}, the initial date and the associated dates
@@ -13,8 +13,9 @@
 #' @param k carrying capacity, which is the maximum LAI that can be attained.
 #'  This value can be cultivar-dependent. The default is set to 6
 #'
-#' @return \code{\link{SpatRast}} where the values represent day where canopy
-#'  closure occurred as an integer from the time origin \code{"1970-01-01"}.
+#' @return \code{SpatRast} where the values
+#'  represent day where canopy closure occurred as an integer from the time
+#'  origin \code{"1970-01-01"}.
 #'  The canopy closure date is reached when 90% canopy closure has occurred for
 #'  the specified location, in this case the pixel.
 #'
