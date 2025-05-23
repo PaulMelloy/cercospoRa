@@ -48,8 +48,8 @@ calc_epidemic_onset <- function(start,
     if(is.na(cc)) return(NA)
     if(cc >= end) stop("'c_closure' is after last weather date")
 
-    w <- copy(weather[times > as.POSIXct(start) &
-                        times < (as.POSIXct(end) + 3600),][times >= as.POSIXct(cc)])
+    w <- copy(weather[times >= as.POSIXct(cc) &
+                        times < (as.POSIXct(end) + 3600),])
 
     daily_inf_val <- calc_DIV(dat = w)
 
