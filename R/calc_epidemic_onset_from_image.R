@@ -4,7 +4,7 @@
 #'  onset, if not specified, the first date in the weather data will be used.
 #' @param end POSIXct, end date, last date to complete calculating the epidemic
 #'  onset, if not specified, the last date in the weather data will be used.
-#' @param cc_r spatRast map of canopy closure dates formatted an integer
+#' @param cc_r SpatRast map of canopy closure dates formatted an integer
 #' of days since 1970-01-01.
 #' It defines the date to start running the model (Wolf)
 #' @param weather data.table, formatted with \code{\link{format_weather}}
