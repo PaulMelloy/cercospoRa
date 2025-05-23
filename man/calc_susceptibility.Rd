@@ -7,8 +7,9 @@
 calc_susceptibility(var_scale = 4)
 }
 \arguments{
-\item{var_scale}{numeric, BBCH scale (1-9) of the sugar beet cultivars.
-1 is the lowest susceptibility and 9 is the highest susceptibility.}
+\item{var_scale}{numeric, bsa scale (1-9) of the sugar beet cultivars.
+1 is the lowest susceptibility and 9 is the highest susceptibility.
+See https://www.bundessortenamt.de and Wolf and Verreet (2005) Table 1.}
 }
 \value{
 numeric, cDIV threshold for the start of the epidemic
