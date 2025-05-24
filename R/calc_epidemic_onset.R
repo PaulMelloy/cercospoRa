@@ -7,8 +7,9 @@
 #' @param c_closure POSIXct formatted date to start the model running the model
 #'  This is usually at canopy closure (Wolf)
 #' @param weather data.table, formatted with \code{\link{format_weather}}
-#' @param cultivar_sus numeric, susceptibility of the cultivar on the
-#'  Beschreibende variety list. Susceptibility rating can range between 1 and 9.
+#' @param cultivar_sus numeric, susceptibility of the cultivar on the 'bsa'
+#'  https://www.bundessortenamt.de variety list.
+#'  Susceptibility rating must range between 1 and 9.
 #'  1 = resistant, 9 = susceptible. Default is 5.
 #'
 #' @return If the input weather is conducive for epidemic, the
@@ -38,7 +39,7 @@ calc_epidemic_onset <- function(start,
   if(missing(end)) end <- as.Date(last(weather$times))
   if(missing(c_closure)){
     warning("'c_closure' not supplied, setting 'start' as canopy closure date")
-    start <- c_closure
+    c_closure <- start
   }
 
   c_closure <- as.POSIXct(c_closure,tz = "UTC")
@@ -47,8 +48,8 @@ calc_epidemic_onset <- function(start,
     if(is.na(cc)) return(NA)
     if(cc >= end) stop("'c_closure' is after last weather date")
 
-    w <- copy(weather[times > as.POSIXct(start) &
-                        times < (as.POSIXct(end) + 3600),][times >= as.POSIXct(cc)])
+    w <- copy(weather[times >= as.POSIXct(cc) &
+                        times < (as.POSIXct(end) + 3600),])
 
     daily_inf_val <- calc_DIV(dat = w)
 
