@@ -233,6 +233,7 @@ mod4 <- gam(das ~ s(x,y, k = 11) + source * fungicide + inoculum,
             data = cclo,
             method = "REML")
 summary(mod4)
+anova(mod4)
 ```
 
 
