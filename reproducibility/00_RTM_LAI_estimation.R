@@ -5,17 +5,11 @@ library("hsdar") # For RTM modeling
 
 setwd("E:\\Clean_Directory")
 
-#function to extract last element of a vector
-tail <- function(x){
-  y <- x[length(x)]
-  return(y)
-}
-
 #generate look up table (LUT)
-#define parameters for sugar beet according to 
-#Jay, Sylvain, Fabienne Maupas, Ryad Bendoula, and Nathalie Gorretta. 
-#"Retrieving LAI, chlorophyll and nitrogen contents in sugar beet crops 
-#from multi-angular optical remote sensing: Comparison of vegetation indices 
+#define parameters for sugar beet according to
+#Jay, Sylvain, Fabienne Maupas, Ryad Bendoula, and Nathalie Gorretta.
+#"Retrieving LAI, chlorophyll and nitrogen contents in sugar beet crops
+#from multi-angular optical remote sensing: Comparison of vegetation indices
 #and PROSAIL inversion for field phenotyping." Field Crops Research 210 (2017): 33-46.
 solar_zenith = 10
 deltaazimuth = 180
@@ -46,8 +40,8 @@ data_resampling_matrix <- data.frame(center=c(492, 560, 664, 704, 833),
 
 
 # function to retrieve LAI values at specific points for a given UAV image containig reflectance values
-retrieve_lai <- function(image_date, 
-                         folder_directory, 
+retrieve_lai <- function(image_date,
+                         folder_directory,
                          roi,
                          spect,
                          data_resampling_matrix,
@@ -57,22 +51,22 @@ retrieve_lai <- function(image_date,
                          normalized = FALSE,
                          aggregate = FALSE,
                          agg_factor = 50){
-  
+
   # Resample spectrum according to sensor
   spect_resample <- spectralResampling(spect, data_resampling_matrix)
-  
-  # read raster  
+
+  # read raster
   image_path <- file.path(folder_directory, paste(image_date,'.tif', sep = ''))
   allbands <- terra::rast(image_path)
   allbands <- allbands[[band_index]] #allbands[[c(2:5, 8)]]
-  
+
   # Preprocess the rasters
   cat(paste0("convert to SpatRaster: ", image_date, "\n"))
   allbands <- terra::crop(allbands, st_transform(roi, crs(allbands)), mask=TRUE)
   if(!harmonized) allbands <- allbands - 1000 #additive offset
   if(!normalized) allbands <- (allbands)/10000 # harmonized S2
   if(!aggregate) allbands <- terra::aggregate(allbands, fact=agg_factor, fun='mean') # aggregate in case it is UAV
-  
+
   # cosine distance
   maximize_cos_wrapper <- function(T, lai) {
     function(v) {
@@ -86,18 +80,18 @@ retrieve_lai <- function(image_date,
       return(lai[max_cos])
     }
   }
-  
+
   # Extract spectrum and LAI
   spect_resample_ <- hsdar::spectra(spect_resample)
   lai <- hsdar::SI(spect_resample)$LAI
-  
+
   # Apply the function
   lai_inversion = terra::app(allbands, maximize_cos_wrapper(T=spect_resample_, lai=lai), cores = 8)
-  
+
   # Create saving path
   lai_folder_directory <- file.path("Data", paste0("LAI_maps"))
   if(!dir.exists(lai_folder_directory)) dir.create(lai_folder_directory)
-  
+
   output_foldername <- file.path(lai_folder_directory, platform)
   if(!dir.exists(output_foldername)) dir.create(output_foldername)
   output_filename <- file.path(output_foldername, paste(image_date,'.tif', sep = ''))
@@ -115,11 +109,11 @@ roi <- st_read("Data\\ROI\\Field_perimeter.gpkg")
 platforms = list(list(platform="S2", harmonized = FALSE, normalized = FALSE, band_index = c(2:5, 8), aggregate = FALSE, agg_factor=NA,
                       data_resampling_matrix = data.frame(center=c(492, 560, 664, 704, 833),
                                                           fwhm=c(66, 36, 31, 15, 106))),
-                 
+
                  list(platform="S2_superresolution", harmonized = TRUE, normalized = FALSE, band_index = c(1:4, 7), aggregate = FALSE, agg_factor=NA,
                       data_resampling_matrix = data.frame(center=c(492, 560, 664, 704, 833),
                                                           fwhm=c(66, 36, 31, 15, 106))),
-                 
+
                  list(platform="UAV", harmonized = TRUE, normalized = TRUE, band_index = 1:5, aggregate = TRUE, agg_factor=50, #GSD = 0.5 m
                       data_resampling_matrix <- data.frame(center=c(475, 560, 668, 717, 842),
                                                            fwhm=c(32, 27, 14, 12, 57)))
@@ -134,36 +128,36 @@ for(platform_ID in platforms){
   normalized = platform_ID$normalized
   aggregate = platform_ID$aggregate
   agg_factor = platform_ID$agg_factor
-  
+
   # find list of images
   folder_directory <- file.path("Data\\Orthomosaics", platform)
   image_list <- list.files(folder_directory, recursive = FALSE)
   image_list <- image_list[endsWith(image_list, '.tif')]
   image_date_list <- strsplit(image_list, ".tif")
-    
+
   # read all dates available for images
   image_date_vector <- c()
   for (i in 1:length(image_date_list)){
-      j <- tail(image_date_list[[i]])
+      j <- tail(image_date_list[[i]],1)
       image_date_vector <- c(image_date_vector, j)
   }
-  
+
   # partially fill function arguments
   retrieve_lai_2 <-  function(x){
     folder_directory <- folder_directory
-    retrieve_lai(x, 
-                 folder_directory, 
-                 roi, 
-                 spect, 
+    retrieve_lai(x,
+                 folder_directory,
+                 roi,
+                 spect,
                  data_resampling_matrix,
-                 band_index=band_index, 
-                 platform=platform, 
+                 band_index=band_index,
+                 platform=platform,
                  harmonized=harmonized,
                  normalized=normalized,
                  aggregate=aggregate,
                  agg_factor=agg_factor)
   }
-  
+
   print("Start loop")
   for(this_image in image_date_vector){
     retrieve_lai_2(this_image)
