@@ -1,0 +1,1 @@
+All raw remote sensing data used to run the analysis pipeline for the manuscript XYZ are availabe for dowload [HERE](https://owncloud.gwdg.de/index.php/s/RuNNNjw3sxdNpgn). A password can be obtained on request. 
