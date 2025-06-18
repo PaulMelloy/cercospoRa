@@ -3,7 +3,7 @@ library(sf)
 library(raster)
 library("hsdar") # For RTM modeling
 
-setwd("E:\\Clean_Directory")
+# setwd("E:\\Clean_Directory")
 
 #generate look up table (LUT)
 #define parameters for sugar beet according to
@@ -39,7 +39,8 @@ data_resampling_matrix <- data.frame(center=c(492, 560, 664, 704, 833),
                                      fwhm=c(66, 36, 31, 15, 106))
 
 
-# function to retrieve LAI values at specific points for a given UAV image containig reflectance values
+# function to retrieve LAI values at specific points for a given UAV image
+#  containing reflectance values
 retrieve_lai <- function(image_date,
                          folder_directory,
                          roi,
@@ -67,19 +68,6 @@ retrieve_lai <- function(image_date,
   if(!normalized) allbands <- (allbands)/10000 # harmonized S2
   if(!aggregate) allbands <- terra::aggregate(allbands, fact=agg_factor, fun='mean') # aggregate in case it is UAV
 
-  # cosine distance
-  maximize_cos_wrapper <- function(T, lai) {
-    function(v) {
-      vect <- unlist(v)
-      if(any(is.na(vect))) return(NaN)
-      cov <- as.matrix(T) %*% vect
-      sqrvar1 <- sqrt(sum(vect^2))
-      sqrvar2 <- sqrt(apply(as.matrix(T)^2, 1, sum))
-      cos <- cov / (sqrvar1 * sqrvar2)
-      max_cos <- which.max(cos)
-      return(lai[max_cos])
-    }
-  }
 
   # Extract spectrum and LAI
   spect_resample_ <- hsdar::spectra(spect_resample)
@@ -97,6 +85,20 @@ retrieve_lai <- function(image_date,
   output_filename <- file.path(output_foldername, paste(image_date,'.tif', sep = ''))
   terra::writeRaster(lai_inversion, filename = output_filename)
   print(paste(output_filename, 'done',  sep = ' '))
+}
+
+# cosine distance
+maximize_cos_wrapper <- function(T, lai) {
+  function(v) {
+    vect <- unlist(v)
+    if(any(is.na(vect))) return(NaN)
+    cov <- as.matrix(T) %*% vect
+    sqrvar1 <- sqrt(sum(vect^2))
+    sqrvar2 <- sqrt(apply(as.matrix(T)^2, 1, sum))
+    cos <- cov / (sqrvar1 * sqrvar2)
+    max_cos <- which.max(cos)
+    return(lai[max_cos])
+  }
 }
 
 
