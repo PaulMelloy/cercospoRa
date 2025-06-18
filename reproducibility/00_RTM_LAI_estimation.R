@@ -74,7 +74,7 @@ retrieve_lai <- function(image_date,
   lai <- hsdar::SI(spect_resample)$LAI
 
   # Apply the function
-  lai_inversion = terra::app(allbands, maximize_cos_wrapper(T=spect_resample_, lai=lai), cores = 8)
+  lai_inversion = terra::app(allbands, maximize_cos_wrapper(T_var=spect_resample_, lai=lai), cores = 8)
 
   # Create saving path
   lai_folder_directory <- file.path("Data", paste0("LAI_maps"))
@@ -88,13 +88,13 @@ retrieve_lai <- function(image_date,
 }
 
 # cosine distance
-maximize_cos_wrapper <- function(T, lai) {
+maximize_cos_wrapper <- function(T_var, lai) {
   function(v) {
     vect <- unlist(v)
     if(any(is.na(vect))) return(NaN)
-    cov <- as.matrix(T) %*% vect
+    cov <- as.matrix(T_var) %*% vect
     sqrvar1 <- sqrt(sum(vect^2))
-    sqrvar2 <- sqrt(apply(as.matrix(T)^2, 1, sum))
+    sqrvar2 <- sqrt(apply(as.matrix(T_var)^2, 1, sum))
     cos <- cov / (sqrvar1 * sqrvar2)
     max_cos <- which.max(cos)
     return(lai[max_cos])
