@@ -1,9 +1,10 @@
-This dataset contains a subset of Sentinel-2 imagery acquired over Göttingen, Germany, in July 2022, used for vegetation monitoring.
- 
-- Contains modified Copernicus Sentinel data 2022
-- Processed by Nathan Okole, Facundo Ispizua, and Rene Heim. 
-- Original data downloaded from: https://dataspace.copernicus.eu
-- Accessed on: 20 June 2024
- 
-Copernicus Sentinel data are made available under the European Union’s open data policy.
-For more information, see: https://www.copernicus.eu/en/about-copernicus/copernicus-data-policy
+### Analysis pipeline:
+
+- 00 **Input** = raw uas, s2 and s2s multispectral raster data; **Output** = lai maps
+- 01 **Input** = lai maps, weather data (part of cercospoRa); **Output** = epidemic onset maps
+- 02A **Input** = lai maps; **Output** = lai progression curves
+- 02B **Input** = lai maps; **Output** = cc maps
+- 02 Input = raw uas, s2 and s2s multispectral raster data; Output =
+- 02 Input = raw uas, s2 and s2s multispectral raster data; Output =
+- 02 Input = raw uas, s2 and s2s multispectral raster data; Output =
+- 02 Input = raw uas, s2 and s2s multispectral raster data; Output = 
