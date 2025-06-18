@@ -2,7 +2,9 @@
 title: "analysis"
 author: "Paul Melloy"
 date: "`r Sys.Date()`"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -692,7 +694,7 @@ tbl_prop_success <-
   align_text_col(align = "center") |>
   set_header_labels(source = "RS method",
                     inoculum = "Inoculum",
-                    prop_success = "∝ success") |>
+                    prop_success = "proportional success") |>
    fontsize(size = 8, part = "body") |>
    fontsize(size = 10, part = "header") |>
    set_caption("Table ##: Proportion success of RS estimated onset dates occuring prior to spatially proximal observed epidemic onset")
