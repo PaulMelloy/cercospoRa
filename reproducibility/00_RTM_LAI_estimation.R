@@ -144,24 +144,20 @@ for(platform_ID in platforms){
       image_date_vector <- c(image_date_vector, j)
   }
 
-  # partially fill function arguments
-  retrieve_lai_2 <-  function(x){
-    folder_directory <- folder_directory
-    retrieve_lai(x,
-                 folder_directory,
-                 roi,
-                 spect,
-                 data_resampling_matrix,
-                 band_index=band_index,
-                 platform=platform,
-                 harmonized=harmonized,
-                 normalized=normalized,
-                 aggregate=aggregate,
-                 agg_factor=agg_factor)
-  }
 
-  print("Start loop")
+  message("Start ", names(platform_ID)," loop")
   for(this_image in image_date_vector){
-    retrieve_lai_2(this_image)
+    lapply(this_image,
+           retrieve_lai,
+           folder_directory = folder_directory,
+           roi,
+           spect,
+           data_resampling_matrix,
+           band_index=band_index,
+           platform=platform,
+           harmonized=harmonized,
+           normalized=normalized,
+           aggregate=aggregate,
+           agg_factor=agg_factor)
   }
 }
